@@ -47,9 +47,9 @@ namespace CustomListNamespace
     }
 
     class Fruit{
-            string Name { get; set; }
-            string Color { get; set; }
-            int Sweetness { get; set; }
+            public string Name { get; set; }
+            public string Color { get; set; }
+            public int Sweetness { get; set; }
 
             public Fruit() { }
 
@@ -82,26 +82,32 @@ namespace CustomListNamespace
             basket.Add(yellowApple);
             basket.Add(orange);
 
-            foreach(Fruit fruit in basket)
-            {
-                fruit.print();
-            }
-            Console.WriteLine("Total fruits in the basket: " + basket.Count);
-
-            basket.Remove(yellowApple);
+            Console.WriteLine("--- Get by index ---");
+            basket[1].print();
+            Console.WriteLine("--- Set by index ---");
+            basket[1].Sweetness = 7;
+            basket[1].print();
 
             Console.WriteLine();
-
+            Console.WriteLine("--- Print all fruits ---");
             foreach (Fruit fruit in basket)
             {
                 fruit.print();
             }
             Console.WriteLine("Total fruits in the basket: " + basket.Count);
 
-            basket.Insert(2, melon);
+            Console.WriteLine();
+            Console.WriteLine("--- Remove yellow apple ---");
+            basket.Remove(yellowApple);
+            foreach (Fruit fruit in basket)
+            {
+                fruit.print();
+            }
+            Console.WriteLine("Total fruits in the basket: " + basket.Count);
 
             Console.WriteLine();
-
+            Console.WriteLine("--- Insert melon at 3 position ---");
+            basket.Insert(2, melon);
             foreach (Fruit fruit in basket)
             {
                 fruit.print();
@@ -110,6 +116,4 @@ namespace CustomListNamespace
 
         }
     }
-
-
 }
