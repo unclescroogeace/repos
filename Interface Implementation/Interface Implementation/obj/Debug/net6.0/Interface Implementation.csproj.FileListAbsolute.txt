@@ -1,0 +1,16 @@
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\bin\Debug\net6.0\Interface Implementation.exe
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\bin\Debug\net6.0\Interface Implementation.deps.json
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\bin\Debug\net6.0\Interface Implementation.runtimeconfig.json
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\bin\Debug\net6.0\Interface Implementation.dll
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\bin\Debug\net6.0\ref\Interface Implementation.dll
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\bin\Debug\net6.0\Interface Implementation.pdb
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\obj\Debug\net6.0\Interface Implementation.csproj.AssemblyReference.cache
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\obj\Debug\net6.0\Interface Implementation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\obj\Debug\net6.0\Interface Implementation.AssemblyInfoInputs.cache
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\obj\Debug\net6.0\Interface Implementation.AssemblyInfo.cs
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\obj\Debug\net6.0\Interface Implementation.ImplicitNamespaceImports.cs
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\obj\Debug\net6.0\Interface Implementation.csproj.CoreCompileInputs.cache
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\obj\Debug\net6.0\Interface Implementation.dll
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\obj\Debug\net6.0\ref\Interface Implementation.dll
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\obj\Debug\net6.0\Interface Implementation.pdb
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\obj\Debug\net6.0\Interface Implementation.genruntimeconfig.cache
