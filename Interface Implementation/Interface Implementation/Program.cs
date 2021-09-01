@@ -86,6 +86,7 @@ namespace CustomListNamespace
             {
                 fruit.print();
             }
+            Console.WriteLine("Total fruits in the basket: " + basket.Count);
 
             basket.Remove(yellowApple);
 
@@ -95,6 +96,7 @@ namespace CustomListNamespace
             {
                 fruit.print();
             }
+            Console.WriteLine("Total fruits in the basket: " + basket.Count);
 
             basket.Insert(2, melon);
 
@@ -104,6 +106,7 @@ namespace CustomListNamespace
             {
                 fruit.print();
             }
+            Console.WriteLine("Total fruits in the basket: " + basket.Count);
 
         }
     }
