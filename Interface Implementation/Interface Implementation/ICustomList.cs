@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Interface_Implementation
 {
-    public interface ICustomList<T>
+    interface ICustomList<T>
     {
         int Count { get; }
         void Add(T item);
