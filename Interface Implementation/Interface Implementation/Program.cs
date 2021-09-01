@@ -51,7 +51,12 @@ namespace CustomListNamespace
             public string Color { get; set; }
             public int Sweetness { get; set; }
 
-            public Fruit() { }
+            public Fruit() 
+            {
+                Name = "";
+                Color = "";
+                Sweetness = 0;
+            }
 
             public Fruit(string Name, string Color, int Sweetness)
             {

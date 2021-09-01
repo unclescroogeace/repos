@@ -8,8 +8,8 @@ namespace Interface_Implementation
 {
     public interface ICustomList<T>
     {
-        public int Count { get; }
-        public void Add(T item);
+        int Count { get; }
+        void Add(T item);
         bool Remove(T item);
         void Insert(int index, T item);
         T this[int index] { get; set; }
