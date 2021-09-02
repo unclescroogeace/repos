@@ -19,31 +19,24 @@ namespace Basket
         private class Basket<T> : ICustomList<T>, IEnumerable<T>
         {
             static int itemindex = 0;
+            static int totalItems = 0;
             T[] objects = new T[2];
 
             public T this[int index] { get => objects[index]; set => objects[index] = value; }
-
             public void Add(T item)
             {
-                if(objects.Length <= itemindex + 1)
+                ArrayResize();
+                objects[itemindex++] = item;
+                totalItems++;
+            }
+            private void ArrayResize()
+            {
+                if (objects.Length <= itemindex + 1)
                 {
                     Array.Resize(ref objects, objects.Length * 2);
                 }
-                objects[itemindex++] = item;
             }
-
-            private int countItems()
-            {
-                int i = 0;
-                while(!EqualityComparer<T>.Default.Equals(objects[i], default(T)))
-                {
-                    i++;
-                }
-                return i;
-            }
-
-            public int Count { get => countItems(); }
-
+            public int Count { get => totalItems; }
             public bool Remove(T item)
             {
                 bool itemRemoved = false;
@@ -52,7 +45,7 @@ namespace Basket
 
                 for (int i = 0; i < objects.Length; i++)
                 {
-                    if(EqualityComparer<T>.Default.Equals(objects[i], default(T)))
+                    if (object.Equals(objects[i], null))
                     {
                         break;
                     }
@@ -63,6 +56,7 @@ namespace Basket
                     }
                     else
                     {
+                        totalItems--;
                         itemRemoved = true;
                     }
                 }
@@ -70,24 +64,26 @@ namespace Basket
 
                 return itemRemoved;
             }
-
             public void Insert(int index, T item)
             {
-                if (objects.Length < itemindex + 1)
-                {
-                    Array.Resize(ref objects, objects.Length * 2);
-                }
-
+                ArrayResize();
                 T[] newArr = new T[objects.Length];
 
                 for (int i = 0; i < objects.Length; i++)
                 {
                     if (i < index)
+                    {
                         newArr[i] = objects[i];
+                    }
                     else if (i == index)
+                    {
                         newArr[i] = item;
+                        totalItems++;
+                    }
                     else
+                    {
                         newArr[i] = objects[i - 1];
+                    }
                 }
                 newArr.CopyTo(objects, 0);
             }
@@ -95,7 +91,7 @@ namespace Basket
             {
                 for (int i = 0; i < objects.Length + 1; i++)
                 {
-                    if (!EqualityComparer<T>.Default.Equals(objects[i], default(T)))
+                    if (!object.Equals(objects[i], null))
                     {
                         yield return objects[i];
                     }
@@ -105,7 +101,6 @@ namespace Basket
                     }
                 }
             }
-
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return GetEnumerator();
@@ -117,21 +112,18 @@ namespace Basket
             public string Name { get; set; }
             public string Color { get; set; }
             public int Sweetness { get; set; }
-
             public Fruit()
             {
                 Name = "";
                 Color = "";
                 Sweetness = 0;
             }
-
             public Fruit(string Name, string Color, int Sweetness)
             {
                 this.Name = Name;
                 this.Color = Color;
                 this.Sweetness = Sweetness;
             }
-
             public void print()
             {
                 Console.WriteLine(Name + " " + Color + " " + Sweetness);
@@ -183,6 +175,18 @@ namespace Basket
                 fruit.print();
             }
             Console.WriteLine("Total fruits in the basket: " + basket.Count);
+
+            Console.WriteLine();
+            Basket<int> bask = new Basket<int>();
+            bask.Add(0);
+            bask.Add(0);
+            bask.Add(1);
+            bask.Add(2);
+            bask.Add(3);
+            bask.Add(15);
+            bask.Add(0);
+            bask.Add(21);
+            Console.WriteLine("Total integers in the basket: " + bask.Count);
         }
     }
 }
