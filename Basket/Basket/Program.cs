@@ -19,13 +19,13 @@ namespace Basket
         private class Basket<T> : ICustomList<T>, IEnumerable<T>
         {
             static int itemindex = 0;
-            T[] objects = new T[16];
+            T[] objects = new T[2];
 
             public T this[int index] { get => objects[index]; set => objects[index] = value; }
 
             public void Add(T item)
             {
-                if(objects.Length < itemindex)
+                if(objects.Length <= itemindex + 1)
                 {
                     Array.Resize(ref objects, objects.Length * 2);
                 }
@@ -73,7 +73,7 @@ namespace Basket
 
             public void Insert(int index, T item)
             {
-                if (objects.Length < itemindex)
+                if (objects.Length < itemindex + 1)
                 {
                     Array.Resize(ref objects, objects.Length * 2);
                 }
