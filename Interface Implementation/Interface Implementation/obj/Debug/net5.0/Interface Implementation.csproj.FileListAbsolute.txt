@@ -1,0 +1,5 @@
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\obj\Debug\net5.0\Interface Implementation.csproj.AssemblyReference.cache
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\obj\Debug\net5.0\Interface Implementation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\obj\Debug\net5.0\Interface Implementation.AssemblyInfoInputs.cache
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\obj\Debug\net5.0\Interface Implementation.AssemblyInfo.cs
+C:\Users\Krasimir Kostadinov\source\repos\Interface Implementation\Interface Implementation\obj\Debug\net5.0\Interface Implementation.csproj.CoreCompileInputs.cache

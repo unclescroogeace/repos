@@ -1,0 +1,16 @@
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\bin\Debug\net5.0\Basket.exe
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\bin\Debug\net5.0\Basket.deps.json
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\bin\Debug\net5.0\Basket.runtimeconfig.json
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\bin\Debug\net5.0\Basket.runtimeconfig.dev.json
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\bin\Debug\net5.0\Basket.dll
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\bin\Debug\net5.0\ref\Basket.dll
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\bin\Debug\net5.0\Basket.pdb
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\obj\Debug\net5.0\Basket.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\obj\Debug\net5.0\Basket.AssemblyInfoInputs.cache
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\obj\Debug\net5.0\Basket.AssemblyInfo.cs
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\obj\Debug\net5.0\Basket.csproj.CoreCompileInputs.cache
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\obj\Debug\net5.0\Basket.dll
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\obj\Debug\net5.0\ref\Basket.dll
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\obj\Debug\net5.0\Basket.pdb
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\obj\Debug\net5.0\Basket.genruntimeconfig.cache
+C:\Users\Krasimir Kostadinov\source\repos\Basket\Basket\obj\Debug\net5.0\Basket.csproj.AssemblyReference.cache
