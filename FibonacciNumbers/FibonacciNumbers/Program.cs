@@ -45,7 +45,6 @@ namespace FibonacciNumbers
             int num;
             do
             {
-
                 Console.Write("Enter N: ");
                 int.TryParse(Console.ReadLine(), out num);
             } while (num < 1);
