@@ -1,0 +1,16 @@
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\bin\Debug\net5.0\Integer Romanization.exe
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\bin\Debug\net5.0\Integer Romanization.deps.json
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\bin\Debug\net5.0\Integer Romanization.runtimeconfig.json
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\bin\Debug\net5.0\Integer Romanization.runtimeconfig.dev.json
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\bin\Debug\net5.0\Integer Romanization.dll
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\bin\Debug\net5.0\ref\Integer Romanization.dll
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\bin\Debug\net5.0\Integer Romanization.pdb
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\obj\Debug\net5.0\Integer Romanization.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\obj\Debug\net5.0\Integer Romanization.AssemblyInfoInputs.cache
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\obj\Debug\net5.0\Integer Romanization.AssemblyInfo.cs
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\obj\Debug\net5.0\Integer Romanization.csproj.CoreCompileInputs.cache
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\obj\Debug\net5.0\Integer Romanization.dll
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\obj\Debug\net5.0\ref\Integer Romanization.dll
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\obj\Debug\net5.0\Integer Romanization.pdb
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\obj\Debug\net5.0\Integer Romanization.genruntimeconfig.cache
+C:\Users\Krasimir Kostadinov\source\repos\Integer Romanization\Integer Romanization\obj\Debug\net5.0\Integer Romanization.csproj.AssemblyReference.cache
