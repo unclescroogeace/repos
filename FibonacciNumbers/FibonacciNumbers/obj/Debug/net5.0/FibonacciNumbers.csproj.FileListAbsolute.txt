@@ -1,0 +1,16 @@
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\bin\Debug\net5.0\FibonacciNumbers.exe
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\bin\Debug\net5.0\FibonacciNumbers.deps.json
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\bin\Debug\net5.0\FibonacciNumbers.runtimeconfig.json
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\bin\Debug\net5.0\FibonacciNumbers.runtimeconfig.dev.json
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\bin\Debug\net5.0\FibonacciNumbers.dll
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\bin\Debug\net5.0\ref\FibonacciNumbers.dll
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\bin\Debug\net5.0\FibonacciNumbers.pdb
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\obj\Debug\net5.0\FibonacciNumbers.csproj.AssemblyReference.cache
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\obj\Debug\net5.0\FibonacciNumbers.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\obj\Debug\net5.0\FibonacciNumbers.AssemblyInfoInputs.cache
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\obj\Debug\net5.0\FibonacciNumbers.AssemblyInfo.cs
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\obj\Debug\net5.0\FibonacciNumbers.csproj.CoreCompileInputs.cache
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\obj\Debug\net5.0\FibonacciNumbers.dll
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\obj\Debug\net5.0\ref\FibonacciNumbers.dll
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\obj\Debug\net5.0\FibonacciNumbers.pdb
+C:\Users\Krasimir Kostadinov\source\repos\FibonacciNumbers\FibonacciNumbers\obj\Debug\net5.0\FibonacciNumbers.genruntimeconfig.cache
