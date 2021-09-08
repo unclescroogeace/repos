@@ -1,0 +1,16 @@
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\bin\Debug\net5.0\SortingAlgorithms.exe
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\bin\Debug\net5.0\SortingAlgorithms.deps.json
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\bin\Debug\net5.0\SortingAlgorithms.runtimeconfig.json
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\bin\Debug\net5.0\SortingAlgorithms.runtimeconfig.dev.json
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\bin\Debug\net5.0\SortingAlgorithms.dll
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\bin\Debug\net5.0\ref\SortingAlgorithms.dll
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\bin\Debug\net5.0\SortingAlgorithms.pdb
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\net5.0\SortingAlgorithms.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\net5.0\SortingAlgorithms.AssemblyInfoInputs.cache
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\net5.0\SortingAlgorithms.AssemblyInfo.cs
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\net5.0\SortingAlgorithms.csproj.CoreCompileInputs.cache
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\net5.0\SortingAlgorithms.dll
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\net5.0\ref\SortingAlgorithms.dll
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\net5.0\SortingAlgorithms.pdb
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\net5.0\SortingAlgorithms.genruntimeconfig.cache
+C:\Users\Krasimir Kostadinov\source\repos\SortingAlgorithms\SortingAlgorithms\obj\Debug\net5.0\SortingAlgorithms.csproj.AssemblyReference.cache
