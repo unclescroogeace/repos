@@ -4,7 +4,7 @@ namespace SortingAlgorithms
 {
     class Program
     {
-        static int[] bubbleSort(int[] arr)
+        static int[] BubbleSort(int[] arr)
         {
             for (int i = 0; i < arr.Length; i++)
             {
@@ -21,7 +21,7 @@ namespace SortingAlgorithms
             return arr;
         }
 
-        static int[] selectionSort(int[] arr)
+        static int[] SelectionSort(int[] arr)
         {
             for (int i = 0; i < arr.Length - 1; i++)
             {
@@ -44,6 +44,42 @@ namespace SortingAlgorithms
             return arr;
         }
 
+        static int BinarySearch(int[] arr, int t)
+        {
+            int left = 0;
+            int right = arr.Length - 1;
+            while (left <= right)
+            {
+                int mid = (left + right) / 2;
+                if (arr[mid] < t)
+                {
+                    left = mid + 1;
+                }
+                else if (arr[mid] > t)
+                {
+                    right = mid - 1;
+                }
+                else
+                {
+                    return mid;
+                }
+            }
+            return -1;
+        }
+
+        public static void RunBinarySearch(int[] arr, int t)
+        {
+            int index = BinarySearch(arr, t);
+            if (index >= 0)
+            {
+                Console.WriteLine($"The searched element was found at at position {index + 1} with index of {index}");
+            }
+            else
+            {
+                Console.WriteLine("The searched element was not found");
+            }
+        }
+
         static int[] ArrayWithRandomNumberGenerator(int length, int minValue, int maxValue)
         {
             int[] arr = new int[length];
@@ -64,7 +100,7 @@ namespace SortingAlgorithms
                 Console.Write(num + " ");
             }
             Console.WriteLine(Environment.NewLine + "After Bubble sorting: ");
-            foreach (int num in bubbleSort(arr))
+            foreach (int num in BubbleSort(arr))
             {
                 Console.Write(num + " ");
             }
@@ -76,11 +112,20 @@ namespace SortingAlgorithms
                 Console.Write(num + " ");
             }
             Console.WriteLine(Environment.NewLine + "After Selection sorting: ");
-            foreach (int num in selectionSort(arr2))
+            foreach (int num in SelectionSort(arr2))
             {
                 Console.Write(num + " ");
             }
             Console.WriteLine();
+
+            Console.WriteLine();
+            int[] arr3 = new int[] { 1, 4, 7, 8, 12, 14, 16, 36, 45, 46, 48, 53, 60 };
+            foreach (int num in arr3)
+            {
+                Console.Write(num + " ");
+            }
+            Console.WriteLine();
+            RunBinarySearch(arr3, 1);
         }
     }
 }
