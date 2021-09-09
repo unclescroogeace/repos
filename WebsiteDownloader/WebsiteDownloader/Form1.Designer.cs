@@ -35,6 +35,7 @@ namespace WebsiteDownloader
             this.parallelAsyncExecute = new System.Windows.Forms.Button();
             this.cancelation = new System.Windows.Forms.Button();
             this.resultBox = new System.Windows.Forms.RichTextBox();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // normalExecute
@@ -94,11 +95,19 @@ namespace WebsiteDownloader
             this.resultBox.TabIndex = 5;
             this.resultBox.Text = "";
             // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(12, 312);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(651, 23);
+            this.progressBar.TabIndex = 6;
+            // 
             // AsyncExample
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(675, 646);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.resultBox);
             this.Controls.Add(this.cancelation);
             this.Controls.Add(this.parallelAsyncExecute);
@@ -119,6 +128,7 @@ namespace WebsiteDownloader
         private System.Windows.Forms.Button parallelAsyncExecute;
         private System.Windows.Forms.Button cancelation;
         private System.Windows.Forms.RichTextBox resultBox;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 
