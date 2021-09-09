@@ -8,12 +8,14 @@ using System.Drawing;
 
 namespace Maze
 {
+    
     class Board
     {   
         public static(int, int) boardSize { get; set; }
-        //private static int[,] boardMatrix = new int[boardSize.Item1, boardSize.Item2];
+        public static int width = boardSize.Item1;
+        public static int height = boardSize.Item2;
         public static Panel[,] boardPanels;
-
+        public static Size panelSize { get; set; }
         public static void GenerateBoardPanels()
         {
             boardPanels = new Panel[boardSize.Item1, boardSize.Item2];
@@ -22,7 +24,10 @@ namespace Maze
                 for (int y = 0; y <= boardPanels.GetUpperBound(1); y++)
                 {
                     boardPanels[x, y] = new Panel();
-                    boardPanels[x, y].Size = new Size(20, 20);
+                    boardPanels[x, y].Size = panelSize;
+                    boardPanels[x, y].BackColor = Color.Black;
+                    boardPanels[x, y].Left = 25 * x + (1 * x);
+                    boardPanels[x, y].Top = 25 * y + (1 * y);
                 }
             }
         }

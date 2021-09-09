@@ -34,6 +34,18 @@ namespace Maze
             this.labelX = new System.Windows.Forms.Label();
             this.labelY = new System.Windows.Forms.Label();
             this.btnGenerateBoard = new System.Windows.Forms.Button();
+            this.lblBlack = new System.Windows.Forms.Label();
+            this.lblPath = new System.Windows.Forms.Label();
+            this.lblStartPoint = new System.Windows.Forms.Label();
+            this.lblEndPoint = new System.Windows.Forms.Label();
+            this.btnColorBlack = new System.Windows.Forms.Button();
+            this.btnColorWhite = new System.Windows.Forms.Button();
+            this.btnColorGreen = new System.Windows.Forms.Button();
+            this.btnColorRed = new System.Windows.Forms.Button();
+            this.lblInfoHeader = new System.Windows.Forms.Label();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnLoad = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbX
@@ -78,11 +90,136 @@ namespace Maze
             this.btnGenerateBoard.UseVisualStyleBackColor = true;
             this.btnGenerateBoard.Click += new System.EventHandler(this.btnGenerateBoard_Click);
             // 
+            // lblBlack
+            // 
+            this.lblBlack.AutoSize = true;
+            this.lblBlack.Location = new System.Drawing.Point(440, 15);
+            this.lblBlack.Name = "lblBlack";
+            this.lblBlack.Size = new System.Drawing.Size(30, 15);
+            this.lblBlack.TabIndex = 5;
+            this.lblBlack.Text = "Wall";
+            // 
+            // lblPath
+            // 
+            this.lblPath.AutoSize = true;
+            this.lblPath.Location = new System.Drawing.Point(536, 16);
+            this.lblPath.Name = "lblPath";
+            this.lblPath.Size = new System.Drawing.Size(31, 15);
+            this.lblPath.TabIndex = 6;
+            this.lblPath.Text = "Path";
+            // 
+            // lblStartPoint
+            // 
+            this.lblStartPoint.AutoSize = true;
+            this.lblStartPoint.Location = new System.Drawing.Point(631, 16);
+            this.lblStartPoint.Name = "lblStartPoint";
+            this.lblStartPoint.Size = new System.Drawing.Size(31, 15);
+            this.lblStartPoint.TabIndex = 7;
+            this.lblStartPoint.Text = "Start";
+            // 
+            // lblEndPoint
+            // 
+            this.lblEndPoint.AutoSize = true;
+            this.lblEndPoint.Location = new System.Drawing.Point(732, 16);
+            this.lblEndPoint.Name = "lblEndPoint";
+            this.lblEndPoint.Size = new System.Drawing.Size(27, 15);
+            this.lblEndPoint.TabIndex = 8;
+            this.lblEndPoint.Text = "End";
+            // 
+            // btnColorBlack
+            // 
+            this.btnColorBlack.BackColor = System.Drawing.Color.Black;
+            this.btnColorBlack.Location = new System.Drawing.Point(476, 8);
+            this.btnColorBlack.Name = "btnColorBlack";
+            this.btnColorBlack.Size = new System.Drawing.Size(30, 30);
+            this.btnColorBlack.TabIndex = 9;
+            this.btnColorBlack.UseVisualStyleBackColor = false;
+            this.btnColorBlack.Click += new System.EventHandler(this.btnColorBlack_Click);
+            // 
+            // btnColorWhite
+            // 
+            this.btnColorWhite.BackColor = System.Drawing.Color.White;
+            this.btnColorWhite.Location = new System.Drawing.Point(573, 7);
+            this.btnColorWhite.Name = "btnColorWhite";
+            this.btnColorWhite.Size = new System.Drawing.Size(30, 30);
+            this.btnColorWhite.TabIndex = 10;
+            this.btnColorWhite.UseVisualStyleBackColor = false;
+            this.btnColorWhite.Click += new System.EventHandler(this.btnColorWhite_Click);
+            // 
+            // btnColorGreen
+            // 
+            this.btnColorGreen.BackColor = System.Drawing.Color.Green;
+            this.btnColorGreen.Location = new System.Drawing.Point(668, 8);
+            this.btnColorGreen.Name = "btnColorGreen";
+            this.btnColorGreen.Size = new System.Drawing.Size(30, 30);
+            this.btnColorGreen.TabIndex = 11;
+            this.btnColorGreen.UseVisualStyleBackColor = false;
+            this.btnColorGreen.Click += new System.EventHandler(this.btnColorGreen_Click);
+            // 
+            // btnColorRed
+            // 
+            this.btnColorRed.BackColor = System.Drawing.Color.Red;
+            this.btnColorRed.Location = new System.Drawing.Point(765, 8);
+            this.btnColorRed.Name = "btnColorRed";
+            this.btnColorRed.Size = new System.Drawing.Size(30, 30);
+            this.btnColorRed.TabIndex = 12;
+            this.btnColorRed.UseVisualStyleBackColor = false;
+            this.btnColorRed.Click += new System.EventHandler(this.btnColorRed_Click);
+            // 
+            // lblInfoHeader
+            // 
+            this.lblInfoHeader.AutoSize = true;
+            this.lblInfoHeader.Location = new System.Drawing.Point(803, 15);
+            this.lblInfoHeader.Name = "lblInfoHeader";
+            this.lblInfoHeader.Size = new System.Drawing.Size(28, 15);
+            this.lblInfoHeader.TabIndex = 13;
+            this.lblInfoHeader.Text = "Info";
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(838, 15);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(0, 15);
+            this.lblInfo.TabIndex = 14;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(319, 12);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(48, 23);
+            this.btnSave.TabIndex = 15;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnLoad
+            // 
+            this.btnLoad.Location = new System.Drawing.Point(372, 12);
+            this.btnLoad.Name = "btnLoad";
+            this.btnLoad.Size = new System.Drawing.Size(47, 23);
+            this.btnLoad.TabIndex = 16;
+            this.btnLoad.Text = "Load";
+            this.btnLoad.UseVisualStyleBackColor = true;
+            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(972, 641);
+            this.ClientSize = new System.Drawing.Size(1025, 843);
+            this.Controls.Add(this.btnLoad);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.lblInfo);
+            this.Controls.Add(this.lblInfoHeader);
+            this.Controls.Add(this.btnColorRed);
+            this.Controls.Add(this.btnColorGreen);
+            this.Controls.Add(this.btnColorWhite);
+            this.Controls.Add(this.btnColorBlack);
+            this.Controls.Add(this.lblEndPoint);
+            this.Controls.Add(this.lblStartPoint);
+            this.Controls.Add(this.lblPath);
+            this.Controls.Add(this.lblBlack);
             this.Controls.Add(this.btnGenerateBoard);
             this.Controls.Add(this.labelY);
             this.Controls.Add(this.labelX);
@@ -102,6 +239,18 @@ namespace Maze
         private System.Windows.Forms.Label labelX;
         private System.Windows.Forms.Label labelY;
         private System.Windows.Forms.Button btnGenerateBoard;
+        private System.Windows.Forms.Label lblBlack;
+        private System.Windows.Forms.Label lblPath;
+        private System.Windows.Forms.Label lblStartPoint;
+        private System.Windows.Forms.Label lblEndPoint;
+        private System.Windows.Forms.Button btnColorBlack;
+        private System.Windows.Forms.Button btnColorWhite;
+        private System.Windows.Forms.Button btnColorGreen;
+        private System.Windows.Forms.Button btnColorRed;
+        private System.Windows.Forms.Label lblInfoHeader;
+        private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnLoad;
     }
 }
 
