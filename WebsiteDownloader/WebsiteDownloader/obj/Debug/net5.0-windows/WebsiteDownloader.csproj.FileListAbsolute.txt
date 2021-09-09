@@ -5,7 +5,6 @@ C:\Users\Krasimir Kostadinov\source\repos\WebsiteDownloader\WebsiteDownloader\bi
 C:\Users\Krasimir Kostadinov\source\repos\WebsiteDownloader\WebsiteDownloader\bin\Debug\net5.0-windows\WebsiteDownloader.dll
 C:\Users\Krasimir Kostadinov\source\repos\WebsiteDownloader\WebsiteDownloader\bin\Debug\net5.0-windows\ref\WebsiteDownloader.dll
 C:\Users\Krasimir Kostadinov\source\repos\WebsiteDownloader\WebsiteDownloader\bin\Debug\net5.0-windows\WebsiteDownloader.pdb
-C:\Users\Krasimir Kostadinov\source\repos\WebsiteDownloader\WebsiteDownloader\obj\Debug\net5.0-windows\WebsiteDownloader.csproj.AssemblyReference.cache
 C:\Users\Krasimir Kostadinov\source\repos\WebsiteDownloader\WebsiteDownloader\obj\Debug\net5.0-windows\WebsiteDownloader.AsyncExample.resources
 C:\Users\Krasimir Kostadinov\source\repos\WebsiteDownloader\WebsiteDownloader\obj\Debug\net5.0-windows\WebsiteDownloader.csproj.GenerateResource.cache
 C:\Users\Krasimir Kostadinov\source\repos\WebsiteDownloader\WebsiteDownloader\obj\Debug\net5.0-windows\WebsiteDownloader.GeneratedMSBuildEditorConfig.editorconfig
@@ -16,3 +15,4 @@ C:\Users\Krasimir Kostadinov\source\repos\WebsiteDownloader\WebsiteDownloader\ob
 C:\Users\Krasimir Kostadinov\source\repos\WebsiteDownloader\WebsiteDownloader\obj\Debug\net5.0-windows\ref\WebsiteDownloader.dll
 C:\Users\Krasimir Kostadinov\source\repos\WebsiteDownloader\WebsiteDownloader\obj\Debug\net5.0-windows\WebsiteDownloader.pdb
 C:\Users\Krasimir Kostadinov\source\repos\WebsiteDownloader\WebsiteDownloader\obj\Debug\net5.0-windows\WebsiteDownloader.genruntimeconfig.cache
+C:\Users\Krasimir Kostadinov\source\repos\WebsiteDownloader\WebsiteDownloader\obj\Debug\net5.0-windows\WebsiteDownloader.csproj.AssemblyReference.cache

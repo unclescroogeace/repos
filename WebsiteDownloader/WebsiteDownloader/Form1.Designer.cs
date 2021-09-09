@@ -75,6 +75,7 @@ namespace WebsiteDownloader
             this.parallelAsyncExecute.TabIndex = 3;
             this.parallelAsyncExecute.Text = "Parallel Async Execute";
             this.parallelAsyncExecute.UseVisualStyleBackColor = true;
+            this.parallelAsyncExecute.Click += new System.EventHandler(this.parallelAsyncExecute_Click);
             // 
             // cancelation
             // 

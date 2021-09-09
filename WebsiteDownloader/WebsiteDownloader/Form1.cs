@@ -14,15 +14,12 @@ namespace WebsiteDownloader
 {
     public partial class AsyncExample : Form
     {
-
-
         public AsyncExample()
         {
             InitializeComponent();
 
         }
-
-        public static List<string> websites = new List<string>()
+        public List<string> websites = new List<string>()
         {
             "https://www.google.com",
             "https://www.microsoft.com",
@@ -38,14 +35,12 @@ namespace WebsiteDownloader
             "https://www.pluralsight.com",
             "https://www.udemy.com"
         };
-
         public class WebsiteDataModel
         {
             public string WebsiteUrl { get; set; }
             public string WebsiteData { get; set; }
         }
-
-        private static WebsiteDataModel DownloadWebsite(string websiteUrl)
+        private WebsiteDataModel DownloadWebsite(string websiteUrl)
         {
             WebsiteDataModel result = new WebsiteDataModel();
             result.WebsiteUrl = websiteUrl;
@@ -54,49 +49,86 @@ namespace WebsiteDownloader
             result.WebsiteData = webClient.DownloadString(websiteUrl);
             return result;
         }
-
-        private async static Task<WebsiteDataModel> DownloadWebsiteAsync(string websiteUrl)
+        private void ReportWebsiteInfo(WebsiteDataModel data)
         {
-            return await Task.Factory.StartNew(() =>
-            {
-                WebsiteDataModel result = new WebsiteDataModel();
-                result.WebsiteUrl = websiteUrl;
-
-                WebClient webClient = new WebClient();
-                result.WebsiteData = webClient.DownloadString(websiteUrl);
-                return result;
-            });
+            resultBox.Text += $"{data.WebsiteUrl} downloaded: {data.WebsiteData.Length} characters long\n";
         }
+        private void RunDownloadSync()
+        {
+            foreach (var website in websites)
+            {
+                WebsiteDataModel result = DownloadWebsite(website);
+                ReportWebsiteInfo(result);
+            }
+        }
+        private void RunDownloadParallel()
+        {
+            StringBuilder sb = new StringBuilder();
+            Parallel.ForEach(websites, website =>
+            {
+                WebsiteDataModel result = DownloadWebsite(website);
+                sb.AppendLine($"{result.WebsiteUrl} downloaded: {result.WebsiteData.Length} characters long");
+            });
+            resultBox.Text = sb.ToString();
+        }
+        private async Task RunDownloadAsync()
+        {
+            foreach (var website in websites)
+            {
+                WebsiteDataModel result = await Task.Run(() => DownloadWebsite(website));
+                ReportWebsiteInfo(result);
+            }
+        }
+        private async Task RunDownloadParallelAsync()
+        {
+            List<Task<WebsiteDataModel>> tasks = new List<Task<WebsiteDataModel>>();
+            foreach (var website in websites)
+            {
+                tasks.Add(Task.Run(() => DownloadWebsite(website)));
+            }
 
+            var results = await Task.WhenAll(tasks);
+            foreach(var item in results)
+            {
+                ReportWebsiteInfo(item);
+            }
+        }
         private void normalExecute_Click(object sender, EventArgs e)
         {
             Stopwatch sw = new Stopwatch();
             resultBox.Clear();
             sw.Start();
-            foreach (var site in websites)
-            {
-                resultBox.AppendText($"{site} downloaded: {DownloadWebsite(site).WebsiteData.Length} characters long\n");
-            }
+            RunDownloadSync();
             sw.Stop();
             resultBox.AppendText($"Total execution time: {sw.ElapsedMilliseconds}ms");
         }
-
         private void normalParallelExecute_Click(object sender, EventArgs e)
+        {
+            Stopwatch sw = new Stopwatch();
+            StringBuilder sb = new StringBuilder();
+            resultBox.Clear();
+            sw.Start();
+            RunDownloadParallel();
+            sw.Stop();
+            resultBox.AppendText($"Total execution time: {sw.ElapsedMilliseconds}ms");
+        }
+        private async void asyncExecute_Click(object sender, EventArgs e)
         {
             Stopwatch sw = new Stopwatch();
             resultBox.Clear();
             sw.Start();
-            Parallel.ForEach(websites, website =>
-            {
-                resultBox.AppendText($"{website} downloaded: {DownloadWebsite(website).WebsiteData.Length} characters long\n");
-            });
+            await RunDownloadAsync();
             sw.Stop();
             resultBox.AppendText($"Total execution time: {sw.ElapsedMilliseconds}ms");
         }
-
-        private void asyncExecute_Click(object sender, EventArgs e)
+        private async void parallelAsyncExecute_Click(object sender, EventArgs e)
         {
-
+            Stopwatch sw = new Stopwatch();
+            resultBox.Clear();
+            sw.Start();
+            await RunDownloadParallelAsync();
+            sw.Stop();
+            resultBox.AppendText($"Total execution time: {sw.ElapsedMilliseconds}ms");
         }
     }
 }
