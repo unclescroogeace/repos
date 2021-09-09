@@ -19,6 +19,23 @@ namespace WebsiteDownloader
             InitializeComponent();
 
         }
+        private void DisableButtons()
+        {
+            foreach (var button in this.Controls.OfType<Button>())
+            {
+                if (button != cancelation)
+                {
+                    button.Enabled = false;
+                }
+            }
+        }
+        private void EnableButtons()
+        {
+            foreach (var button in this.Controls.OfType<Button>())
+            {
+                button.Enabled = true;
+            }
+        }
         public List<string> websites = new List<string>()
         {
             "https://www.google.com",
@@ -53,7 +70,7 @@ namespace WebsiteDownloader
         {
             resultBox.Text += $"{data.WebsiteUrl} downloaded: {data.WebsiteData.Length} characters long\n";
         }
-        private void RunDownloadSync()
+        private void RunDownloadWebsiteSync()
         {
             foreach (var website in websites)
             {
@@ -61,7 +78,7 @@ namespace WebsiteDownloader
                 ReportWebsiteInfo(result);
             }
         }
-        private void RunDownloadParallel()
+        private void RunDownloadWebsiteParallel()
         {
             StringBuilder sb = new StringBuilder();
             Parallel.ForEach(websites, website =>
@@ -71,7 +88,7 @@ namespace WebsiteDownloader
             });
             resultBox.Text = sb.ToString();
         }
-        private async Task RunDownloadAsync()
+        private async Task RunDownloadWebsiteAsync()
         {
             foreach (var website in websites)
             {
@@ -79,7 +96,7 @@ namespace WebsiteDownloader
                 ReportWebsiteInfo(result);
             }
         }
-        private async Task RunDownloadParallelAsync()
+        private async Task RunDownloadWebsiteParallelAsync()
         {
             List<Task<WebsiteDataModel>> tasks = new List<Task<WebsiteDataModel>>();
             foreach (var website in websites)
@@ -88,7 +105,7 @@ namespace WebsiteDownloader
             }
 
             var results = await Task.WhenAll(tasks);
-            foreach(var item in results)
+            foreach (var item in results)
             {
                 ReportWebsiteInfo(item);
             }
@@ -97,37 +114,44 @@ namespace WebsiteDownloader
         {
             Stopwatch sw = new Stopwatch();
             resultBox.Clear();
+            DisableButtons();
             sw.Start();
-            RunDownloadSync();
+            RunDownloadWebsiteSync();
             sw.Stop();
+            EnableButtons();
             resultBox.AppendText($"Total execution time: {sw.ElapsedMilliseconds}ms");
         }
         private void normalParallelExecute_Click(object sender, EventArgs e)
         {
             Stopwatch sw = new Stopwatch();
-            StringBuilder sb = new StringBuilder();
             resultBox.Clear();
+            DisableButtons();
             sw.Start();
-            RunDownloadParallel();
+            RunDownloadWebsiteParallel();
             sw.Stop();
+            EnableButtons();
             resultBox.AppendText($"Total execution time: {sw.ElapsedMilliseconds}ms");
         }
         private async void asyncExecute_Click(object sender, EventArgs e)
         {
             Stopwatch sw = new Stopwatch();
             resultBox.Clear();
+            DisableButtons();
             sw.Start();
-            await RunDownloadAsync();
+            await RunDownloadWebsiteAsync();
             sw.Stop();
+            EnableButtons();
             resultBox.AppendText($"Total execution time: {sw.ElapsedMilliseconds}ms");
         }
         private async void parallelAsyncExecute_Click(object sender, EventArgs e)
         {
             Stopwatch sw = new Stopwatch();
             resultBox.Clear();
+            DisableButtons();
             sw.Start();
-            await RunDownloadParallelAsync();
+            await RunDownloadWebsiteParallelAsync();
             sw.Stop();
+            EnableButtons();
             resultBox.AppendText($"Total execution time: {sw.ElapsedMilliseconds}ms");
         }
     }
