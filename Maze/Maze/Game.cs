@@ -21,13 +21,17 @@ namespace Maze
             InitializeComponent();
         }
 
-        private void AddPanelsToForm()
+        private void EmptyMainPanel()
         {
             foreach (Control item in main.Controls.OfType<Panel>().ToList())
             {
                 main.Controls.Remove(item);
             }
+        }
 
+        private void AddPanelsToForm()
+        {
+            EmptyMainPanel();
             main.Size = new Size(Board.panelSize.Width * Board.boardSize.Item1 + Board.boardSize.Item1 - 1,
                                 Board.panelSize.Height * Board.boardSize.Item2 + Board.boardSize.Item2 - 1);
             main.BackColor = Color.White;
@@ -38,7 +42,6 @@ namespace Maze
                 {
                     Board.boardPanels[x, y].Click += p_Click;
                     main.Controls.Add(Board.boardPanels[x, y]);
-                    
                 }
             }
             Controls.Add(main);
@@ -46,11 +49,7 @@ namespace Maze
 
         private void AddPanelsToFormByLoading(Panel[,] panels)
         {
-            foreach (Control item in main.Controls.OfType<Panel>().ToList())
-            {
-                main.Controls.Remove(item);
-            }
-
+            EmptyMainPanel();
 
             main.Size = new Size(Board.panelSize.Width * Board.boardSize.Item1 + Board.boardSize.Item1 - 1,
                                 Board.panelSize.Height * Board.boardSize.Item2 + Board.boardSize.Item2 - 1);
