@@ -20,7 +20,6 @@ namespace Maze
         {
             InitializeComponent();
         }
-
         private void EmptyMainPanel()
         {
             foreach (Control item in MainPanel.Controls.OfType<Panel>().ToList())
@@ -28,13 +27,11 @@ namespace Maze
                 MainPanel.Controls.Remove(item);
             }
         }
-
         private void AddClickEventToPanel(Panel panel)
         {
-            panel.Click += p_Click;
+            panel.Click += Panel_Click;
             MainPanel.Controls.Add(panel);
         }
-
         private void MainPanelRenewer()
         {
             EmptyMainPanel();
@@ -43,7 +40,6 @@ namespace Maze
             MainPanel.BackColor = Color.White;
             MainPanel.Top = 100;
         }
-
         private void AddPanelsToForm()
         {
             MainPanelRenewer();
@@ -58,7 +54,6 @@ namespace Maze
             }
             Controls.Add(MainPanel);
         }
-
         private void AddPanelsToFormByLoading(Panel[,] panels)
         {
             MainPanelRenewer();
@@ -71,8 +66,7 @@ namespace Maze
             }
             Controls.Add(MainPanel);
         }
-
-        private void p_Click(object sender, EventArgs e)
+        private void Panel_Click(object sender, EventArgs e)
         {
             if (SelectedColor == Color.Green)
             {
@@ -141,12 +135,10 @@ namespace Maze
                 }
             }
         }
-
-        private void btnGenerateBoard_Click(object sender, EventArgs e)
+        private void BtnGenerateBoard_Click(object sender, EventArgs e)
         {
-            int x, y;
-            int.TryParse(tbX.Text, out x);
-            int.TryParse(tbY.Text, out y);
+            _ = int.TryParse(tbX.Text, out int x);
+            _ = int.TryParse(tbY.Text, out int y);
             if (x > 0 && y > 0)
             {
                 Board.BoardSize = (x, y);
@@ -155,36 +147,30 @@ namespace Maze
                 AddPanelsToForm();
             }
         }
-
-        private void btnColorBlack_Click(object sender, EventArgs e)
+        private void BtnColorBlack_Click(object sender, EventArgs e)
         {
             SelectedColor = (sender as Button).BackColor;
         }
-
-        private void btnColorWhite_Click(object sender, EventArgs e)
+        private void BtnColorWhite_Click(object sender, EventArgs e)
         {
             SelectedColor = (sender as Button).BackColor;
         }
-
-        private void btnColorGreen_Click(object sender, EventArgs e)
+        private void BtnColorGreen_Click(object sender, EventArgs e)
         {
             SelectedColor = (sender as Button).BackColor;
         }
-
-        private void btnColorRed_Click(object sender, EventArgs e)
+        private void BtnColorRed_Click(object sender, EventArgs e)
         {
             SelectedColor = (sender as Button).BackColor;
         }
-
-        private void btnSave_Click(object sender, EventArgs e)
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             if (Board.BoardPanels != null)
             {
                 FileManaging.Save();
             }
         }
-
-        private void btnLoad_Click(object sender, EventArgs e)
+        private void BtnLoad_Click(object sender, EventArgs e)
         {
             if (FileManaging.Load())
             {

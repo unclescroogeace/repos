@@ -12,8 +12,6 @@ namespace Maze
     class Board
     {
         public static (int, int) BoardSize { get; set; }
-        public static int Width = BoardSize.Item1;
-        public static int Height = BoardSize.Item2;
         public static Panel[,] BoardPanels;
         public static Size PanelSize { get; set; }
         public static void GenerateBoardPanels()

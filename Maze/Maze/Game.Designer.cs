@@ -88,7 +88,7 @@ namespace Maze
             this.btnGenerateBoard.TabIndex = 4;
             this.btnGenerateBoard.Text = "Generate Board";
             this.btnGenerateBoard.UseVisualStyleBackColor = true;
-            this.btnGenerateBoard.Click += new System.EventHandler(this.btnGenerateBoard_Click);
+            this.btnGenerateBoard.Click += new System.EventHandler(this.BtnGenerateBoard_Click);
             // 
             // lblBlack
             // 
@@ -134,7 +134,7 @@ namespace Maze
             this.btnColorBlack.Size = new System.Drawing.Size(30, 30);
             this.btnColorBlack.TabIndex = 9;
             this.btnColorBlack.UseVisualStyleBackColor = false;
-            this.btnColorBlack.Click += new System.EventHandler(this.btnColorBlack_Click);
+            this.btnColorBlack.Click += new System.EventHandler(this.BtnColorBlack_Click);
             // 
             // btnColorWhite
             // 
@@ -144,7 +144,7 @@ namespace Maze
             this.btnColorWhite.Size = new System.Drawing.Size(30, 30);
             this.btnColorWhite.TabIndex = 10;
             this.btnColorWhite.UseVisualStyleBackColor = false;
-            this.btnColorWhite.Click += new System.EventHandler(this.btnColorWhite_Click);
+            this.btnColorWhite.Click += new System.EventHandler(this.BtnColorWhite_Click);
             // 
             // btnColorGreen
             // 
@@ -154,7 +154,7 @@ namespace Maze
             this.btnColorGreen.Size = new System.Drawing.Size(30, 30);
             this.btnColorGreen.TabIndex = 11;
             this.btnColorGreen.UseVisualStyleBackColor = false;
-            this.btnColorGreen.Click += new System.EventHandler(this.btnColorGreen_Click);
+            this.btnColorGreen.Click += new System.EventHandler(this.BtnColorGreen_Click);
             // 
             // btnColorRed
             // 
@@ -164,7 +164,7 @@ namespace Maze
             this.btnColorRed.Size = new System.Drawing.Size(30, 30);
             this.btnColorRed.TabIndex = 12;
             this.btnColorRed.UseVisualStyleBackColor = false;
-            this.btnColorRed.Click += new System.EventHandler(this.btnColorRed_Click);
+            this.btnColorRed.Click += new System.EventHandler(this.BtnColorRed_Click);
             // 
             // lblInfoHeader
             // 
@@ -191,7 +191,7 @@ namespace Maze
             this.btnSave.TabIndex = 15;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.btnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // btnLoad
             // 
@@ -201,7 +201,7 @@ namespace Maze
             this.btnLoad.TabIndex = 16;
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
-            this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
+            this.btnLoad.Click += new System.EventHandler(this.BtnLoad_Click);
             // 
             // Game
             // 

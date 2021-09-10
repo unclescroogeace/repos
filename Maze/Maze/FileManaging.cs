@@ -43,7 +43,6 @@ namespace Maze
                 }
                 streamWriter.Close();
             }
-
         }
         public static bool Load()
         {
@@ -60,7 +59,6 @@ namespace Maze
             }
             return false;
         }
-
         private static Panel[,] PopulatePanels(string path)
         {
             using StreamReader sr = new(path);
@@ -109,7 +107,6 @@ namespace Maze
             }
             return Panels;
         }
-
         private static char GetBackColor(Panel panel)
         {
             if (panel.BackColor == Color.Green)
