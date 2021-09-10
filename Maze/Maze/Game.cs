@@ -15,7 +15,7 @@ namespace Maze
         private Color SelectedColor = Color.Black;
         private bool StartPointAvailable = false;
         private bool EndPointAvailable = false;
-        public Panel main = new Panel();
+        public Panel MainPanel = new Panel();
         public Game()
         {
             InitializeComponent();
@@ -23,9 +23,9 @@ namespace Maze
 
         private void EmptyMainPanel()
         {
-            foreach (Control item in main.Controls.OfType<Panel>().ToList())
+            foreach (Control item in MainPanel.Controls.OfType<Panel>().ToList())
             {
-                main.Controls.Remove(item);
+                MainPanel.Controls.Remove(item);
             }
         }
 
@@ -34,38 +34,42 @@ namespace Maze
             EmptyMainPanel();
             StartPointAvailable = false;
             EndPointAvailable = false;
-            main.Size = new Size(Board.panelSize.Width * Board.boardSize.Item1 + Board.boardSize.Item1 - 1,
+            MainPanel.Size = new Size(Board.panelSize.Width * Board.boardSize.Item1 + Board.boardSize.Item1 - 1,
                                 Board.panelSize.Height * Board.boardSize.Item2 + Board.boardSize.Item2 - 1);
-            main.BackColor = Color.White;
-            main.Top = 100;
+            MainPanel.BackColor = Color.White;
+            MainPanel.Top = 100;
             for (int x = 0; x <= Board.boardPanels.GetUpperBound(0); x++)
             {
                 for (int y = 0; y <= Board.boardPanels.GetUpperBound(1); y++)
                 {
                     Board.boardPanels[x, y].Click += p_Click;
-                    main.Controls.Add(Board.boardPanels[x, y]);
+                    MainPanel.Controls.Add(Board.boardPanels[x, y]);
                 }
             }
-            Controls.Add(main);
+            Controls.Add(MainPanel);
+        }
+
+        private void AddClickEventToPanel(Panel panel)
+        {
+            panel.Click += p_Click;
+            MainPanel.Controls.Add(panel);
         }
 
         private void AddPanelsToFormByLoading(Panel[,] panels)
         {
             EmptyMainPanel();
-
-            main.Size = new Size(Board.panelSize.Width * Board.boardSize.Item1 + Board.boardSize.Item1 - 1,
+            MainPanel.Size = new Size(Board.panelSize.Width * Board.boardSize.Item1 + Board.boardSize.Item1 - 1,
                                 Board.panelSize.Height * Board.boardSize.Item2 + Board.boardSize.Item2 - 1);
-            main.BackColor = Color.White;
-            main.Top = 100; 
+            MainPanel.BackColor = Color.White;
+            MainPanel.Top = 100; 
             for (int x = 0; x <= panels.GetUpperBound(0); x++)
             {
                 for (int y = 0; y <= panels.GetUpperBound(1); y++)
                 {
-                    panels[x, y].Click += p_Click;
-                    main.Controls.Add(panels[x, y]);
+                    AddClickEventToPanel(panels[x, y]);
                 }
             }
-            Controls.Add(main);
+            Controls.Add(MainPanel);
         }
 
         void p_Click(object sender, EventArgs e)

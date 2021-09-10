@@ -15,23 +15,23 @@ namespace Maze
         public static void Save()
         {
             char[,] board = new char[Board.boardSize.Item1,Board.boardSize.Item2];
-
-            for (int x = 0; x <= Board.boardPanels.GetUpperBound(0); x++)
-            {
-                for (int y = 0; y <= Board.boardPanels.GetUpperBound(1); y++)
-                {
-                    board[x, y] = getBackColor(Board.boardPanels[x, y]);
-                }
-            }
-
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "Maze File|*.maz";
             saveFileDialog.Title = "Save Maze File";
-            saveFileDialog.ShowDialog();
+            saveFileDialog.ShowDialog(); 
+
             if (saveFileDialog.FileName != string.Empty)
             {
                 StreamWriter streamWriter = new StreamWriter(saveFileDialog.FileName);
                 string output = string.Empty;
+
+                for (int x = 0; x <= Board.boardPanels.GetUpperBound(0); x++)
+                {
+                    for (int y = 0; y <= Board.boardPanels.GetUpperBound(1); y++)
+                    {
+                        board[x, y] = getBackColor(Board.boardPanels[x, y]);
+                    }
+                }
                 for (int x = 0; x <= board.GetUpperBound(0); x++)
                 {
                     output = string.Empty;
@@ -50,14 +50,13 @@ namespace Maze
         {
             using (StreamReader sr = new StreamReader(path))
             {
-                
-                int n;
+                int size;
                 char[] charArr;
                 string line = sr.ReadLine();
-                n = line.Length;
-                Panels = new Panel[n, n];
+                size = line.Length;
+                Panels = new Panel[size, size];
                 Board.panelSize = new Size(25, 25);
-                Board.boardSize = (n, n);
+                Board.boardSize = (size, size);
 
                 for (int x = 0; x <= Panels.GetUpperBound(0); x++)
                 {
@@ -103,8 +102,6 @@ namespace Maze
                 openFileDialog.Filter = "Maze File (*.maz)|";
                 openFileDialog.FilterIndex = 2;
                 openFileDialog.RestoreDirectory = true;
-
-
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
