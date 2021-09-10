@@ -29,39 +29,39 @@ namespace Maze
             }
         }
 
-        private void AddPanelsToForm()
-        {
-            EmptyMainPanel();
-            StartPointAvailable = false;
-            EndPointAvailable = false;
-            MainPanel.Size = new Size(Board.panelSize.Width * Board.boardSize.Item1 + Board.boardSize.Item1 - 1,
-                                Board.panelSize.Height * Board.boardSize.Item2 + Board.boardSize.Item2 - 1);
-            MainPanel.BackColor = Color.White;
-            MainPanel.Top = 100;
-            for (int x = 0; x <= Board.boardPanels.GetUpperBound(0); x++)
-            {
-                for (int y = 0; y <= Board.boardPanels.GetUpperBound(1); y++)
-                {
-                    Board.boardPanels[x, y].Click += p_Click;
-                    MainPanel.Controls.Add(Board.boardPanels[x, y]);
-                }
-            }
-            Controls.Add(MainPanel);
-        }
-
         private void AddClickEventToPanel(Panel panel)
         {
             panel.Click += p_Click;
             MainPanel.Controls.Add(panel);
         }
 
-        private void AddPanelsToFormByLoading(Panel[,] panels)
+        private void MainPanelRenewer()
         {
             EmptyMainPanel();
-            MainPanel.Size = new Size(Board.panelSize.Width * Board.boardSize.Item1 + Board.boardSize.Item1 - 1,
-                                Board.panelSize.Height * Board.boardSize.Item2 + Board.boardSize.Item2 - 1);
+            MainPanel.Size = new Size(Board.PanelSize.Width * Board.BoardSize.Item1 + Board.BoardSize.Item1 - 1,
+                                Board.PanelSize.Height * Board.BoardSize.Item2 + Board.BoardSize.Item2 - 1);
             MainPanel.BackColor = Color.White;
-            MainPanel.Top = 100; 
+            MainPanel.Top = 100;
+        }
+
+        private void AddPanelsToForm()
+        {
+            MainPanelRenewer();
+            StartPointAvailable = false;
+            EndPointAvailable = false;
+            for (int x = 0; x <= Board.BoardPanels.GetUpperBound(0); x++)
+            {
+                for (int y = 0; y <= Board.BoardPanels.GetUpperBound(1); y++)
+                {
+                    AddClickEventToPanel(Board.BoardPanels[x, y]);
+                }
+            }
+            Controls.Add(MainPanel);
+        }
+
+        private void AddPanelsToFormByLoading(Panel[,] panels)
+        {
+            MainPanelRenewer();
             for (int x = 0; x <= panels.GetUpperBound(0); x++)
             {
                 for (int y = 0; y <= panels.GetUpperBound(1); y++)
@@ -72,7 +72,7 @@ namespace Maze
             Controls.Add(MainPanel);
         }
 
-        void p_Click(object sender, EventArgs e)
+        private void p_Click(object sender, EventArgs e)
         {
             if (SelectedColor == Color.Green)
             {
@@ -149,8 +149,8 @@ namespace Maze
             int.TryParse(tbY.Text, out y);
             if (x > 0 && y > 0)
             {
-                Board.boardSize = (x, y);
-                Board.panelSize = new Size(25, 25);
+                Board.BoardSize = (x, y);
+                Board.PanelSize = new Size(25, 25);
                 Board.GenerateBoardPanels();
                 AddPanelsToForm();
             }
@@ -178,7 +178,7 @@ namespace Maze
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (Board.boardPanels != null)
+            if (Board.BoardPanels != null)
             {
                 FileManaging.Save();
             }
