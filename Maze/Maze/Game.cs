@@ -12,14 +12,14 @@ namespace Maze
 {
     public partial class Game : Form
     {
-        private Color SelectedColor = Color.Empty;
-        private bool StartPointAvailable = false;
-        private bool EndPointAvailable = false;
-        public Panel MainPanel = new();
         public Game()
         {
             InitializeComponent();
         }
+        private Color SelectedColor = Color.Empty;
+        private bool StartPointAvailable = false;
+        private bool EndPointAvailable = false;
+        public Panel MainPanel = new();
         private void EmptyMainPanel()
         {
             foreach (Control item in MainPanel.Controls.OfType<Panel>().ToList())

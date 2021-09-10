@@ -66,12 +66,15 @@ namespace Maze
             char[] charArr;
             string line = sr.ReadLine();
             size = line.Length;
+            //Not proper size array for N x M
+            //var lineCount = File.ReadLines(@"C:\file.txt").Count();
             Panels = new Panel[size, size];
             Board.PanelSize = new Size(25, 25);
             Board.BoardSize = (size, size);
 
             for (int x = 0; x <= Panels.GetUpperBound(0); x++)
             {
+                //Error to fix
                 charArr = line.ToCharArray();
                 for (int y = 0; y <= Panels.GetUpperBound(1); y++)
                 {
