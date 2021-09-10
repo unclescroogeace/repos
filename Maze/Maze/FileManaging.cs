@@ -15,16 +15,16 @@ namespace Maze
         public static void Save()
         {
             char[,] board = new char[Board.BoardSize.Item1, Board.BoardSize.Item2];
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Maze File|*.maz";
-            saveFileDialog.Title = "Save Maze File";
+            SaveFileDialog saveFileDialog = new()
+            {
+                Filter = "Maze File|*.maz",
+                Title = "Save Maze File"
+            };
             saveFileDialog.ShowDialog();
 
             if (saveFileDialog.FileName != string.Empty)
             {
-                StreamWriter streamWriter = new StreamWriter(saveFileDialog.FileName);
-                string output = string.Empty;
-
+                StreamWriter streamWriter = new(saveFileDialog.FileName);
                 for (int x = 0; x <= Board.BoardPanels.GetUpperBound(0); x++)
                 {
                     for (int y = 0; y <= Board.BoardPanels.GetUpperBound(1); y++)
@@ -34,7 +34,7 @@ namespace Maze
                 }
                 for (int x = 0; x <= board.GetUpperBound(0); x++)
                 {
-                    output = string.Empty;
+                    string output = string.Empty;
                     for (int y = 0; y <= board.GetUpperBound(1); y++)
                     {
                         output += board[x, y];
@@ -47,69 +47,67 @@ namespace Maze
         }
         public static bool Load()
         {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.InitialDirectory = @"C:\Users\Krasimir Kostadinov\Documents";
-                openFileDialog.Filter = "Maze File (*.maz)|";
-                openFileDialog.FilterIndex = 2;
-                openFileDialog.RestoreDirectory = true;
+            using OpenFileDialog openFileDialog = new();
+            openFileDialog.InitialDirectory = @"C:\Users\Krasimir Kostadinov\Documents";
+            openFileDialog.Filter = "Maze File (*.maz)|";
+            openFileDialog.FilterIndex = 2;
+            openFileDialog.RestoreDirectory = true;
 
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    Panels = PopulatePanels(openFileDialog.FileName);
-                    return true;
-                }
-                return false;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Panels = PopulatePanels(openFileDialog.FileName);
+                return true;
             }
+            return false;
         }
 
         private static Panel[,] PopulatePanels(string path)
         {
-            using (StreamReader sr = new StreamReader(path))
-            {
-                int size;
-                char[] charArr;
-                string line = sr.ReadLine();
-                size = line.Length;
-                Panels = new Panel[size, size];
-                Board.PanelSize = new Size(25, 25);
-                Board.BoardSize = (size, size);
+            using StreamReader sr = new(path);
+            int size;
+            char[] charArr;
+            string line = sr.ReadLine();
+            size = line.Length;
+            Panels = new Panel[size, size];
+            Board.PanelSize = new Size(25, 25);
+            Board.BoardSize = (size, size);
 
-                for (int x = 0; x <= Panels.GetUpperBound(0); x++)
+            for (int x = 0; x <= Panels.GetUpperBound(0); x++)
+            {
+                charArr = line.ToCharArray();
+                for (int y = 0; y <= Panels.GetUpperBound(1); y++)
                 {
-                    charArr = line.ToCharArray();
-                    for (int y = 0; y <= Panels.GetUpperBound(1); y++)
+                    Panel panel = new()
                     {
-                        Panel panel = new Panel();
-                        panel.Size = Board.PanelSize;
-                        if (charArr[y] == 'G')
-                        {
-                            panel.BackColor = Color.Green;
-                        }
-                        else if (charArr[y] == 'R')
-                        {
-                            panel.BackColor = Color.Red;
-                        }
-                        else if (charArr[y] == 'B')
-                        {
-                            panel.BackColor = Color.Black;
-                        }
-                        else if (charArr[y] == 'W')
-                        {
-                            panel.BackColor = Color.White;
-                        }
-                        else
-                        {
-                            throw new InvalidOperationException("Invalid BackColor transfer operation");
-                        }
-                        panel.Left = 25 * x + (1 * x);
-                        panel.Top = 25 * y + (1 * y);
-                        Panels[x, y] = panel;
+                        Size = Board.PanelSize
+                    };
+                    if (charArr[y] == 'G')
+                    {
+                        panel.BackColor = Color.Green;
                     }
-                    line = sr.ReadLine();
+                    else if (charArr[y] == 'R')
+                    {
+                        panel.BackColor = Color.Red;
+                    }
+                    else if (charArr[y] == 'B')
+                    {
+                        panel.BackColor = Color.Black;
+                    }
+                    else if (charArr[y] == 'W')
+                    {
+                        panel.BackColor = Color.White;
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Invalid BackColor transfer operation");
+                    }
+                    panel.Left = 25 * x + (1 * x);
+                    panel.Top = 25 * y + (1 * y);
+                    Panels[x, y] = panel;
                 }
-                return Panels;
+                line = sr.ReadLine();
             }
+            return Panels;
         }
 
         private static char GetBackColor(Panel panel)

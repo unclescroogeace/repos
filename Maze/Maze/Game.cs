@@ -12,10 +12,10 @@ namespace Maze
 {
     public partial class Game : Form
     {
-        private Color SelectedColor = Color.Black;
+        private Color SelectedColor = Color.Empty;
         private bool StartPointAvailable = false;
         private bool EndPointAvailable = false;
-        public Panel MainPanel = new Panel();
+        public Panel MainPanel = new();
         public Game()
         {
             InitializeComponent();
