@@ -40,48 +40,52 @@ namespace Maze
 
         public static Panel[,] Load()
         {
-            StreamReader sr = new StreamReader("bird.txt");
-            string line;
-            int n;
-            char[] charArr;
-            line = sr.ReadLine();
-            n = line.Length;
-            Panel[,] panels = new Panel[n,n];
-
-            for (int x = 0; x <= panels.GetUpperBound(0); x++)
+            using (StreamReader sr = new StreamReader("bird.txt"))
             {
-                charArr= line.ToCharArray();
-                for (int y = 0; y <= panels.GetUpperBound(1); y++)
-                {
-                    Panel panel = new Panel();
-                    panel.Size = Board.panelSize;
-                    if (charArr[y] == 'G')
-                    {
-                        panel.BackColor = Color.Green;
-                    }
-                    else if (charArr[y] == 'R')
-                    {
-                        panel.BackColor = Color.Red;
-                    }
-                    else if (charArr[y] == 'B')
-                    {
-                        panel.BackColor = Color.Black;
-                    }
-                    else if (charArr[y] == 'W')
-                    {
-                        panel.BackColor = Color.White;
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException("Invalid transfer operation");
-                    }
-                    panel.Left = 25 * x + (1 * x);
-                    panel.Top = 25 * y + (1 * y);
-                    panels[x, y] = panel;
-                }
+                string line;
+                int n;
+                char[] charArr;
                 line = sr.ReadLine();
+                n = line.Length;
+                Panel[,] panels = new Panel[n, n];
+                Board.panelSize = new Size(25, 25);
+                Board.boardSize = (n, n);
+
+                for (int x = 0; x <= panels.GetUpperBound(0); x++)
+                {
+                    charArr = line.ToCharArray();
+                    for (int y = 0; y <= panels.GetUpperBound(1); y++)
+                    {
+                        Panel panel = new Panel();
+                        panel.Size = Board.panelSize;
+                        if (charArr[y] == 'G')
+                        {
+                            panel.BackColor = Color.Green;
+                        }
+                        else if (charArr[y] == 'R')
+                        {
+                            panel.BackColor = Color.Red;
+                        }
+                        else if (charArr[y] == 'B')
+                        {
+                            panel.BackColor = Color.Black;
+                        }
+                        else if (charArr[y] == 'W')
+                        {
+                            panel.BackColor = Color.White;
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException("Invalid transfer operation");
+                        }
+                        panel.Left = 25 * x + (1 * x);
+                        panel.Top = 25 * y + (1 * y);
+                        panels[x, y] = panel;
+                    }
+                    line = sr.ReadLine();
+                }
+                return panels;
             }
-            return panels;
         }
 
         private static char getBackColor(Panel panel)

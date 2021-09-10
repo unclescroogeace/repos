@@ -23,7 +23,7 @@ namespace Maze
 
         private void AddPanelsToForm()
         {
-            foreach (Control item in main.Controls.OfType<ComboBox>().ToList())
+            foreach (Control item in main.Controls.OfType<Panel>().ToList())
             {
                 main.Controls.Remove(item);
             }
@@ -46,10 +46,11 @@ namespace Maze
 
         private void AddPanelsToFormByLoading(Panel[,] panels)
         {
-            foreach (Control item in main.Controls.OfType<ComboBox>().ToList())
+            foreach (Control item in main.Controls.OfType<Panel>().ToList())
             {
                 main.Controls.Remove(item);
             }
+
 
             main.Size = new Size(Board.panelSize.Width * Board.boardSize.Item1 + Board.boardSize.Item1 - 1,
                                 Board.panelSize.Height * Board.boardSize.Item2 + Board.boardSize.Item2 - 1);

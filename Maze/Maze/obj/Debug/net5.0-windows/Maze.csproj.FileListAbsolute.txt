@@ -5,7 +5,6 @@ C:\Users\Krasimir Kostadinov\source\repos\Maze\Maze\bin\Debug\net5.0-windows\Maz
 C:\Users\Krasimir Kostadinov\source\repos\Maze\Maze\bin\Debug\net5.0-windows\Maze.dll
 C:\Users\Krasimir Kostadinov\source\repos\Maze\Maze\bin\Debug\net5.0-windows\ref\Maze.dll
 C:\Users\Krasimir Kostadinov\source\repos\Maze\Maze\bin\Debug\net5.0-windows\Maze.pdb
-C:\Users\Krasimir Kostadinov\source\repos\Maze\Maze\obj\Debug\net5.0-windows\Maze.csproj.AssemblyReference.cache
 C:\Users\Krasimir Kostadinov\source\repos\Maze\Maze\obj\Debug\net5.0-windows\Maze.Game.resources
 C:\Users\Krasimir Kostadinov\source\repos\Maze\Maze\obj\Debug\net5.0-windows\Maze.csproj.GenerateResource.cache
 C:\Users\Krasimir Kostadinov\source\repos\Maze\Maze\obj\Debug\net5.0-windows\Maze.GeneratedMSBuildEditorConfig.editorconfig
