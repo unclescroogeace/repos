@@ -8,6 +8,6 @@ namespace Maze
 {
     class PathFinder
     {
-
+        
     }
 }

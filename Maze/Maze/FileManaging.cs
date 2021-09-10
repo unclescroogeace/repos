@@ -11,6 +11,7 @@ namespace Maze
 {
     public class FileManaging
     {
+        public static Panel[,] Panels { get; set; }
         public static void Save()
         {
             char[,] board = new char[Board.boardSize.Item1,Board.boardSize.Item2];
@@ -23,38 +24,45 @@ namespace Maze
                 }
             }
 
-            StreamWriter streamWriter = new StreamWriter("bird.txt");
-            string output = string.Empty;
-            for (int x = 0; x <= board.GetUpperBound(0); x++)
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Maze File|*.maz";
+            saveFileDialog.Title = "Save Maze File";
+            saveFileDialog.ShowDialog();
+            if (saveFileDialog.FileName != string.Empty)
             {
-                output = string.Empty;
-                for (int y = 0; y <= board.GetUpperBound(1); y++)
+                StreamWriter streamWriter = new StreamWriter(saveFileDialog.FileName);
+                string output = string.Empty;
+                for (int x = 0; x <= board.GetUpperBound(0); x++)
                 {
-                    output += board[x, y];
+                    output = string.Empty;
+                    for (int y = 0; y <= board.GetUpperBound(1); y++)
+                    {
+                        output += board[x, y];
+                    }
+                    streamWriter.WriteLine(output);
                 }
-                streamWriter.WriteLine(output);
+                streamWriter.Close();
             }
-            streamWriter.Close();
 
         }
 
-        public static Panel[,] Load()
+        private static Panel[,] populatePanels(string path)
         {
-            using (StreamReader sr = new StreamReader("bird.txt"))
+            using (StreamReader sr = new StreamReader(path))
             {
-                string line;
+                
                 int n;
                 char[] charArr;
-                line = sr.ReadLine();
+                string line = sr.ReadLine();
                 n = line.Length;
-                Panel[,] panels = new Panel[n, n];
+                Panels = new Panel[n, n];
                 Board.panelSize = new Size(25, 25);
                 Board.boardSize = (n, n);
 
-                for (int x = 0; x <= panels.GetUpperBound(0); x++)
+                for (int x = 0; x <= Panels.GetUpperBound(0); x++)
                 {
                     charArr = line.ToCharArray();
-                    for (int y = 0; y <= panels.GetUpperBound(1); y++)
+                    for (int y = 0; y <= Panels.GetUpperBound(1); y++)
                     {
                         Panel panel = new Panel();
                         panel.Size = Board.panelSize;
@@ -80,11 +88,30 @@ namespace Maze
                         }
                         panel.Left = 25 * x + (1 * x);
                         panel.Top = 25 * y + (1 * y);
-                        panels[x, y] = panel;
+                        Panels[x, y] = panel;
                     }
                     line = sr.ReadLine();
                 }
-                return panels;
+                return Panels;
+            }
+        }
+        public static bool Load()
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = @"C:\Users\Krasimir Kostadinov\Documents";
+                openFileDialog.Filter = "Maze File (*.maz)|";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+
+
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                   Panels = populatePanels(openFileDialog.FileName);
+                   return true;
+                }
+                return false;
             }
         }
 

@@ -32,6 +32,8 @@ namespace Maze
         private void AddPanelsToForm()
         {
             EmptyMainPanel();
+            StartPointAvailable = false;
+            EndPointAvailable = false;
             main.Size = new Size(Board.panelSize.Width * Board.boardSize.Item1 + Board.boardSize.Item1 - 1,
                                 Board.panelSize.Height * Board.boardSize.Item2 + Board.boardSize.Item2 - 1);
             main.BackColor = Color.White;
@@ -172,12 +174,18 @@ namespace Maze
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            FileManaging.Save();
+            if (Board.boardPanels != null)
+            {
+                FileManaging.Save();
+            }
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            AddPanelsToFormByLoading(FileManaging.Load());
+            if (FileManaging.Load())
+            {
+                AddPanelsToFormByLoading(FileManaging.Panels);
+            }
         }
     }
 }
