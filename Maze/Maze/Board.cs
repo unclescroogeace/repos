@@ -31,7 +31,6 @@ namespace Maze
                         Left = 25 * x + (1 * x),
                         Top = 25 * y + (1 * y)
                     });
-                    Tiles[x, y].Type = TileTypes.Wall;
                 }
             }
         }
