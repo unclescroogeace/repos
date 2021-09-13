@@ -52,7 +52,6 @@ namespace Maze
             }
             Controls.Add(MainPanel);
         }
-
         private void AddPanelsToFormByLoading(Tile[,] tiles)
         {
             MainPanelRenewer();
@@ -74,6 +73,13 @@ namespace Maze
                 {
                     lblInfo.Text = "You can have only 1 start point";
                 }
+                else if ((sender as Panel).BackColor == Color.Red)
+                {
+                    Board.EndPointAvailable = false;
+                    Board.StartPointAvailable = true;
+                    (sender as Panel).BackColor = SelectedColor;
+                    lblInfo.Text = string.Empty;
+                }
                 else
                 {
                     Board.StartPointAvailable = true;
@@ -86,6 +92,13 @@ namespace Maze
                 if (Board.EndPointAvailable == true)
                 {
                     lblInfo.Text = "You cna have only 1 end point";
+                }
+                else if ((sender as Panel).BackColor == Color.Green)
+                {
+                    Board.StartPointAvailable = false;
+                    Board.EndPointAvailable = true;
+                    (sender as Panel).BackColor = SelectedColor;
+                    lblInfo.Text = string.Empty;
                 }
                 else
                 {
@@ -177,7 +190,6 @@ namespace Maze
                 AddPanelsToFormByLoading(FileManaging.Tiles);
             }
         }
-
         private void BtnFindSP_Click(object sender, EventArgs e)
         {
             if (Board.StartPointAvailable == true && Board.EndPointAvailable == true)

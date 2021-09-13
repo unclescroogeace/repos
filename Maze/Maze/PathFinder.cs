@@ -19,7 +19,7 @@ namespace Maze
             {
                 for (int y = 0; y < tiles.GetLength(1); y++)
                 {
-                    char character = Board.GetTileBackColor(tiles[x, y]); 
+                    char character = Board.GetTileBackColor(tiles[x, y]);
                     if (character == 'G')
                     {
                         startVertex = tiles[x, y].Id;
@@ -28,13 +28,10 @@ namespace Maze
                     {
                         endVertex = tiles[x, y].Id;
                     }
-                    // skip this cells
                     if (!IsFreeCell(tiles[x, y]))
                     {
                         continue;
                     }
-                    
-                    
                     CreateNeighbor(x, y, tiles, graph);
                 }
             }
@@ -46,32 +43,15 @@ namespace Maze
             {
                 for (int col = -1; col <= 1; col++)
                 {
-                    // avoid the center cell
+                    if (col + c >= Board.BoardSize.Item2 || row + r >= Board.BoardSize.Item1)
+                    {
+                        continue;
+                    }
                     if (row == 0 && col == 0)
                     {
                         continue;
                     }
-                    // outside matrix
                     if ((0 > c + col) || (c + col >= tiles.GetLength(0)) || (0 > r + row) || (r + row >= tiles.GetLength(1)))
-                    {
-                        continue;
-                    }
-                    ////diagonals removed
-                    //if ((c + col != -1 && r + row != -1) && (c + col != 1 && r + row != -1) && (c + col != -1 && r + row != 1) && (c + col != 1 && r + row != 1) )
-                    //{
-                    //    continue;
-                    //}
-
-                    //if ((c + col == 0 && r + row != 0) || (c + col != 0 && r + row == 0))
-                    //{
-                    //    if (!isFreeCell(tiles[r + row, c + col]))
-                    //    {
-                    //        continue;
-                    //    }
-                    //    graph.Add(tiles[r, c].Id, tiles[row + r, col + c].Id);
-                    //}
-
-                    if ((col + c == -1 && row + r == -1) || (col + c == 1 && row + r == -1) || (col + c == -1 && row + r == 1) || (col + c == 1 && row + r == 1))
                     {
                         continue;
                     }
@@ -80,56 +60,46 @@ namespace Maze
                         continue;
                     }
                     graph.Add(tiles[r, c].Id, tiles[row + r, col + c].Id);
-
                 }
             }
 
         }
-
         private static bool IsFreeCell(Tile tile)
         {
             return Board.GetTileBackColor(tile) != 'B';
         }
-
         public static void FindSP(Graph graph)
         {
             if (graph == null || graph.Size() == 0)
             {
                 throw new ArgumentException("empty or null graph");
             }
-
             if (graph.Size() == 1)
             {
                 throw new ArgumentException(
                         "graph's size must be greater than 1");
             }
-
             if (startVertex == -1)
             {
                 throw new ArgumentException("Start vertex not found");
             }
-
             if (endVertex == -1)
             {
                 throw new ArgumentException("End vertex not found");
             }
 
             Dictionary<int, int> sonToParent = BFS(graph, startVertex, endVertex);
-
             Stack<int> path = new();
             for (int son = endVertex; son != startVertex; son = sonToParent[son])
             {
                 path.Push(son);
             }
-
             path.Push(startVertex);
-            
             while (!(path.Count == 0))
             {
                 DrawPath(path.Pop());
             }
         }
-
         private static void DrawPath(int n)
         {
             int w = Board.Tiles.GetLength(0); // width
@@ -149,7 +119,6 @@ namespace Maze
                 }
             }
         }
-
         private static Dictionary<int, int> BFS(Graph g, int startVertex2, int endVertex2)
         {
             Queue<int> q = new();
@@ -159,19 +128,16 @@ namespace Maze
             while (!(q.Count == 0))
             {
                 int v = q.Dequeue();
-                
-                foreach(int s in g.Adj(v))
+                foreach (int s in g.Adj(v))
                 {
                     if (!marked.Contains(s))
                     {
                         marked.Add(s);
                         sonToParent.Add(s, v);
-
                         if (s == endVertex2)
                         {
                             return sonToParent;
                         }
-
                         q.Enqueue(s);
                     }
                 }

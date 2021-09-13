@@ -11,7 +11,7 @@ namespace Maze
 {
     public class FileManaging
     {
-        public static Tile[,] Tiles{ get; set; }
+        public static Tile[,] Tiles { get; set; }
         public static void Save()
         {
             char[,] board = new char[Board.BoardSize.Item1, Board.BoardSize.Item2];
@@ -69,10 +69,10 @@ namespace Maze
             string line = sr.ReadLine();
             size = line.Length;
             //Not proper size array for N x M
-            //var lineCount = File.ReadLines(@"C:\file.txt").Count();
-            Tiles = new Tile[size, size];
+            var rows = File.ReadLines(path).Count();
+            Tiles = new Tile[rows, size];
             Board.PanelSize = new Size(25, 25);
-            Board.BoardSize = (size, size);
+            Board.BoardSize = (rows, size);
             int counter = 1;
             for (int x = 0; x <= Tiles.GetUpperBound(0); x++)
             {
@@ -99,6 +99,10 @@ namespace Maze
                         panel.BackColor = Color.Black;
                     }
                     else if (charArr[y] == 'W')
+                    {
+                        panel.BackColor = Color.White;
+                    }
+                    else if (charArr[y] == 'P')
                     {
                         panel.BackColor = Color.White;
                     }
