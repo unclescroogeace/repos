@@ -12,6 +12,8 @@ namespace Maze
     class Board
     {
         public static (int, int) BoardSize { get; set; }
+        public static bool StartPointAvailable { get; set; } = false;
+        public static bool EndPointAvailable { get; set; } = false;
         public static Tile[,] Tiles;
         public static Size PanelSize { get; set; }
         public static void GenerateBoardPanels()
@@ -29,7 +31,35 @@ namespace Maze
                         Left = 25 * x + (1 * x),
                         Top = 25 * y + (1 * y)
                     });
+                    Tiles[x, y].Type = TileTypes.Wall;
                 }
+            }
+        }
+        public static char GetTileBackColor(Tile tile)
+        {
+            if (tile.Panel.BackColor == Color.Green)
+            {
+                return 'G';
+            }
+            else if (tile.Panel.BackColor == Color.Red)
+            {
+                return 'R';
+            }
+            else if (tile.Panel.BackColor == Color.White)
+            {
+                return 'W';
+            }
+            else if (tile.Panel.BackColor == Color.Black)
+            {
+                return 'B';
+            }
+            else if (tile.Panel.BackColor == Color.Purple)
+            {
+                return 'P';
+            }
+            else
+            {
+                throw new InvalidOperationException("Invalid BackColor transfer operation");
             }
         }
     }

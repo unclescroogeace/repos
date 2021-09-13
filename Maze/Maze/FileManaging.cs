@@ -29,7 +29,7 @@ namespace Maze
                 {
                     for (int y = 0; y <= Board.Tiles.GetUpperBound(1); y++)
                     {
-                        board[x, y] = GetBackColor(Board.Tiles[x, y].Panel);
+                        board[x, y] = Board.GetTileBackColor(Board.Tiles[x, y]);
                     }
                 }
                 for (int x = 0; x <= board.GetUpperBound(0); x++)
@@ -61,6 +61,8 @@ namespace Maze
         }
         private static Tile[,] PopulatePanels(string path)
         {
+            Board.StartPointAvailable = false;
+            Board.EndPointAvailable = false;
             using StreamReader sr = new(path);
             int size;
             char[] charArr;
@@ -71,7 +73,7 @@ namespace Maze
             Tiles = new Tile[size, size];
             Board.PanelSize = new Size(25, 25);
             Board.BoardSize = (size, size);
-
+            int counter = 1;
             for (int x = 0; x <= Tiles.GetUpperBound(0); x++)
             {
                 //Error to fix
@@ -84,10 +86,12 @@ namespace Maze
                     };
                     if (charArr[y] == 'G')
                     {
+                        Board.StartPointAvailable = true;
                         panel.BackColor = Color.Green;
                     }
                     else if (charArr[y] == 'R')
                     {
+                        Board.EndPointAvailable = true;
                         panel.BackColor = Color.Red;
                     }
                     else if (charArr[y] == 'B')
@@ -104,35 +108,12 @@ namespace Maze
                     }
                     panel.Left = 25 * x + (1 * x);
                     panel.Top = 25 * y + (1 * y);
-                    Tile tile = new(1, panel);
+                    Tile tile = new(counter++, panel);
                     Tiles[x, y] = tile;
                 }
                 line = sr.ReadLine();
             }
             return Tiles;
-        }
-        private static char GetBackColor(Panel panel)
-        {
-            if (panel.BackColor == Color.Green)
-            {
-                return 'G';
-            }
-            else if (panel.BackColor == Color.Red)
-            {
-                return 'R';
-            }
-            else if (panel.BackColor == Color.White)
-            {
-                return 'W';
-            }
-            else if (panel.BackColor == Color.Black)
-            {
-                return 'B';
-            }
-            else
-            {
-                throw new InvalidOperationException("Invalid BackColor transfer operation");
-            }
         }
     }
 }

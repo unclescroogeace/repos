@@ -17,8 +17,6 @@ namespace Maze
             InitializeComponent();
         }
         private Color SelectedColor = Color.Empty;
-        private bool StartPointAvailable = false;
-        private bool EndPointAvailable = false;
         public Panel MainPanel = new();
         private void EmptyMainPanel()
         {
@@ -43,8 +41,8 @@ namespace Maze
         private void AddPanelsToForm()
         {
             MainPanelRenewer();
-            StartPointAvailable = false;
-            EndPointAvailable = false;
+            Board.StartPointAvailable = false;
+            Board.EndPointAvailable = false;
             for (int x = 0; x <= Board.Tiles.GetUpperBound(0); x++)
             {
                 for (int y = 0; y <= Board.Tiles.GetUpperBound(1); y++)
@@ -54,9 +52,11 @@ namespace Maze
             }
             Controls.Add(MainPanel);
         }
+
         private void AddPanelsToFormByLoading(Tile[,] tiles)
         {
             MainPanelRenewer();
+            Board.Tiles = tiles;
             for (int x = 0; x <= tiles.GetUpperBound(0); x++)
             {
                 for (int y = 0; y <= tiles.GetUpperBound(1); y++)
@@ -70,26 +70,26 @@ namespace Maze
         {
             if (SelectedColor == Color.Green)
             {
-                if (StartPointAvailable == true)
+                if (Board.StartPointAvailable == true)
                 {
                     lblInfo.Text = "You can have only 1 start point";
                 }
                 else
                 {
-                    StartPointAvailable = true;
+                    Board.StartPointAvailable = true;
                     (sender as Panel).BackColor = SelectedColor;
                     lblInfo.Text = string.Empty;
                 }
             }
             else if (SelectedColor == Color.Red)
             {
-                if (EndPointAvailable == true)
+                if (Board.EndPointAvailable == true)
                 {
                     lblInfo.Text = "You cna have only 1 end point";
                 }
                 else
                 {
-                    EndPointAvailable = true;
+                    Board.EndPointAvailable = true;
                     (sender as Panel).BackColor = SelectedColor;
                     lblInfo.Text = string.Empty;
                 }
@@ -98,13 +98,13 @@ namespace Maze
             {
                 if ((sender as Panel).BackColor == Color.Green)
                 {
-                    StartPointAvailable = false;
+                    Board.StartPointAvailable = false;
                     (sender as Panel).BackColor = SelectedColor;
                     lblInfo.Text = string.Empty;
                 }
                 else if ((sender as Panel).BackColor == Color.Red)
                 {
-                    EndPointAvailable = false;
+                    Board.EndPointAvailable = false;
                     (sender as Panel).BackColor = SelectedColor;
                     lblInfo.Text = string.Empty;
                 }
@@ -118,13 +118,13 @@ namespace Maze
             {
                 if ((sender as Panel).BackColor == Color.Green)
                 {
-                    StartPointAvailable = false;
+                    Board.StartPointAvailable = false;
                     (sender as Panel).BackColor = SelectedColor;
                     lblInfo.Text = string.Empty;
                 }
                 else if ((sender as Panel).BackColor == Color.Red)
                 {
-                    EndPointAvailable = false;
+                    Board.EndPointAvailable = false;
                     (sender as Panel).BackColor = SelectedColor;
                     lblInfo.Text = string.Empty;
                 }
@@ -175,6 +175,19 @@ namespace Maze
             if (FileManaging.Load())
             {
                 AddPanelsToFormByLoading(FileManaging.Tiles);
+            }
+        }
+
+        private void BtnFindSP_Click(object sender, EventArgs e)
+        {
+            if (Board.StartPointAvailable == true && Board.EndPointAvailable == true)
+            {
+                Graph graph = PathFinder.CreateGraph(Board.Tiles);
+                PathFinder.FindSP(graph);
+            }
+            else
+            {
+                lblInfo.Text = "Invalid search";
             }
         }
     }
