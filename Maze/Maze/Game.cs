@@ -45,23 +45,23 @@ namespace Maze
             MainPanelRenewer();
             StartPointAvailable = false;
             EndPointAvailable = false;
-            for (int x = 0; x <= Board.BoardPanels.GetUpperBound(0); x++)
+            for (int x = 0; x <= Board.Tiles.GetUpperBound(0); x++)
             {
-                for (int y = 0; y <= Board.BoardPanels.GetUpperBound(1); y++)
+                for (int y = 0; y <= Board.Tiles.GetUpperBound(1); y++)
                 {
-                    AddClickEventToPanel(Board.BoardPanels[x, y]);
+                    AddClickEventToPanel(Board.Tiles[x, y].Panel);
                 }
             }
             Controls.Add(MainPanel);
         }
-        private void AddPanelsToFormByLoading(Panel[,] panels)
+        private void AddPanelsToFormByLoading(Tile[,] tiles)
         {
             MainPanelRenewer();
-            for (int x = 0; x <= panels.GetUpperBound(0); x++)
+            for (int x = 0; x <= tiles.GetUpperBound(0); x++)
             {
-                for (int y = 0; y <= panels.GetUpperBound(1); y++)
+                for (int y = 0; y <= tiles.GetUpperBound(1); y++)
                 {
-                    AddClickEventToPanel(panels[x, y]);
+                    AddClickEventToPanel(tiles[x, y].Panel);
                 }
             }
             Controls.Add(MainPanel);
@@ -165,7 +165,7 @@ namespace Maze
         }
         private void BtnSave_Click(object sender, EventArgs e)
         {
-            if (Board.BoardPanels != null)
+            if (Board.Tiles != null)
             {
                 FileManaging.Save();
             }
@@ -174,7 +174,7 @@ namespace Maze
         {
             if (FileManaging.Load())
             {
-                AddPanelsToFormByLoading(FileManaging.Panels);
+                AddPanelsToFormByLoading(FileManaging.Tiles);
             }
         }
     }

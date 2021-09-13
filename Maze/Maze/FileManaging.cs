@@ -11,7 +11,7 @@ namespace Maze
 {
     public class FileManaging
     {
-        public static Panel[,] Panels { get; set; }
+        public static Tile[,] Tiles{ get; set; }
         public static void Save()
         {
             char[,] board = new char[Board.BoardSize.Item1, Board.BoardSize.Item2];
@@ -25,11 +25,11 @@ namespace Maze
             if (saveFileDialog.FileName != string.Empty)
             {
                 StreamWriter streamWriter = new(saveFileDialog.FileName);
-                for (int x = 0; x <= Board.BoardPanels.GetUpperBound(0); x++)
+                for (int x = 0; x <= Board.Tiles.GetUpperBound(0); x++)
                 {
-                    for (int y = 0; y <= Board.BoardPanels.GetUpperBound(1); y++)
+                    for (int y = 0; y <= Board.Tiles.GetUpperBound(1); y++)
                     {
-                        board[x, y] = GetBackColor(Board.BoardPanels[x, y]);
+                        board[x, y] = GetBackColor(Board.Tiles[x, y].Panel);
                     }
                 }
                 for (int x = 0; x <= board.GetUpperBound(0); x++)
@@ -54,12 +54,12 @@ namespace Maze
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                Panels = PopulatePanels(openFileDialog.FileName);
+                Tiles = PopulatePanels(openFileDialog.FileName);
                 return true;
             }
             return false;
         }
-        private static Panel[,] PopulatePanels(string path)
+        private static Tile[,] PopulatePanels(string path)
         {
             using StreamReader sr = new(path);
             int size;
@@ -68,15 +68,15 @@ namespace Maze
             size = line.Length;
             //Not proper size array for N x M
             //var lineCount = File.ReadLines(@"C:\file.txt").Count();
-            Panels = new Panel[size, size];
+            Tiles = new Tile[size, size];
             Board.PanelSize = new Size(25, 25);
             Board.BoardSize = (size, size);
 
-            for (int x = 0; x <= Panels.GetUpperBound(0); x++)
+            for (int x = 0; x <= Tiles.GetUpperBound(0); x++)
             {
                 //Error to fix
                 charArr = line.ToCharArray();
-                for (int y = 0; y <= Panels.GetUpperBound(1); y++)
+                for (int y = 0; y <= Tiles.GetUpperBound(1); y++)
                 {
                     Panel panel = new()
                     {
@@ -104,11 +104,12 @@ namespace Maze
                     }
                     panel.Left = 25 * x + (1 * x);
                     panel.Top = 25 * y + (1 * y);
-                    Panels[x, y] = panel;
+                    Tile tile = new(1, panel);
+                    Tiles[x, y] = tile;
                 }
                 line = sr.ReadLine();
             }
-            return Panels;
+            return Tiles;
         }
         private static char GetBackColor(Panel panel)
         {
