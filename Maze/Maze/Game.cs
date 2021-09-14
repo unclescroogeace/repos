@@ -192,6 +192,7 @@ namespace Maze
         }
         private void BtnFindSP_Click(object sender, EventArgs e)
         {
+            Board.ClearPath();
             if (Board.StartPointAvailable == true && Board.EndPointAvailable == true)
             {
                 Graph graph = PathFinder.CreateGraph(Board.Tiles);

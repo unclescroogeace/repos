@@ -76,7 +76,6 @@ namespace Maze
             int counter = 1;
             for (int x = 0; x <= Tiles.GetUpperBound(0); x++)
             {
-                //Error to fix
                 charArr = line.ToCharArray();
                 for (int y = 0; y <= Tiles.GetUpperBound(1); y++)
                 {

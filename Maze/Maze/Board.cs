@@ -18,7 +18,7 @@ namespace Maze
         public static Size PanelSize { get; set; }
         public static void GenerateBoardPanels()
         {
-            int counter = 0;
+            int counter = 1;
             Tiles = new Tile[BoardSize.Item1, BoardSize.Item2];
             for (int x = 0; x <= Tiles.GetUpperBound(0); x++)
             {
@@ -59,6 +59,48 @@ namespace Maze
             else
             {
                 throw new InvalidOperationException("Invalid BackColor transfer operation");
+            }
+        }
+        public static int GetStartPointId()
+        {
+            for (int x = 0; x <= Tiles.GetUpperBound(0); x++)
+            {
+                for (int y = 0; y <= Tiles.GetUpperBound(1); y++)
+                {
+                    if (GetTileBackColor(Tiles[x, y]) == 'G')
+                    {
+                        return Tiles[x, y].Id;
+                    }
+                }
+            }
+            return 0;
+        }
+        public static int GetEndPointId()
+        {
+            for (int x = 0; x <= Tiles.GetUpperBound(0); x++)
+            {
+                for (int y = 0; y <= Tiles.GetUpperBound(1); y++)
+                {
+                    if (GetTileBackColor(Tiles[x, y]) == 'R')
+                    {
+                        return Tiles[x, y].Id;
+                    }
+                }
+            }
+            return 0;
+        }
+
+        public static void ClearPath()
+        {
+            for (int x = 0; x <= Tiles.GetUpperBound(0); x++)
+            {
+                for (int y = 0; y <= Tiles.GetUpperBound(1); y++)
+                {
+                    if (Tiles[x, y].Panel.BackColor == Color.Purple)
+                    {
+                        Tiles[x, y].Panel.BackColor = Color.White;
+                    }
+                }
             }
         }
     }

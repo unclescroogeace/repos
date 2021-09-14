@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Maze
 {
@@ -12,6 +13,7 @@ namespace Maze
 
         private static int startVertex;
         private static int endVertex;
+        private static bool isStartVertexEdgeAvailable = false;
         public static Graph CreateGraph(Tile[,] tiles)
         {
             Graph graph = new();
@@ -43,7 +45,7 @@ namespace Maze
             {
                 for (int col = -1; col <= 1; col++)
                 {
-                    if (col + c >= Board.BoardSize.Item2 || row + r >= Board.BoardSize.Item1)
+                    if (row + r >= Board.BoardSize.Item1 || col + c >= Board.BoardSize.Item2)
                     {
                         continue;
                     }
@@ -59,6 +61,10 @@ namespace Maze
                     {
                         continue;
                     }
+                    if (tiles[r, c].Id == startVertex)
+                    {
+                        isStartVertexEdgeAvailable = true;
+                    }
                     graph.Add(tiles[r, c].Id, tiles[row + r, col + c].Id);
                 }
             }
@@ -68,27 +74,45 @@ namespace Maze
         {
             return Board.GetTileBackColor(tile) != 'B';
         }
+
         public static void FindSP(Graph graph)
         {
-            if (graph == null || graph.Size() == 0)
+            try
             {
-                throw new ArgumentException("empty or null graph");
+                if (graph == null || graph.Size() == 0)
+                {
+                    throw new ArgumentException("empty or null graph");
+                }
+                if (graph.Size() == 1)
+                {
+                    throw new ArgumentException("graph's size must be greater than 1");
+                }
+                if (startVertex == -1)
+                {
+                    throw new ArgumentException("Start vertex not found");
+                }
+                if (endVertex == -1)
+                {
+                    throw new ArgumentException("End vertex not found");
+                }
             }
-            if (graph.Size() == 1)
+            catch(ArgumentException e)
             {
-                throw new ArgumentException(
-                        "graph's size must be greater than 1");
+                MessageBox.Show(e.Message);
+                return;
             }
-            if (startVertex == -1)
+            if (!isStartVertexEdgeAvailable)
             {
-                throw new ArgumentException("Start vertex not found");
-            }
-            if (endVertex == -1)
-            {
-                throw new ArgumentException("End vertex not found");
+                MessageBox.Show("No path available");
+                return;
             }
 
             Dictionary<int, int> sonToParent = BFS(graph, startVertex, endVertex);
+            if (Object.Equals(sonToParent, default(Dictionary<int, int>)))
+            {
+                MessageBox.Show("No path available");
+                return;
+            }
             Stack<int> path = new();
             for (int son = endVertex; son != startVertex; son = sonToParent[son])
             {
@@ -102,12 +126,9 @@ namespace Maze
         }
         private static void DrawPath(int n)
         {
-            int w = Board.Tiles.GetLength(0); // width
-            int h = Board.Tiles.GetLength(1); // height
-
-            for (int x = 0; x < w; ++x)
+            for (int x = 0; x < Board.Tiles.GetLength(0); ++x)
             {
-                for (int y = 0; y < h; ++y)
+                for (int y = 0; y < Board.Tiles.GetLength(1); ++y)
                 {
                     if (Board.Tiles[x, y].Id.Equals(n))
                     {
