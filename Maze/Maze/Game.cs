@@ -25,11 +25,6 @@ namespace Maze
                 MainPanel.Controls.Remove(item);
             }
         }
-        private void AddClickEventToPanel(Panel panel)
-        {
-            panel.Click += Panel_Click;
-            MainPanel.Controls.Add(panel);
-        }
         private void MainPanelRenewer()
         {
             EmptyMainPanel();
@@ -38,29 +33,31 @@ namespace Maze
             MainPanel.BackColor = Color.White;
             MainPanel.Top = 100;
         }
+        private void AddClickEventToPanel(Panel panel)
+        {
+            panel.Click += Panel_Click;
+            MainPanel.Controls.Add(panel);
+        }
         private void AddPanelsToForm()
         {
             MainPanelRenewer();
             Board.StartPointAvailable = false;
             Board.EndPointAvailable = false;
-            for (int x = 0; x <= Board.Tiles.GetUpperBound(0); x++)
-            {
-                for (int y = 0; y <= Board.Tiles.GetUpperBound(1); y++)
-                {
-                    AddClickEventToPanel(Board.Tiles[x, y].Panel);
-                }
-            }
-            Controls.Add(MainPanel);
+            AddPanels();
         }
         private void AddPanelsToFormByLoading(Tile[,] tiles)
         {
             MainPanelRenewer();
             Board.Tiles = tiles;
-            for (int x = 0; x <= tiles.GetUpperBound(0); x++)
+            AddPanels();
+        }
+        private void AddPanels()
+        {
+            for (int x = 0; x < Board.Tiles.GetLength(0); x++)
             {
-                for (int y = 0; y <= tiles.GetUpperBound(1); y++)
+                for (int y = 0; y < Board.Tiles.GetLength(1); y++)
                 {
-                    AddClickEventToPanel(tiles[x, y].Panel);
+                    AddClickEventToPanel(Board.Tiles[x, y].Panel);
                 }
             }
             Controls.Add(MainPanel);
@@ -196,11 +193,11 @@ namespace Maze
             if (Board.StartPointAvailable == true && Board.EndPointAvailable == true)
             {
                 Graph graph = PathFinder.CreateGraph(Board.Tiles);
-                PathFinder.FindSP(graph);
+                PathFinder.FindShortestPath(graph);
             }
             else
             {
-                lblInfo.Text = "Invalid search";
+                lblInfo.Text = "No start or end point";
             }
         }
     }

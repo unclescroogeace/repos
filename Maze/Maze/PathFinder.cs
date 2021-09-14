@@ -10,7 +10,6 @@ namespace Maze
 {
     class PathFinder
     {
-
         private static int startVertex;
         private static int endVertex;
         private static bool isStartVertexEdgeAvailable = false;
@@ -22,16 +21,16 @@ namespace Maze
             {
                 for (int y = 0; y < tiles.GetLength(1); y++)
                 {
-                    char character = Board.GetTileBackColor(tiles[x, y]);
-                    if (character == 'G')
+                    char tileBackColor = Board.GetTileBackColor(tiles[x, y]);
+                    if (tileBackColor == 'G')
                     {
                         startVertex = tiles[x, y].Id;
                     }
-                    else if (character == 'R')
+                    else if (tileBackColor == 'R')
                     {
                         endVertex = tiles[x, y].Id;
                     }
-                    if (!IsFreeCell(tiles[x, y]))
+                    if (!IsTileFree(tiles[x, y]))
                     {
                         continue;
                     }
@@ -58,7 +57,7 @@ namespace Maze
                     {
                         continue;
                     }
-                    if (!IsFreeCell(tiles[r + row, c + col]))
+                    if (!IsTileFree(tiles[r + row, c + col]))
                     {
                         continue;
                     }
@@ -69,14 +68,12 @@ namespace Maze
                     graph.Add(tiles[r, c].Id, tiles[row + r, col + c].Id);
                 }
             }
-
         }
-        private static bool IsFreeCell(Tile tile)
+        private static bool IsTileFree(Tile tile)
         {
             return Board.GetTileBackColor(tile) != 'B';
         }
-
-        public static void FindSP(Graph graph)
+        public static void FindShortestPath(Graph graph)
         {
             try
             {
@@ -97,7 +94,7 @@ namespace Maze
                     throw new ArgumentException("End vertex not found");
                 }
             }
-            catch(ArgumentException e)
+            catch (ArgumentException e)
             {
                 MessageBox.Show(e.Message);
                 return;

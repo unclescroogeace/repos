@@ -18,10 +18,10 @@ namespace Maze
             SaveFileDialog saveFileDialog = new()
             {
                 Filter = "Maze File|*.maz",
-                Title = "Save Maze File"
+                Title = "Save Maze File",
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
             };
             saveFileDialog.ShowDialog();
-
             if (saveFileDialog.FileName != string.Empty)
             {
                 StreamWriter streamWriter = new(saveFileDialog.FileName);
@@ -46,12 +46,13 @@ namespace Maze
         }
         public static bool Load()
         {
-            using OpenFileDialog openFileDialog = new();
-            openFileDialog.InitialDirectory = @"C:\Users\Krasimir Kostadinov\Documents";
-            openFileDialog.Filter = "Maze File (*.maz)|";
-            openFileDialog.FilterIndex = 2;
-            openFileDialog.RestoreDirectory = true;
-
+            using OpenFileDialog openFileDialog = new()
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                Filter = "Maze File (*.maz)|",
+                FilterIndex = 2,
+                RestoreDirectory = true
+            };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 Tiles = PopulatePanels(openFileDialog.FileName);
@@ -61,23 +62,22 @@ namespace Maze
         }
         private static Tile[,] PopulatePanels(string path)
         {
+            char[] charArr;
+            int counter = 1;
             Board.StartPointAvailable = false;
             Board.EndPointAvailable = false;
             using StreamReader sr = new(path);
-            int size;
-            char[] charArr;
             string line = sr.ReadLine();
-            size = line.Length;
-            //Not proper size array for N x M
+            int cols = line.Length;
             var rows = File.ReadLines(path).Count();
-            Tiles = new Tile[rows, size];
+            Tiles = new Tile[rows, cols];
             Board.PanelSize = new Size(25, 25);
-            Board.BoardSize = (rows, size);
-            int counter = 1;
-            for (int x = 0; x <= Tiles.GetUpperBound(0); x++)
+            Board.BoardSize = (rows, cols);
+
+            for (int x = 0; x < Tiles.GetLength(0); x++)
             {
                 charArr = line.ToCharArray();
-                for (int y = 0; y <= Tiles.GetUpperBound(1); y++)
+                for (int y = 0; y < Tiles.GetLength(1); y++)
                 {
                     Panel panel = new()
                     {

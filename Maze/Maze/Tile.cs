@@ -18,5 +18,4 @@ namespace Maze
             Panel = panel;
         }
     }
-
 }

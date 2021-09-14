@@ -8,7 +8,6 @@ using System.Drawing;
 
 namespace Maze
 {
-
     class Board
     {
         public static (int, int) BoardSize { get; set; }
@@ -20,9 +19,9 @@ namespace Maze
         {
             int counter = 1;
             Tiles = new Tile[BoardSize.Item1, BoardSize.Item2];
-            for (int x = 0; x <= Tiles.GetUpperBound(0); x++)
+            for (int x = 0; x < Tiles.GetLength(0); x++)
             {
-                for (int y = 0; y <= Tiles.GetUpperBound(1); y++)
+                for (int y = 0; y < Tiles.GetLength(1); y++)
                 {
                     Tiles[x, y] = new(counter++, new Panel
                     {
@@ -61,42 +60,13 @@ namespace Maze
                 throw new InvalidOperationException("Invalid BackColor transfer operation");
             }
         }
-        public static int GetStartPointId()
-        {
-            for (int x = 0; x <= Tiles.GetUpperBound(0); x++)
-            {
-                for (int y = 0; y <= Tiles.GetUpperBound(1); y++)
-                {
-                    if (GetTileBackColor(Tiles[x, y]) == 'G')
-                    {
-                        return Tiles[x, y].Id;
-                    }
-                }
-            }
-            return 0;
-        }
-        public static int GetEndPointId()
-        {
-            for (int x = 0; x <= Tiles.GetUpperBound(0); x++)
-            {
-                for (int y = 0; y <= Tiles.GetUpperBound(1); y++)
-                {
-                    if (GetTileBackColor(Tiles[x, y]) == 'R')
-                    {
-                        return Tiles[x, y].Id;
-                    }
-                }
-            }
-            return 0;
-        }
-
         public static void ClearPath()
         {
             if (!Object.Equals(Tiles, default(Tile[,])))
             {
-                for (int x = 0; x <= Tiles.GetUpperBound(0); x++)
+                for (int x = 0; x < Tiles.GetLength(0); x++)
                 {
-                    for (int y = 0; y <= Tiles.GetUpperBound(1); y++)
+                    for (int y = 0; y < Tiles.GetLength(1); y++)
                     {
                         if (Tiles[x, y].Panel.BackColor == Color.Purple)
                         {
