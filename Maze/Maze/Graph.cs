@@ -20,6 +20,7 @@ namespace Maze
         public void AddEdge(int v1, int v2)
         {
             Add(v1, v2);
+            Add(v2, v1);
         }
         public void Add(int from, int to)
         {

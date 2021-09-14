@@ -92,13 +92,16 @@ namespace Maze
 
         public static void ClearPath()
         {
-            for (int x = 0; x <= Tiles.GetUpperBound(0); x++)
+            if (!Object.Equals(Tiles, default(Tile[,])))
             {
-                for (int y = 0; y <= Tiles.GetUpperBound(1); y++)
+                for (int x = 0; x <= Tiles.GetUpperBound(0); x++)
                 {
-                    if (Tiles[x, y].Panel.BackColor == Color.Purple)
+                    for (int y = 0; y <= Tiles.GetUpperBound(1); y++)
                     {
-                        Tiles[x, y].Panel.BackColor = Color.White;
+                        if (Tiles[x, y].Panel.BackColor == Color.Purple)
+                        {
+                            Tiles[x, y].Panel.BackColor = Color.White;
+                        }
                     }
                 }
             }

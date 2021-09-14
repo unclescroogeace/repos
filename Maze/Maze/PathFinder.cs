@@ -16,6 +16,7 @@ namespace Maze
         private static bool isStartVertexEdgeAvailable = false;
         public static Graph CreateGraph(Tile[,] tiles)
         {
+            isStartVertexEdgeAvailable = false;
             Graph graph = new();
             for (int x = 0; x < tiles.GetLength(0); x++)
             {
@@ -53,7 +54,7 @@ namespace Maze
                     {
                         continue;
                     }
-                    if ((0 > c + col) || (c + col >= tiles.GetLength(0)) || (0 > r + row) || (r + row >= tiles.GetLength(1)))
+                    if ((0 > r + row) || (r + row >= tiles.GetLength(0)) || (0 > c + col) || (c + col >= tiles.GetLength(1)))
                     {
                         continue;
                     }
