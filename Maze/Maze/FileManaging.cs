@@ -25,17 +25,17 @@ namespace Maze
             if (saveFileDialog.FileName != string.Empty)
             {
                 StreamWriter streamWriter = new(saveFileDialog.FileName);
-                for (int x = 0; x <= Board.Tiles.GetUpperBound(0); x++)
+                for (int x = 0; x < Board.Tiles.GetLength(0); x++)
                 {
-                    for (int y = 0; y <= Board.Tiles.GetUpperBound(1); y++)
+                    for (int y = 0; y < Board.Tiles.GetLength(1); y++)
                     {
                         board[x, y] = Board.GetTileBackColor(Board.Tiles[x, y]);
                     }
                 }
-                for (int x = 0; x <= board.GetUpperBound(0); x++)
+                for (int x = 0; x < board.GetLength(0); x++)
                 {
                     string output = string.Empty;
-                    for (int y = 0; y <= board.GetUpperBound(1); y++)
+                    for (int y = 0; y < board.GetLength(1); y++)
                     {
                         output += board[x, y];
                     }
