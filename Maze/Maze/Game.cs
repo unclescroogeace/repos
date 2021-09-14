@@ -200,5 +200,9 @@ namespace Maze
                 lblInfo.Text = "No start or end point";
             }
         }
+        private void BtnClearPath_Click(object sender, EventArgs e)
+        {
+            Board.ClearPath();
+        }
     }
 }
