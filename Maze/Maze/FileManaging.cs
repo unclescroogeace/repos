@@ -39,7 +39,6 @@ namespace Maze
                     {
                         output += board[x, y];
                     }
-                    streamWriter.WriteLine(output);
                 }
                 streamWriter.Close();
             }
