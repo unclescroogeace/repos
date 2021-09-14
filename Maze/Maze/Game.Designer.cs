@@ -48,6 +48,7 @@ namespace Maze
             this.btnLoad = new System.Windows.Forms.Button();
             this.BtnFindSP = new System.Windows.Forms.Button();
             this.BtnClearPath = new System.Windows.Forms.Button();
+            this.BtnPreLoadedMap = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbX
@@ -95,7 +96,7 @@ namespace Maze
             // lblBlack
             // 
             this.lblBlack.AutoSize = true;
-            this.lblBlack.Location = new System.Drawing.Point(569, 16);
+            this.lblBlack.Location = new System.Drawing.Point(646, 16);
             this.lblBlack.Name = "lblBlack";
             this.lblBlack.Size = new System.Drawing.Size(30, 15);
             this.lblBlack.TabIndex = 5;
@@ -104,7 +105,7 @@ namespace Maze
             // lblPath
             // 
             this.lblPath.AutoSize = true;
-            this.lblPath.Location = new System.Drawing.Point(665, 17);
+            this.lblPath.Location = new System.Drawing.Point(707, 16);
             this.lblPath.Name = "lblPath";
             this.lblPath.Size = new System.Drawing.Size(31, 15);
             this.lblPath.TabIndex = 6;
@@ -113,7 +114,7 @@ namespace Maze
             // lblStartPoint
             // 
             this.lblStartPoint.AutoSize = true;
-            this.lblStartPoint.Location = new System.Drawing.Point(760, 17);
+            this.lblStartPoint.Location = new System.Drawing.Point(768, 15);
             this.lblStartPoint.Name = "lblStartPoint";
             this.lblStartPoint.Size = new System.Drawing.Size(31, 15);
             this.lblStartPoint.TabIndex = 7;
@@ -122,7 +123,7 @@ namespace Maze
             // lblEndPoint
             // 
             this.lblEndPoint.AutoSize = true;
-            this.lblEndPoint.Location = new System.Drawing.Point(861, 17);
+            this.lblEndPoint.Location = new System.Drawing.Point(831, 15);
             this.lblEndPoint.Name = "lblEndPoint";
             this.lblEndPoint.Size = new System.Drawing.Size(27, 15);
             this.lblEndPoint.TabIndex = 8;
@@ -131,7 +132,7 @@ namespace Maze
             // btnColorBlack
             // 
             this.btnColorBlack.BackColor = System.Drawing.Color.Black;
-            this.btnColorBlack.Location = new System.Drawing.Point(605, 9);
+            this.btnColorBlack.Location = new System.Drawing.Point(676, 8);
             this.btnColorBlack.Name = "btnColorBlack";
             this.btnColorBlack.Size = new System.Drawing.Size(30, 30);
             this.btnColorBlack.TabIndex = 9;
@@ -141,7 +142,7 @@ namespace Maze
             // btnColorWhite
             // 
             this.btnColorWhite.BackColor = System.Drawing.Color.White;
-            this.btnColorWhite.Location = new System.Drawing.Point(702, 8);
+            this.btnColorWhite.Location = new System.Drawing.Point(737, 8);
             this.btnColorWhite.Name = "btnColorWhite";
             this.btnColorWhite.Size = new System.Drawing.Size(30, 30);
             this.btnColorWhite.TabIndex = 10;
@@ -151,7 +152,7 @@ namespace Maze
             // btnColorGreen
             // 
             this.btnColorGreen.BackColor = System.Drawing.Color.Green;
-            this.btnColorGreen.Location = new System.Drawing.Point(797, 9);
+            this.btnColorGreen.Location = new System.Drawing.Point(798, 7);
             this.btnColorGreen.Name = "btnColorGreen";
             this.btnColorGreen.Size = new System.Drawing.Size(30, 30);
             this.btnColorGreen.TabIndex = 11;
@@ -161,7 +162,7 @@ namespace Maze
             // btnColorRed
             // 
             this.btnColorRed.BackColor = System.Drawing.Color.Red;
-            this.btnColorRed.Location = new System.Drawing.Point(894, 9);
+            this.btnColorRed.Location = new System.Drawing.Point(859, 7);
             this.btnColorRed.Name = "btnColorRed";
             this.btnColorRed.Size = new System.Drawing.Size(30, 30);
             this.btnColorRed.TabIndex = 12;
@@ -171,16 +172,16 @@ namespace Maze
             // lblInfoHeader
             // 
             this.lblInfoHeader.AutoSize = true;
-            this.lblInfoHeader.Location = new System.Drawing.Point(932, 16);
+            this.lblInfoHeader.Location = new System.Drawing.Point(893, 15);
             this.lblInfoHeader.Name = "lblInfoHeader";
-            this.lblInfoHeader.Size = new System.Drawing.Size(28, 15);
+            this.lblInfoHeader.Size = new System.Drawing.Size(37, 15);
             this.lblInfoHeader.TabIndex = 13;
-            this.lblInfoHeader.Text = "Info";
+            this.lblInfoHeader.Text = "Info : ";
             // 
             // lblInfo
             // 
             this.lblInfo.AutoSize = true;
-            this.lblInfo.Location = new System.Drawing.Point(921, 16);
+            this.lblInfo.Location = new System.Drawing.Point(936, 16);
             this.lblInfo.Name = "lblInfo";
             this.lblInfo.Size = new System.Drawing.Size(0, 15);
             this.lblInfo.TabIndex = 14;
@@ -225,11 +226,22 @@ namespace Maze
             this.BtnClearPath.UseVisualStyleBackColor = true;
             this.BtnClearPath.Click += new System.EventHandler(this.BtnClearPath_Click);
             // 
+            // BtnPreLoadedMap
+            // 
+            this.BtnPreLoadedMap.Location = new System.Drawing.Point(568, 12);
+            this.BtnPreLoadedMap.Name = "BtnPreLoadedMap";
+            this.BtnPreLoadedMap.Size = new System.Drawing.Size(72, 23);
+            this.BtnPreLoadedMap.TabIndex = 19;
+            this.BtnPreLoadedMap.Text = "Test Map";
+            this.BtnPreLoadedMap.UseVisualStyleBackColor = true;
+            this.BtnPreLoadedMap.Click += new System.EventHandler(this.BtnPreLoadedMap_Click);
+            // 
             // Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1025, 843);
+            this.Controls.Add(this.BtnPreLoadedMap);
             this.Controls.Add(this.BtnClearPath);
             this.Controls.Add(this.BtnFindSP);
             this.Controls.Add(this.btnLoad);
@@ -277,6 +289,7 @@ namespace Maze
         private System.Windows.Forms.Button btnLoad;
         private System.Windows.Forms.Button BtnFindSP;
         private System.Windows.Forms.Button BtnClearPath;
+        private System.Windows.Forms.Button BtnPreLoadedMap;
     }
 }
 

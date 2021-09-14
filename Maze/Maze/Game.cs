@@ -16,8 +16,8 @@ namespace Maze
         {
             InitializeComponent();
         }
-        private Color SelectedColor = Color.Empty;
         public Panel MainPanel = new();
+        private Color SelectedColor = Color.Empty;
         private void EmptyMainPanel()
         {
             foreach (Control item in MainPanel.Controls.OfType<Panel>().ToList())
@@ -203,6 +203,104 @@ namespace Maze
         private void BtnClearPath_Click(object sender, EventArgs e)
         {
             Board.ClearPath();
+        }
+        private void BtnPreLoadedMap_Click(object sender, EventArgs e)
+        {
+            char[,] preLoaded = { { 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'W', 'B', 'B', 'B', 'B', 'W', 'W', 'W', 'W', 'W'
+                },
+                                 { 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'B', 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'W', 'B', 'B', 'B', 'W', 'B', 'B', 'W', 'B'
+                },
+                                 { 'W', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'W', 'W', 'W', 'B', 'B', 'W', 'B', 'B', 'B', 'W', 'B', 'W', 'B', 'B'
+                },
+                                 { 'W', 'W', 'B', 'B', 'B', 'B', 'W', 'W', 'W', 'W', 'W', 'B', 'W', 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'W', 'W', 'B', 'B', 'B'
+                },
+                                 { 'B', 'W', 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'B', 'B', 'W', 'B', 'W', 'B', 'W', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'B'
+                },
+                                 { 'B', 'W', 'B', 'B', 'G', 'B', 'W', 'B', 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'W', 'B', 'B', 'B', 'W', 'W', 'B', 'B', 'B', 'B'
+                },
+                                 { 'B', 'W', 'B', 'B', 'W', 'B', 'W', 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'B', 'W', 'B', 'W', 'B', 'B', 'B', 'B', 'B', 'B'
+                },
+                                 { 'B', 'W', 'B', 'B', 'W', 'B', 'B', 'W', 'B', 'B', 'B', 'W', 'W', 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'W', 'W', 'W', 'W', 'B'
+                },
+                                 { 'B', 'W', 'W', 'W', 'W', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W'
+                },
+                                 { 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'B', 'W', 'W', 'B', 'B', 'B', 'B', 'W', 'W', 'B', 'B', 'B', 'B', 'B', 'W'
+                },
+                                 { 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'W', 'B', 'B', 'B', 'B', 'W', 'B', 'W', 'B', 'B', 'B', 'W', 'W', 'B'
+                },
+                                 { 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'B', 'W', 'B', 'B', 'W', 'W', 'B', 'B', 'B', 'W', 'B', 'W', 'B', 'B', 'W', 'B', 'B', 'B'
+                },
+                                 { 'B', 'W', 'W', 'W', 'W', 'W', 'B', 'W', 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'W', 'B', 'W', 'B', 'W', 'B', 'B', 'B', 'B'
+                },
+                                 { 'B', 'W', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'W', 'B', 'B', 'W', 'B', 'B', 'B', 'B', 'B'
+                },
+                                 { 'B', 'B', 'W', 'B', 'W', 'W', 'W', 'B', 'W', 'W', 'W', 'W', 'W', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B'
+                },
+                                 { 'B', 'B', 'B', 'W', 'W', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'W', 'B', 'B', 'B', 'B', 'B', 'B', 'B'
+                },
+                                 { 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'B', 'B', 'B'
+                },
+                                 { 'B', 'B', 'B', 'B', 'W', 'W', 'B', 'B', 'W', 'B', 'B', 'W', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'W', 'W', 'W', 'W', 'B'
+                },
+                                 { 'B', 'B', 'B', 'W', 'B', 'B', 'W', 'B', 'W', 'B', 'W', 'W', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'W', 'B'
+                },
+                                 { 'B', 'B', 'B', 'W', 'B', 'B', 'W', 'B', 'W', 'B', 'W', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'B', 'W', 'B'
+                },
+                                 { 'B', 'B', 'B', 'W', 'B', 'B', 'B', 'W', 'B', 'B', 'W', 'B', 'W', 'W', 'W', 'B', 'B', 'W', 'B', 'B', 'B', 'R', 'B', 'W', 'B'
+                },
+                                 { 'B', 'B', 'W', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'W', 'B', 'B', 'W', 'B', 'B', 'B', 'W', 'B', 'W', 'B'
+                },
+                                 { 'B', 'B', 'W', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'B', 'B', 'W', 'B', 'B', 'W', 'W', 'B', 'W', 'B'
+                },
+                                 { 'B', 'B', 'W', 'W', 'W', 'W', 'B', 'W', 'W', 'B', 'B', 'W', 'W', 'B', 'W', 'W', 'W', 'W', 'W', 'W', 'W', 'B', 'B', 'W', 'B'
+                },
+                                 { 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'B', 'W', 'W', 'W', 'B', 'B', 'W', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'W', 'W', 'W', 'B'
+                }
+            };
+            MainPanelRenewer();
+            Board.BoardSize = (25, 25);
+            int counter = 1;
+            Board.StartPointAvailable = false;
+            Board.EndPointAvailable = false;
+            Board.PanelSize = new Size(25, 25);
+            Tile[,] tiles = new Tile[25, 25];
+            for (int x = 0; x < Board.BoardSize.Item1; x++)
+            {
+                for (int y = 0; y < Board.BoardSize.Item2; y++)
+                {
+                    Panel panel = new()
+                    {
+                        Size = Board.PanelSize
+                    };
+                    if (preLoaded[x, y] == 'G')
+                    {
+                        Board.StartPointAvailable = true;
+                        panel.BackColor = Color.Green;
+                    }
+                    else if (preLoaded[x, y] == 'R')
+                    {
+                        Board.EndPointAvailable = true;
+                        panel.BackColor = Color.Red;
+                    }
+                    else if (preLoaded[x, y] == 'B')
+                    {
+                        panel.BackColor = Color.Black;
+                    }
+                    else if (preLoaded[x, y] == 'W')
+                    {
+                        panel.BackColor = Color.White;
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("Invalid BackColor transfer operation");
+                    }
+                    panel.Left = 25 * x + (1 * x);
+                    panel.Top = 25 * y + (1 * y);
+                    Tile tile = new(counter++, panel);
+                    tiles[x, y] = tile;
+                }
+            }
+            AddPanelsToFormByLoading(tiles);
         }
     }
 }

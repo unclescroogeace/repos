@@ -8,7 +8,7 @@ namespace Maze
 {
     class Graph
     {
-        Dictionary<int, HashSet<int>> edgeTo;
+        private Dictionary<int, HashSet<int>> edgeTo;
         public Graph()
         {
             edgeTo = new Dictionary<int, HashSet<int>>();
