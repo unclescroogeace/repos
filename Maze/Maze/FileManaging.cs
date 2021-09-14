@@ -19,29 +19,32 @@ namespace Maze
             {
                 Filter = "Maze File|*.maz",
                 Title = "Save Maze File",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
-            };
-            saveFileDialog.ShowDialog();
-            if (saveFileDialog.FileName != string.Empty)
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                OverwritePrompt = true
+        };
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                StreamWriter streamWriter = new(saveFileDialog.FileName);
-                for (int x = 0; x < Board.Tiles.GetLength(0); x++)
+                if (saveFileDialog.FileName != string.Empty)
                 {
-                    for (int y = 0; y < Board.Tiles.GetLength(1); y++)
+                    StreamWriter streamWriter = new(saveFileDialog.FileName);
+                    for (int x = 0; x < Board.Tiles.GetLength(0); x++)
                     {
-                        board[x, y] = Board.GetTileBackColor(Board.Tiles[x, y]);
+                        for (int y = 0; y < Board.Tiles.GetLength(1); y++)
+                        {
+                            board[x, y] = Board.GetTileBackColor(Board.Tiles[x, y]);
+                        }
                     }
-                }
-                for (int x = 0; x < board.GetLength(0); x++)
-                {
-                    string output = string.Empty;
-                    for (int y = 0; y < board.GetLength(1); y++)
+                    for (int x = 0; x < board.GetLength(0); x++)
                     {
-                        output += board[x, y];
+                        string output = string.Empty;
+                        for (int y = 0; y < board.GetLength(1); y++)
+                        {
+                            output += board[x, y];
+                        }
                     }
+                    streamWriter.Close();
                 }
-                streamWriter.Close();
-            }
+            } 
         }
         public static bool Load()
         {
