@@ -5,7 +5,6 @@ C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\bin\
 C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\bin\Debug\net5.0-windows\BudgetCalculator.dll
 C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\bin\Debug\net5.0-windows\ref\BudgetCalculator.dll
 C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\bin\Debug\net5.0-windows\BudgetCalculator.pdb
-C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\obj\Debug\net5.0-windows\BudgetCalculator.csproj.AssemblyReference.cache
 C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\obj\Debug\net5.0-windows\BudgetCalculator.BudgetCalculator.resources
 C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\obj\Debug\net5.0-windows\BudgetCalculator.Income.resources
 C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\obj\Debug\net5.0-windows\BudgetCalculator.csproj.GenerateResource.cache
@@ -17,3 +16,11 @@ C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\obj\
 C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\obj\Debug\net5.0-windows\ref\BudgetCalculator.dll
 C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\obj\Debug\net5.0-windows\BudgetCalculator.pdb
 C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\obj\Debug\net5.0-windows\BudgetCalculator.genruntimeconfig.cache
+C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\bin\Debug\net5.0-windows\System.Data.SqlClient.dll
+C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\bin\Debug\net5.0-windows\runtimes\win-arm64\native\sni.dll
+C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\bin\Debug\net5.0-windows\runtimes\win-x64\native\sni.dll
+C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\bin\Debug\net5.0-windows\runtimes\win-x86\native\sni.dll
+C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\bin\Debug\net5.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\bin\Debug\net5.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\obj\Debug\net5.0-windows\BudgetCalculator.csproj.CopyComplete
+C:\Users\Krasimir Kostadinov\source\repos\BudgetCalculator\BudgetCalculator\obj\Debug\net5.0-windows\BudgetCalculator.csproj.AssemblyReference.cache

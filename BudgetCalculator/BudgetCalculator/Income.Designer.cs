@@ -274,6 +274,7 @@ namespace BudgetCalculator
             this.buttonSet.Text = "Set";
             this.buttonSet.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.buttonSet.UseVisualStyleBackColor = true;
+            this.buttonSet.Click += new System.EventHandler(this.ButtonSet_Click);
             // 
             // labelCurrencyJanuary
             // 
