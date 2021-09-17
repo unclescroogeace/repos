@@ -58,9 +58,12 @@ namespace BudgetCalculator
             this.ButtonSetExpense = new System.Windows.Forms.Button();
             this.labelSavingsGoals = new System.Windows.Forms.Label();
             this.labelSavings = new System.Windows.Forms.Label();
-            this.textBoxSavings = new System.Windows.Forms.TextBox();
             this.labelTotalExpenses = new System.Windows.Forms.Label();
             this.labelTotalExpensesAmount = new System.Windows.Forms.Label();
+            this.labelGoals = new System.Windows.Forms.Label();
+            this.textBoxGoals = new System.Windows.Forms.TextBox();
+            this.labelSavingsAmount = new System.Windows.Forms.Label();
+            this.ButtonSetGoals = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelIncome
@@ -91,9 +94,11 @@ namespace BudgetCalculator
             // labelAnnually
             // 
             this.labelAnnually.AutoSize = true;
-            this.labelAnnually.Location = new System.Drawing.Point(534, 14);
+            this.labelAnnually.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.labelAnnually.ForeColor = System.Drawing.Color.Red;
+            this.labelAnnually.Location = new System.Drawing.Point(544, 8);
             this.labelAnnually.Name = "labelAnnually";
-            this.labelAnnually.Size = new System.Drawing.Size(244, 15);
+            this.labelAnnually.Size = new System.Drawing.Size(255, 15);
             this.labelAnnually.TabIndex = 5;
             this.labelAnnually.Text = "* All amounts need to be in amount per year!";
             // 
@@ -282,9 +287,9 @@ namespace BudgetCalculator
             this.labelSavingsGoals.AutoSize = true;
             this.labelSavingsGoals.Location = new System.Drawing.Point(6, 264);
             this.labelSavingsGoals.Name = "labelSavingsGoals";
-            this.labelSavingsGoals.Size = new System.Drawing.Size(105, 15);
+            this.labelSavingsGoals.Size = new System.Drawing.Size(113, 15);
             this.labelSavingsGoals.TabIndex = 28;
-            this.labelSavingsGoals.Text = "-- Savings Goals --";
+            this.labelSavingsGoals.Text = "-- Savings / Goals --";
             // 
             // labelSavings
             // 
@@ -294,13 +299,6 @@ namespace BudgetCalculator
             this.labelSavings.Size = new System.Drawing.Size(47, 15);
             this.labelSavings.TabIndex = 29;
             this.labelSavings.Text = "Savings";
-            // 
-            // textBoxSavings
-            // 
-            this.textBoxSavings.Location = new System.Drawing.Point(101, 295);
-            this.textBoxSavings.Name = "textBoxSavings";
-            this.textBoxSavings.Size = new System.Drawing.Size(100, 23);
-            this.textBoxSavings.TabIndex = 30;
             // 
             // labelTotalExpenses
             // 
@@ -319,14 +317,51 @@ namespace BudgetCalculator
             this.labelTotalExpensesAmount.Size = new System.Drawing.Size(0, 15);
             this.labelTotalExpensesAmount.TabIndex = 32;
             // 
+            // labelGoals
+            // 
+            this.labelGoals.AutoSize = true;
+            this.labelGoals.Location = new System.Drawing.Point(51, 327);
+            this.labelGoals.Name = "labelGoals";
+            this.labelGoals.Size = new System.Drawing.Size(36, 15);
+            this.labelGoals.TabIndex = 33;
+            this.labelGoals.Text = "Goals";
+            // 
+            // textBoxGoals
+            // 
+            this.textBoxGoals.Location = new System.Drawing.Point(101, 324);
+            this.textBoxGoals.Name = "textBoxGoals";
+            this.textBoxGoals.Size = new System.Drawing.Size(100, 23);
+            this.textBoxGoals.TabIndex = 34;
+            // 
+            // labelSavingsAmount
+            // 
+            this.labelSavingsAmount.AutoSize = true;
+            this.labelSavingsAmount.Location = new System.Drawing.Point(101, 298);
+            this.labelSavingsAmount.Name = "labelSavingsAmount";
+            this.labelSavingsAmount.Size = new System.Drawing.Size(0, 15);
+            this.labelSavingsAmount.TabIndex = 35;
+            // 
+            // ButtonSetGoals
+            // 
+            this.ButtonSetGoals.Location = new System.Drawing.Point(213, 323);
+            this.ButtonSetGoals.Name = "ButtonSetGoals";
+            this.ButtonSetGoals.Size = new System.Drawing.Size(75, 23);
+            this.ButtonSetGoals.TabIndex = 36;
+            this.ButtonSetGoals.Text = "Set";
+            this.ButtonSetGoals.UseVisualStyleBackColor = true;
+            this.ButtonSetGoals.Click += new System.EventHandler(this.ButtonSetGoals_Click);
+            // 
             // BudgetCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ButtonSetGoals);
+            this.Controls.Add(this.labelSavingsAmount);
+            this.Controls.Add(this.textBoxGoals);
+            this.Controls.Add(this.labelGoals);
             this.Controls.Add(this.labelTotalExpensesAmount);
             this.Controls.Add(this.labelTotalExpenses);
-            this.Controls.Add(this.textBoxSavings);
             this.Controls.Add(this.labelSavings);
             this.Controls.Add(this.labelSavingsGoals);
             this.Controls.Add(this.ButtonSetExpense);
@@ -393,9 +428,12 @@ namespace BudgetCalculator
         private System.Windows.Forms.Button ButtonSetExpense;
         private System.Windows.Forms.Label labelSavingsGoals;
         private System.Windows.Forms.Label labelSavings;
-        private System.Windows.Forms.TextBox textBoxSavings;
         private System.Windows.Forms.Label labelTotalExpenses;
         private System.Windows.Forms.Label labelTotalExpensesAmount;
+        private System.Windows.Forms.Label labelGoals;
+        private System.Windows.Forms.TextBox textBoxGoals;
+        private System.Windows.Forms.Label labelSavingsAmount;
+        private System.Windows.Forms.Button ButtonSetGoals;
     }
 }
 

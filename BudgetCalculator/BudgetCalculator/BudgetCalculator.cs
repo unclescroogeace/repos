@@ -13,45 +13,16 @@ namespace BudgetCalculator
 {
     public partial class BudgetCalculator : Form
     {
+        private decimal ExpenseValue = 0;
+        private decimal IncomeValue = 0;
         public BudgetCalculator()
         {
             InitializeComponent();
-            LoadIncomeSavings();
+            LoadIncome();
+            LoadGoals();
             LoadExpenses();
+            CalculateSavings();
         }
-
-        private void LoadIncomeSavings()
-        {
-            string connectionString = "Server=localhost;Database=BudgetCalculator;Trusted_Connection=True;";
-            using SqlConnection connection = new(connectionString);
-            string queryString = "SELECT Amount FROM Money";
-            SqlCommand command = new(queryString, connection);
-            try
-            {
-
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                decimal[] decimalArray = new decimal[2];
-                int i = 0;
-                while (reader.Read())
-                {
-                    if (!decimal.TryParse(reader[0].ToString(), out decimalArray[i]))
-                    {
-                        MessageBox.Show("Invalid income/savings");
-                    }
-                    i++;
-                }
-                reader.Close();
-                textBoxIncome.Text = Math.Round(decimalArray[0], 2).ToString();
-                textBoxSavings.Text = Math.Round(decimalArray[1], 2).ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            connection.Close();
-        }
-
         private void LoadExpenses()
         {
             string connectionString = "Server=localhost;Database=BudgetCalculator;Trusted_Connection=True;";
@@ -86,6 +57,7 @@ namespace BudgetCalculator
                 textBoxEducation.Text = Math.Round(decimalArray[8], 2).ToString();
                 textBoxMiscellaneous.Text = Math.Round(decimalArray[9], 2).ToString();
                 labelTotalExpensesAmount.Text = Math.Round(total, 2).ToString();
+                ExpenseValue = total;
             }
             catch (Exception ex)
             {
@@ -93,7 +65,64 @@ namespace BudgetCalculator
             }
             connection.Close();
         }
-
+        private void LoadIncome()
+        {
+            string connectionString = "Server=localhost;Database=BudgetCalculator;Trusted_Connection=True;";
+            using SqlConnection connection = new(connectionString);
+            string queryString = "SELECT Amount FROM Money WHERE Id = 1";
+            SqlCommand command = new(queryString, connection);
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                decimal value = 0;
+                int i = 0;
+                while (reader.Read())
+                {
+                    if (!decimal.TryParse(reader[0].ToString(), out value))
+                    {
+                        MessageBox.Show("Ivvalid expense");
+                    }
+                    i++;
+                }
+                reader.Close();
+                textBoxIncome.Text = Math.Round(value, 2).ToString();
+                IncomeValue = value;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            connection.Close();
+        }
+        private void LoadGoals()
+        {
+            string connectionString = "Server=localhost;Database=BudgetCalculator;Trusted_Connection=True;";
+            using SqlConnection connection = new(connectionString);
+            string queryString = "SELECT Amount FROM Money WHERE Id = 2";
+            SqlCommand command = new(queryString, connection);
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                decimal value = 0;
+                int i = 0;
+                while (reader.Read())
+                {
+                    if (!decimal.TryParse(reader[0].ToString(), out value))
+                    {
+                        MessageBox.Show("Ivvalid expense");
+                    }
+                }
+                reader.Close();
+                textBoxGoals.Text = Math.Round(value, 2).ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            connection.Close();
+        }
         private void UpdateExpenses()
         {
             string connectionString = "Server=localhost;Database=BudgetCalculator;Trusted_Connection=True;";
@@ -131,7 +160,46 @@ namespace BudgetCalculator
             }
             connection.Close();
         }
-
+        private void UpdateIncome()
+        {
+            string connectionString = "Server=localhost;Database=BudgetCalculator;Trusted_Connection=True;";
+            string queryString = @"UPDATE Money SET Amount = @Amount WHERE Id = 1";
+            using SqlConnection connection = new(connectionString);
+            SqlCommand command = new(queryString, connection);
+            command.Parameters.Add("@Amount", SqlDbType.Decimal).Value = IfEmpty(textBoxIncome.Text);
+            connection.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            connection.Close();
+        }
+        private void UpdateGoals()
+        {
+            string connectionString = "Server=localhost;Database=BudgetCalculator;Trusted_Connection=True;";
+            string queryString = @"UPDATE Money SET Amount = @Amount WHERE Id = 2";
+            using SqlConnection connection = new(connectionString);
+            SqlCommand command = new(queryString, connection);
+            command.Parameters.Add("@Amount", SqlDbType.Decimal).Value = IfEmpty(textBoxGoals.Text);
+            connection.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            connection.Close();
+        }
+        private void CalculateSavings()
+        {
+            labelSavingsAmount.Text = Math.Round(IncomeValue - ExpenseValue, 2).ToString();
+        }
         private static decimal IfEmpty(string value)
         {
             if (string.IsNullOrEmpty(value))
@@ -145,12 +213,20 @@ namespace BudgetCalculator
         }
         private void ButtonIncomeSet_Click(object sender, EventArgs e)
         {
-
+            UpdateIncome();
+            LoadIncome();
+            CalculateSavings();
         }
-
         private void ButtonSetExpense_Click(object sender, EventArgs e)
         {
             UpdateExpenses();
+            LoadExpenses();
+            CalculateSavings();
+        }
+        private void ButtonSetGoals_Click(object sender, EventArgs e)
+        {
+            UpdateGoals();
+            LoadGoals();
         }
     }
 }
