@@ -27,5 +27,11 @@ namespace BudgetCalculator
             Income IncomeForm = new(comboBoxCurrency.SelectedItem.ToString());
             IncomeForm.ShowDialog();
         }
+
+        private void ButtonAddExpense_Click(object sender, EventArgs e)
+        {
+            Expense ExpenseForm = new(comboBoxCurrency.SelectedItem.ToString());
+            ExpenseForm.ShowDialog();
+        }
     }
 }

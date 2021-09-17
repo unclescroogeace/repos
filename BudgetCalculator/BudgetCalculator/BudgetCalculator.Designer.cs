@@ -32,6 +32,7 @@ namespace BudgetCalculator
             this.comboBoxCurrency = new System.Windows.Forms.ComboBox();
             this.labelCurrency = new System.Windows.Forms.Label();
             this.buttonAddIncome = new System.Windows.Forms.Button();
+            this.ButtonAddExpense = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // comboBoxCurrency
@@ -61,11 +62,22 @@ namespace BudgetCalculator
             this.buttonAddIncome.UseVisualStyleBackColor = true;
             this.buttonAddIncome.Click += new System.EventHandler(this.ButtonAddIncome_Click);
             // 
+            // ButtonAddExpense
+            // 
+            this.ButtonAddExpense.Location = new System.Drawing.Point(110, 11);
+            this.ButtonAddExpense.Name = "ButtonAddExpense";
+            this.ButtonAddExpense.Size = new System.Drawing.Size(93, 23);
+            this.ButtonAddExpense.TabIndex = 3;
+            this.ButtonAddExpense.Text = "Add Expense";
+            this.ButtonAddExpense.UseVisualStyleBackColor = true;
+            this.ButtonAddExpense.Click += new System.EventHandler(this.ButtonAddExpense_Click);
+            // 
             // BudgetCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ButtonAddExpense);
             this.Controls.Add(this.buttonAddIncome);
             this.Controls.Add(this.labelCurrency);
             this.Controls.Add(this.comboBoxCurrency);
@@ -81,6 +93,7 @@ namespace BudgetCalculator
         private System.Windows.Forms.ComboBox comboBoxCurrency;
         private System.Windows.Forms.Label labelCurrency;
         private System.Windows.Forms.Button buttonAddIncome;
+        private System.Windows.Forms.Button ButtonAddExpense;
     }
 }
 
