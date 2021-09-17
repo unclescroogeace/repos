@@ -32,7 +32,6 @@ namespace BudgetCalculator
             this.labelIncome = new System.Windows.Forms.Label();
             this.textBoxIncome = new System.Windows.Forms.TextBox();
             this.labelExpenses = new System.Windows.Forms.Label();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.labelAnnually = new System.Windows.Forms.Label();
             this.ButtonIncomeSet = new System.Windows.Forms.Button();
             this.labelHousing = new System.Windows.Forms.Label();
@@ -402,7 +401,6 @@ namespace BudgetCalculator
         private System.Windows.Forms.Label labelIncome;
         private System.Windows.Forms.TextBox textBoxIncome;
         private System.Windows.Forms.Label labelExpenses;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label labelAnnually;
         private System.Windows.Forms.Button ButtonIncomeSet;
         private System.Windows.Forms.Label labelHousing;
