@@ -275,6 +275,7 @@ namespace BudgetCalculator
             this.ButtonSetExpense.TabIndex = 27;
             this.ButtonSetExpense.Text = "Set";
             this.ButtonSetExpense.UseVisualStyleBackColor = true;
+            this.ButtonSetExpense.Click += new System.EventHandler(this.ButtonSetExpense_Click);
             // 
             // labelSavingsGoals
             // 
