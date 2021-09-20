@@ -4,11 +4,5 @@
     <Compile Update="BudgetCalculator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Expense.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Income.cs">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
 </Project>

@@ -15,6 +15,19 @@ namespace BudgetCalculator
     {
         private decimal ExpenseValue = 0;
         private decimal IncomeValue = 0;
+        private decimal GoalsValue = 0;
+        private static decimal IfEmptyOrNegative(string value)
+        {
+            if (string.IsNullOrEmpty(value) || decimal.Parse(value) < 0)
+            {
+                throw new EmptyOrNullOrNegativeException("Empty/Null/Negative value");
+            }
+            else
+            {
+                return decimal.Parse(value);
+            }
+        }
+
         public BudgetCalculator()
         {
             InitializeComponent();
@@ -106,7 +119,6 @@ namespace BudgetCalculator
                 connection.Open();
                 SqlDataReader reader = command.ExecuteReader();
                 decimal value = 0;
-                int i = 0;
                 while (reader.Read())
                 {
                     if (!decimal.TryParse(reader[0].ToString(), out value))
@@ -116,6 +128,7 @@ namespace BudgetCalculator
                 }
                 reader.Close();
                 textBoxGoals.Text = Math.Round(value, 2).ToString();
+                GoalsValue = value;
             }
             catch (Exception ex)
             {
@@ -139,16 +152,23 @@ namespace BudgetCalculator
                                                                     END)";
             using SqlConnection connection = new(connectionString);
             SqlCommand command = new(queryString, connection);
-            command.Parameters.Add("@Housing", SqlDbType.Decimal).Value = IfEmpty(textBoxHousing.Text);
-            command.Parameters.Add("@Transportation", SqlDbType.Decimal).Value = IfEmpty(textBoxTransportation.Text);
-            command.Parameters.Add("@Taxes", SqlDbType.Decimal).Value = IfEmpty(textBoxTaxes.Text);
-            command.Parameters.Add("@Utilities", SqlDbType.Decimal).Value = IfEmpty(textBoxUtilities.Text);
-            command.Parameters.Add("@Vices", SqlDbType.Decimal).Value = IfEmpty(textBoxVices.Text);
-            command.Parameters.Add("@Food", SqlDbType.Decimal).Value = IfEmpty(textBoxFood.Text);
-            command.Parameters.Add("@Insurance", SqlDbType.Decimal).Value = IfEmpty(textBoxInsurance.Text);
-            command.Parameters.Add("@Entertainment", SqlDbType.Decimal).Value = IfEmpty(textBoxEntertainment.Text);
-            command.Parameters.Add("@Education", SqlDbType.Decimal).Value = IfEmpty(textBoxEducation.Text);
-            command.Parameters.Add("@Miscellaneous", SqlDbType.Decimal).Value = IfEmpty(textBoxMiscellaneous.Text);
+            try
+            {
+                command.Parameters.Add("@Housing", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxHousing.Text);
+                command.Parameters.Add("@Transportation", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxTransportation.Text);
+                command.Parameters.Add("@Taxes", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxTaxes.Text);
+                command.Parameters.Add("@Utilities", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxUtilities.Text);
+                command.Parameters.Add("@Vices", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxVices.Text);
+                command.Parameters.Add("@Food", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxFood.Text);
+                command.Parameters.Add("@Insurance", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxInsurance.Text);
+                command.Parameters.Add("@Entertainment", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxEntertainment.Text);
+                command.Parameters.Add("@Education", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxEducation.Text);
+                command.Parameters.Add("@Miscellaneous", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxMiscellaneous.Text);
+            }
+            catch(EmptyOrNullOrNegativeException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             connection.Open();
             try
             {
@@ -166,7 +186,14 @@ namespace BudgetCalculator
             string queryString = @"UPDATE Money SET Amount = @Amount WHERE Id = 1";
             using SqlConnection connection = new(connectionString);
             SqlCommand command = new(queryString, connection);
-            command.Parameters.Add("@Amount", SqlDbType.Decimal).Value = IfEmpty(textBoxIncome.Text);
+            try
+            {
+                command.Parameters.Add("@Amount", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxIncome.Text);
+            }
+            catch(EmptyOrNullOrNegativeException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             connection.Open();
             try
             {
@@ -184,7 +211,14 @@ namespace BudgetCalculator
             string queryString = @"UPDATE Money SET Amount = @Amount WHERE Id = 2";
             using SqlConnection connection = new(connectionString);
             SqlCommand command = new(queryString, connection);
-            command.Parameters.Add("@Amount", SqlDbType.Decimal).Value = IfEmpty(textBoxGoals.Text);
+            try
+            {
+                command.Parameters.Add("@Amount", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxGoals.Text);
+            }
+            catch(EmptyOrNullOrNegativeException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             connection.Open();
             try
             {
@@ -199,17 +233,6 @@ namespace BudgetCalculator
         private void CalculateSavings()
         {
             labelSavingsAmount.Text = Math.Round(IncomeValue - ExpenseValue, 2).ToString();
-        }
-        private static decimal IfEmpty(string value)
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                return 0;
-            }
-            else
-            {
-                return decimal.Parse(value);
-            }
         }
         private void ButtonIncomeSet_Click(object sender, EventArgs e)
         {
@@ -227,6 +250,52 @@ namespace BudgetCalculator
         {
             UpdateGoals();
             LoadGoals();
+            CalculateGoal();
+        }
+        private void ButtonCalculateBudget_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CalculateAndSetBudgetPerExpense(labelHousingBudget, IfEmptyOrNegative(textBoxHousing.Text), "Housing", 23);
+                CalculateAndSetBudgetPerExpense(labelTransportationBudget, IfEmptyOrNegative(textBoxTransportation.Text), "Transportation", 13);
+                CalculateAndSetBudgetPerExpense(labelTaxesBudget, IfEmptyOrNegative(textBoxTaxes.Text), "Taxes", 12);
+                CalculateAndSetBudgetPerExpense(labelUtilitiesBudget, IfEmptyOrNegative(textBoxUtilities.Text), "Utilities", 11);
+                CalculateAndSetBudgetPerExpense(labelVicesBudget, IfEmptyOrNegative(textBoxVices.Text), "Vices", 7);
+                CalculateAndSetBudgetPerExpense(labelFoodBudget, IfEmptyOrNegative(textBoxFood.Text), "Food", 14);
+                CalculateAndSetBudgetPerExpense(labelInsuranceBudget, IfEmptyOrNegative(textBoxInsurance.Text), "Insurance", 9);
+                CalculateAndSetBudgetPerExpense(labelEntertainmentBudget, IfEmptyOrNegative(textBoxEntertainment.Text), "Entertainment", 4);
+                CalculateAndSetBudgetPerExpense(labelEducationBudget, IfEmptyOrNegative(textBoxEducation.Text), "Education", 4);
+                CalculateAndSetBudgetPerExpense(labelMiscellaneousBudget, IfEmptyOrNegative(textBoxMiscellaneous.Text), "Miscellaneous", 3);
+            }
+            catch(EmptyOrNullOrNegativeException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        private void CalculateAndSetBudgetPerExpense(Label label, decimal amount, string expenseType, int avarageSpent)
+        {
+            int percent = (int)Math.Round((amount / IncomeValue) * 100);
+            if (percent > avarageSpent)
+            {
+                label.ForeColor = Color.Red;
+            }
+            else
+            {
+                label.ForeColor = Color.Green;
+            }
+            label.Text = $"You spent {amount} for {expenseType} each year which is {percent}% of the budget.";
+            label.Text += $"{Environment.NewLine}Avarage spent amount is {avarageSpent}% per year.";
+        }
+        private void ButtonCalculateSavings_Click(object sender, EventArgs e)
+        {
+            CalculateGoal();
+        }
+        private void CalculateGoal()
+        {
+            decimal monthly = (IncomeValue - ExpenseValue) / 12;
+            labelSavingsCalculation.Text = $"You are now saving {Math.Round((IncomeValue - ExpenseValue), 2)} per year" +
+                $"{Environment.NewLine}or {Math.Round(monthly, 2)} per month." +
+                $"{Environment.NewLine}You will reach your goal after {Math.Ceiling(GoalsValue / monthly)} months";
         }
     }
 }
