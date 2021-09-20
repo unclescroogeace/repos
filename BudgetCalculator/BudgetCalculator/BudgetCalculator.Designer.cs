@@ -110,9 +110,9 @@ namespace BudgetCalculator
             this.labelAnnually.ForeColor = System.Drawing.Color.Red;
             this.labelAnnually.Location = new System.Drawing.Point(544, 8);
             this.labelAnnually.Name = "labelAnnually";
-            this.labelAnnually.Size = new System.Drawing.Size(255, 15);
+            this.labelAnnually.Size = new System.Drawing.Size(360, 15);
             this.labelAnnually.TabIndex = 5;
-            this.labelAnnually.Text = "* All amounts need to be in amount per year!";
+            this.labelAnnually.Text = "* All amounts which need to be entered are in amount per year!";
             // 
             // ButtonIncomeSet
             // 
@@ -122,7 +122,7 @@ namespace BudgetCalculator
             this.ButtonIncomeSet.TabIndex = 6;
             this.ButtonIncomeSet.Text = "Set";
             this.ButtonIncomeSet.UseVisualStyleBackColor = true;
-            this.ButtonIncomeSet.Click += new System.EventHandler(this.ButtonIncomeSet_Click);
+            this.ButtonIncomeSet.Click += new System.EventHandler(this.ButtonSetIncome_Click);
             // 
             // labelHousing
             // 

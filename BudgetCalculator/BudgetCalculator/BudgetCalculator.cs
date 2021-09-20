@@ -16,6 +16,15 @@ namespace BudgetCalculator
         private decimal ExpenseValue = 0;
         private decimal IncomeValue = 0;
         private decimal GoalsValue = 0;
+        public BudgetCalculator()
+        {
+            InitializeComponent();
+            LoadIncome();
+            LoadGoals();
+            LoadExpenses();
+            CalculateSavings();
+            CalculateGoal();
+        }
         private static decimal IfEmptyOrNegative(string value)
         {
             if (string.IsNullOrEmpty(value) || decimal.Parse(value) < 0)
@@ -26,15 +35,6 @@ namespace BudgetCalculator
             {
                 return decimal.Parse(value);
             }
-        }
-
-        public BudgetCalculator()
-        {
-            InitializeComponent();
-            LoadIncome();
-            LoadGoals();
-            LoadExpenses();
-            CalculateSavings();
         }
         private void LoadExpenses()
         {
@@ -51,7 +51,7 @@ namespace BudgetCalculator
                 int i = 0;
                 while (reader.Read())
                 {
-                    if(!decimal.TryParse(reader[0].ToString(), out decimalArray[i]))
+                    if (!decimal.TryParse(reader[0].ToString(), out decimalArray[i]))
                     {
                         MessageBox.Show("Ivvalid expense");
                     }
@@ -165,7 +165,7 @@ namespace BudgetCalculator
                 command.Parameters.Add("@Education", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxEducation.Text);
                 command.Parameters.Add("@Miscellaneous", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxMiscellaneous.Text);
             }
-            catch(EmptyOrNullOrNegativeException ex)
+            catch (EmptyOrNullOrNegativeException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -190,7 +190,7 @@ namespace BudgetCalculator
             {
                 command.Parameters.Add("@Amount", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxIncome.Text);
             }
-            catch(EmptyOrNullOrNegativeException ex)
+            catch (EmptyOrNullOrNegativeException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -215,7 +215,7 @@ namespace BudgetCalculator
             {
                 command.Parameters.Add("@Amount", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxGoals.Text);
             }
-            catch(EmptyOrNullOrNegativeException ex)
+            catch (EmptyOrNullOrNegativeException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -234,7 +234,28 @@ namespace BudgetCalculator
         {
             labelSavingsAmount.Text = Math.Round(IncomeValue - ExpenseValue, 2).ToString();
         }
-        private void ButtonIncomeSet_Click(object sender, EventArgs e)
+        private void CalculateGoal()
+        {
+            decimal monthly = (IncomeValue - ExpenseValue) / 12;
+            labelSavingsCalculation.Text = $"You are now saving {Math.Round((IncomeValue - ExpenseValue), 2)} per year" +
+                $"{Environment.NewLine}or {Math.Round(monthly, 2)} per month." +
+                $"{Environment.NewLine}You will reach your goal after {Math.Ceiling(GoalsValue / monthly)} months";
+        }
+        private void CalculateAndSetBudgetPerExpense(Label label, decimal amount, string expenseType, int avarageSpent)
+        {
+            int percent = (int)Math.Round((amount / IncomeValue) * 100);
+            if (percent > avarageSpent)
+            {
+                label.ForeColor = Color.Red;
+            }
+            else
+            {
+                label.ForeColor = Color.Green;
+            }
+            label.Text = $"You spent {amount} for {expenseType} each year which is {percent}% of the budget.";
+            label.Text += $"{Environment.NewLine}Avarage spent amount is {avarageSpent}% per year.";
+        }
+        private void ButtonSetIncome_Click(object sender, EventArgs e)
         {
             UpdateIncome();
             LoadIncome();
@@ -267,35 +288,14 @@ namespace BudgetCalculator
                 CalculateAndSetBudgetPerExpense(labelEducationBudget, IfEmptyOrNegative(textBoxEducation.Text), "Education", 4);
                 CalculateAndSetBudgetPerExpense(labelMiscellaneousBudget, IfEmptyOrNegative(textBoxMiscellaneous.Text), "Miscellaneous", 3);
             }
-            catch(EmptyOrNullOrNegativeException ex)
+            catch (EmptyOrNullOrNegativeException ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-        private void CalculateAndSetBudgetPerExpense(Label label, decimal amount, string expenseType, int avarageSpent)
-        {
-            int percent = (int)Math.Round((amount / IncomeValue) * 100);
-            if (percent > avarageSpent)
-            {
-                label.ForeColor = Color.Red;
-            }
-            else
-            {
-                label.ForeColor = Color.Green;
-            }
-            label.Text = $"You spent {amount} for {expenseType} each year which is {percent}% of the budget.";
-            label.Text += $"{Environment.NewLine}Avarage spent amount is {avarageSpent}% per year.";
-        }
         private void ButtonCalculateSavings_Click(object sender, EventArgs e)
         {
             CalculateGoal();
-        }
-        private void CalculateGoal()
-        {
-            decimal monthly = (IncomeValue - ExpenseValue) / 12;
-            labelSavingsCalculation.Text = $"You are now saving {Math.Round((IncomeValue - ExpenseValue), 2)} per year" +
-                $"{Environment.NewLine}or {Math.Round(monthly, 2)} per month." +
-                $"{Environment.NewLine}You will reach your goal after {Math.Ceiling(GoalsValue / monthly)} months";
         }
     }
 }
