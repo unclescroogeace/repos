@@ -281,12 +281,15 @@ namespace BudgetCalculator
             UpdateIncome();
             LoadIncome();
             CalculateSavings();
+            CalculateGoal();
         }
         private void ButtonSetExpense_Click(object sender, EventArgs e)
         {
             UpdateExpenses();
             LoadExpenses();
             CalculateSavings();
+            CalculateBudget();
+            CalculateGoal();
         }
         private void ButtonSetGoals_Click(object sender, EventArgs e)
         {

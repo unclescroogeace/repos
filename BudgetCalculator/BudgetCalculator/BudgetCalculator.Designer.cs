@@ -366,7 +366,7 @@ namespace BudgetCalculator
             // labelHousingBudget
             // 
             this.labelHousingBudget.AutoSize = true;
-            this.labelHousingBudget.Location = new System.Drawing.Point(448, 72);
+            this.labelHousingBudget.Location = new System.Drawing.Point(484, 69);
             this.labelHousingBudget.Name = "labelHousingBudget";
             this.labelHousingBudget.Size = new System.Drawing.Size(0, 15);
             this.labelHousingBudget.TabIndex = 39;
@@ -374,7 +374,7 @@ namespace BudgetCalculator
             // labelTransportationBudget
             // 
             this.labelTransportationBudget.AutoSize = true;
-            this.labelTransportationBudget.Location = new System.Drawing.Point(448, 112);
+            this.labelTransportationBudget.Location = new System.Drawing.Point(484, 109);
             this.labelTransportationBudget.Name = "labelTransportationBudget";
             this.labelTransportationBudget.Size = new System.Drawing.Size(0, 15);
             this.labelTransportationBudget.TabIndex = 40;
@@ -382,7 +382,7 @@ namespace BudgetCalculator
             // labelTaxesBudget
             // 
             this.labelTaxesBudget.AutoSize = true;
-            this.labelTaxesBudget.Location = new System.Drawing.Point(448, 151);
+            this.labelTaxesBudget.Location = new System.Drawing.Point(484, 148);
             this.labelTaxesBudget.Name = "labelTaxesBudget";
             this.labelTaxesBudget.Size = new System.Drawing.Size(0, 15);
             this.labelTaxesBudget.TabIndex = 41;
@@ -390,7 +390,7 @@ namespace BudgetCalculator
             // labelUtilitiesBudget
             // 
             this.labelUtilitiesBudget.AutoSize = true;
-            this.labelUtilitiesBudget.Location = new System.Drawing.Point(448, 189);
+            this.labelUtilitiesBudget.Location = new System.Drawing.Point(484, 186);
             this.labelUtilitiesBudget.Name = "labelUtilitiesBudget";
             this.labelUtilitiesBudget.Size = new System.Drawing.Size(0, 15);
             this.labelUtilitiesBudget.TabIndex = 42;
@@ -398,7 +398,7 @@ namespace BudgetCalculator
             // labelVicesBudget
             // 
             this.labelVicesBudget.AutoSize = true;
-            this.labelVicesBudget.Location = new System.Drawing.Point(448, 227);
+            this.labelVicesBudget.Location = new System.Drawing.Point(484, 224);
             this.labelVicesBudget.Name = "labelVicesBudget";
             this.labelVicesBudget.Size = new System.Drawing.Size(0, 15);
             this.labelVicesBudget.TabIndex = 43;
@@ -406,7 +406,7 @@ namespace BudgetCalculator
             // labelFoodBudget
             // 
             this.labelFoodBudget.AutoSize = true;
-            this.labelFoodBudget.Location = new System.Drawing.Point(448, 267);
+            this.labelFoodBudget.Location = new System.Drawing.Point(484, 264);
             this.labelFoodBudget.Name = "labelFoodBudget";
             this.labelFoodBudget.Size = new System.Drawing.Size(0, 15);
             this.labelFoodBudget.TabIndex = 44;
@@ -414,7 +414,7 @@ namespace BudgetCalculator
             // labelInsuranceBudget
             // 
             this.labelInsuranceBudget.AutoSize = true;
-            this.labelInsuranceBudget.Location = new System.Drawing.Point(448, 308);
+            this.labelInsuranceBudget.Location = new System.Drawing.Point(484, 305);
             this.labelInsuranceBudget.Name = "labelInsuranceBudget";
             this.labelInsuranceBudget.Size = new System.Drawing.Size(0, 15);
             this.labelInsuranceBudget.TabIndex = 45;
@@ -422,7 +422,7 @@ namespace BudgetCalculator
             // labelEntertainmentBudget
             // 
             this.labelEntertainmentBudget.AutoSize = true;
-            this.labelEntertainmentBudget.Location = new System.Drawing.Point(448, 346);
+            this.labelEntertainmentBudget.Location = new System.Drawing.Point(484, 343);
             this.labelEntertainmentBudget.Name = "labelEntertainmentBudget";
             this.labelEntertainmentBudget.Size = new System.Drawing.Size(0, 15);
             this.labelEntertainmentBudget.TabIndex = 46;
@@ -430,7 +430,7 @@ namespace BudgetCalculator
             // labelEducationBudget
             // 
             this.labelEducationBudget.AutoSize = true;
-            this.labelEducationBudget.Location = new System.Drawing.Point(448, 382);
+            this.labelEducationBudget.Location = new System.Drawing.Point(484, 379);
             this.labelEducationBudget.Name = "labelEducationBudget";
             this.labelEducationBudget.Size = new System.Drawing.Size(0, 15);
             this.labelEducationBudget.TabIndex = 47;
@@ -438,7 +438,7 @@ namespace BudgetCalculator
             // labelMiscellaneousBudget
             // 
             this.labelMiscellaneousBudget.AutoSize = true;
-            this.labelMiscellaneousBudget.Location = new System.Drawing.Point(448, 421);
+            this.labelMiscellaneousBudget.Location = new System.Drawing.Point(484, 418);
             this.labelMiscellaneousBudget.Name = "labelMiscellaneousBudget";
             this.labelMiscellaneousBudget.Size = new System.Drawing.Size(0, 15);
             this.labelMiscellaneousBudget.TabIndex = 48;
@@ -447,9 +447,9 @@ namespace BudgetCalculator
             // 
             this.ButtonCalculateBudget.Location = new System.Drawing.Point(779, 457);
             this.ButtonCalculateBudget.Name = "ButtonCalculateBudget";
-            this.ButtonCalculateBudget.Size = new System.Drawing.Size(75, 23);
+            this.ButtonCalculateBudget.Size = new System.Drawing.Size(125, 23);
             this.ButtonCalculateBudget.TabIndex = 49;
-            this.ButtonCalculateBudget.Text = "Calculate";
+            this.ButtonCalculateBudget.Text = "Calculate Budget";
             this.ButtonCalculateBudget.UseVisualStyleBackColor = true;
             this.ButtonCalculateBudget.Click += new System.EventHandler(this.ButtonCalculateBudget_Click);
             // 
@@ -465,9 +465,9 @@ namespace BudgetCalculator
             // 
             this.ButtonCalculateSavings.Location = new System.Drawing.Point(26, 457);
             this.ButtonCalculateSavings.Name = "ButtonCalculateSavings";
-            this.ButtonCalculateSavings.Size = new System.Drawing.Size(75, 23);
+            this.ButtonCalculateSavings.Size = new System.Drawing.Size(109, 23);
             this.ButtonCalculateSavings.TabIndex = 51;
-            this.ButtonCalculateSavings.Text = "Calculate";
+            this.ButtonCalculateSavings.Text = "Calculate Goals";
             this.ButtonCalculateSavings.UseVisualStyleBackColor = true;
             this.ButtonCalculateSavings.Click += new System.EventHandler(this.ButtonCalculateSavings_Click);
             // 
