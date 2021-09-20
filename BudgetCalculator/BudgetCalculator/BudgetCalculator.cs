@@ -24,6 +24,7 @@ namespace BudgetCalculator
             LoadExpenses();
             CalculateSavings();
             CalculateGoal();
+            CalculateBudget();
         }
         private static decimal IfEmptyOrNegative(string value)
         {
@@ -139,17 +140,17 @@ namespace BudgetCalculator
         private void UpdateExpenses()
         {
             string connectionString = "Server=localhost;Database=BudgetCalculator;Trusted_Connection=True;";
-            string queryString = @"UPDATE Expense SET Amount = (CASE WHEN Id = 1 then @Housing
-                                                                    WHEN Id = 2 then @Transportation
-                                                                    WHEN Id = 3 then @Taxes
-                                                                    WHEN Id = 4 then @Utilities
-                                                                    WHEN Id = 5 then @Vices
-                                                                    WHEN Id = 6 then @Food
-                                                                    WHEN Id = 7 then @Insurance
-                                                                    WHEN Id = 8 then @Entertainment
-                                                                    WHEN Id = 9 then @Education
-                                                                    WHEN Id = 10 then @Miscellaneous
-                                                                    END)";
+            string queryString = @"UPDATE Expense SET Amount = (CASE WHEN Id = 1  THEN @Housing
+                                                                     WHEN Id = 2  THEN @Transportation
+                                                                     WHEN Id = 3  THEN @Taxes
+                                                                     WHEN Id = 4  THEN @Utilities
+                                                                     WHEN Id = 5  THEN @Vices
+                                                                     WHEN Id = 6  THEN @Food
+                                                                     WHEN Id = 7  THEN @Insurance
+                                                                     WHEN Id = 8  THEN @Entertainment
+                                                                     WHEN Id = 9  THEN @Education
+                                                                     WHEN Id = 10 THEN @Miscellaneous
+                                                                     END)";
             using SqlConnection connection = new(connectionString);
             SqlCommand command = new(queryString, connection);
             try
@@ -241,6 +242,26 @@ namespace BudgetCalculator
                 $"{Environment.NewLine}or {Math.Round(monthly, 2)} per month." +
                 $"{Environment.NewLine}You will reach your goal after {Math.Ceiling(GoalsValue / monthly)} months";
         }
+        private void CalculateBudget()
+        {
+            try
+            {
+                CalculateAndSetBudgetPerExpense(labelHousingBudget, IfEmptyOrNegative(textBoxHousing.Text), "Housing", 23);
+                CalculateAndSetBudgetPerExpense(labelTransportationBudget, IfEmptyOrNegative(textBoxTransportation.Text), "Transportation", 13);
+                CalculateAndSetBudgetPerExpense(labelTaxesBudget, IfEmptyOrNegative(textBoxTaxes.Text), "Taxes", 12);
+                CalculateAndSetBudgetPerExpense(labelUtilitiesBudget, IfEmptyOrNegative(textBoxUtilities.Text), "Utilities", 11);
+                CalculateAndSetBudgetPerExpense(labelVicesBudget, IfEmptyOrNegative(textBoxVices.Text), "Vices", 7);
+                CalculateAndSetBudgetPerExpense(labelFoodBudget, IfEmptyOrNegative(textBoxFood.Text), "Food", 14);
+                CalculateAndSetBudgetPerExpense(labelInsuranceBudget, IfEmptyOrNegative(textBoxInsurance.Text), "Insurance", 9);
+                CalculateAndSetBudgetPerExpense(labelEntertainmentBudget, IfEmptyOrNegative(textBoxEntertainment.Text), "Entertainment", 4);
+                CalculateAndSetBudgetPerExpense(labelEducationBudget, IfEmptyOrNegative(textBoxEducation.Text), "Education", 4);
+                CalculateAndSetBudgetPerExpense(labelMiscellaneousBudget, IfEmptyOrNegative(textBoxMiscellaneous.Text), "Miscellaneous", 3);
+            }
+            catch (EmptyOrNullOrNegativeException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private void CalculateAndSetBudgetPerExpense(Label label, decimal amount, string expenseType, int avarageSpent)
         {
             int percent = (int)Math.Round((amount / IncomeValue) * 100);
@@ -275,23 +296,7 @@ namespace BudgetCalculator
         }
         private void ButtonCalculateBudget_Click(object sender, EventArgs e)
         {
-            try
-            {
-                CalculateAndSetBudgetPerExpense(labelHousingBudget, IfEmptyOrNegative(textBoxHousing.Text), "Housing", 23);
-                CalculateAndSetBudgetPerExpense(labelTransportationBudget, IfEmptyOrNegative(textBoxTransportation.Text), "Transportation", 13);
-                CalculateAndSetBudgetPerExpense(labelTaxesBudget, IfEmptyOrNegative(textBoxTaxes.Text), "Taxes", 12);
-                CalculateAndSetBudgetPerExpense(labelUtilitiesBudget, IfEmptyOrNegative(textBoxUtilities.Text), "Utilities", 11);
-                CalculateAndSetBudgetPerExpense(labelVicesBudget, IfEmptyOrNegative(textBoxVices.Text), "Vices", 7);
-                CalculateAndSetBudgetPerExpense(labelFoodBudget, IfEmptyOrNegative(textBoxFood.Text), "Food", 14);
-                CalculateAndSetBudgetPerExpense(labelInsuranceBudget, IfEmptyOrNegative(textBoxInsurance.Text), "Insurance", 9);
-                CalculateAndSetBudgetPerExpense(labelEntertainmentBudget, IfEmptyOrNegative(textBoxEntertainment.Text), "Entertainment", 4);
-                CalculateAndSetBudgetPerExpense(labelEducationBudget, IfEmptyOrNegative(textBoxEducation.Text), "Education", 4);
-                CalculateAndSetBudgetPerExpense(labelMiscellaneousBudget, IfEmptyOrNegative(textBoxMiscellaneous.Text), "Miscellaneous", 3);
-            }
-            catch (EmptyOrNullOrNegativeException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            CalculateBudget();
         }
         private void ButtonCalculateSavings_Click(object sender, EventArgs e)
         {
