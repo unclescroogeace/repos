@@ -73,9 +73,10 @@ namespace BudgetCalculator
             this.labelEntertainmentBudget = new System.Windows.Forms.Label();
             this.labelEducationBudget = new System.Windows.Forms.Label();
             this.labelMiscellaneousBudget = new System.Windows.Forms.Label();
-            this.ButtonCalculateBudget = new System.Windows.Forms.Button();
             this.labelSavingsCalculation = new System.Windows.Forms.Label();
-            this.ButtonCalculateSavings = new System.Windows.Forms.Button();
+            this.labelIncomePerMonth = new System.Windows.Forms.Label();
+            this.labelSavingsPerMonth = new System.Windows.Forms.Label();
+            this.labelTotalExpensesPerMonth = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelIncome
@@ -315,7 +316,7 @@ namespace BudgetCalculator
             // labelTotalExpenses
             // 
             this.labelTotalExpenses.AutoSize = true;
-            this.labelTotalExpenses.Location = new System.Drawing.Point(124, 225);
+            this.labelTotalExpenses.Location = new System.Drawing.Point(43, 225);
             this.labelTotalExpenses.Name = "labelTotalExpenses";
             this.labelTotalExpenses.Size = new System.Drawing.Size(89, 15);
             this.labelTotalExpenses.TabIndex = 31;
@@ -324,7 +325,7 @@ namespace BudgetCalculator
             // labelTotalExpensesAmount
             // 
             this.labelTotalExpensesAmount.AutoSize = true;
-            this.labelTotalExpensesAmount.Location = new System.Drawing.Point(212, 225);
+            this.labelTotalExpensesAmount.Location = new System.Drawing.Point(131, 225);
             this.labelTotalExpensesAmount.Name = "labelTotalExpensesAmount";
             this.labelTotalExpensesAmount.Size = new System.Drawing.Size(0, 15);
             this.labelTotalExpensesAmount.TabIndex = 32;
@@ -443,16 +444,6 @@ namespace BudgetCalculator
             this.labelMiscellaneousBudget.Size = new System.Drawing.Size(0, 15);
             this.labelMiscellaneousBudget.TabIndex = 48;
             // 
-            // ButtonCalculateBudget
-            // 
-            this.ButtonCalculateBudget.Location = new System.Drawing.Point(779, 457);
-            this.ButtonCalculateBudget.Name = "ButtonCalculateBudget";
-            this.ButtonCalculateBudget.Size = new System.Drawing.Size(125, 23);
-            this.ButtonCalculateBudget.TabIndex = 49;
-            this.ButtonCalculateBudget.Text = "Calculate Budget";
-            this.ButtonCalculateBudget.UseVisualStyleBackColor = true;
-            this.ButtonCalculateBudget.Click += new System.EventHandler(this.ButtonCalculateBudget_Click);
-            // 
             // labelSavingsCalculation
             // 
             this.labelSavingsCalculation.AutoSize = true;
@@ -461,24 +452,39 @@ namespace BudgetCalculator
             this.labelSavingsCalculation.Size = new System.Drawing.Size(0, 15);
             this.labelSavingsCalculation.TabIndex = 50;
             // 
-            // ButtonCalculateSavings
+            // labelIncomePerMonth
             // 
-            this.ButtonCalculateSavings.Location = new System.Drawing.Point(26, 457);
-            this.ButtonCalculateSavings.Name = "ButtonCalculateSavings";
-            this.ButtonCalculateSavings.Size = new System.Drawing.Size(109, 23);
-            this.ButtonCalculateSavings.TabIndex = 51;
-            this.ButtonCalculateSavings.Text = "Calculate Goals";
-            this.ButtonCalculateSavings.UseVisualStyleBackColor = true;
-            this.ButtonCalculateSavings.Click += new System.EventHandler(this.ButtonCalculateSavings_Click);
+            this.labelIncomePerMonth.AutoSize = true;
+            this.labelIncomePerMonth.Location = new System.Drawing.Point(295, 11);
+            this.labelIncomePerMonth.Name = "labelIncomePerMonth";
+            this.labelIncomePerMonth.Size = new System.Drawing.Size(0, 15);
+            this.labelIncomePerMonth.TabIndex = 52;
+            // 
+            // labelSavingsPerMonth
+            // 
+            this.labelSavingsPerMonth.AutoSize = true;
+            this.labelSavingsPerMonth.Location = new System.Drawing.Point(192, 298);
+            this.labelSavingsPerMonth.Name = "labelSavingsPerMonth";
+            this.labelSavingsPerMonth.Size = new System.Drawing.Size(0, 15);
+            this.labelSavingsPerMonth.TabIndex = 53;
+            // 
+            // labelTotalExpensesPerMonth
+            // 
+            this.labelTotalExpensesPerMonth.AutoSize = true;
+            this.labelTotalExpensesPerMonth.Location = new System.Drawing.Point(244, 225);
+            this.labelTotalExpensesPerMonth.Name = "labelTotalExpensesPerMonth";
+            this.labelTotalExpensesPerMonth.Size = new System.Drawing.Size(0, 15);
+            this.labelTotalExpensesPerMonth.TabIndex = 54;
             // 
             // BudgetCalculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(939, 513);
-            this.Controls.Add(this.ButtonCalculateSavings);
+            this.Controls.Add(this.labelTotalExpensesPerMonth);
+            this.Controls.Add(this.labelSavingsPerMonth);
+            this.Controls.Add(this.labelIncomePerMonth);
             this.Controls.Add(this.labelSavingsCalculation);
-            this.Controls.Add(this.ButtonCalculateBudget);
             this.Controls.Add(this.labelMiscellaneousBudget);
             this.Controls.Add(this.labelEducationBudget);
             this.Controls.Add(this.labelEntertainmentBudget);
@@ -524,6 +530,7 @@ namespace BudgetCalculator
             this.Controls.Add(this.textBoxIncome);
             this.Controls.Add(this.labelIncome);
             this.Name = "BudgetCalculator";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Budget Calculator";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -576,9 +583,10 @@ namespace BudgetCalculator
         private System.Windows.Forms.Label labelEntertainmentBudget;
         private System.Windows.Forms.Label labelEducationBudget;
         private System.Windows.Forms.Label labelMiscellaneousBudget;
-        private System.Windows.Forms.Button ButtonCalculateBudget;
         private System.Windows.Forms.Label labelSavingsCalculation;
-        private System.Windows.Forms.Button ButtonCalculateSavings;
+        private System.Windows.Forms.Label labelIncomePerMonth;
+        private System.Windows.Forms.Label labelSavingsPerMonth;
+        private System.Windows.Forms.Label labelTotalExpensesPerMonth;
     }
 }
 

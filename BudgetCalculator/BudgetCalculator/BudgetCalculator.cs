@@ -22,13 +22,17 @@ namespace BudgetCalculator
             LoadIncome();
             LoadGoals();
             LoadExpenses();
-            CalculateSavings();
-            CalculateGoal();
-            CalculateBudget();
+            if (ExpenseValue > 0 && IncomeValue > 0 && GoalsValue > 0)
+            {
+                CalculateExpenses();
+                CalculateSavings();
+                CalculateGoal();
+                CalculateBudget();
+            }
         }
         private static decimal IfEmptyOrNegative(string value)
         {
-            if (string.IsNullOrEmpty(value) || decimal.Parse(value) < 0)
+            if (string.IsNullOrEmpty(value) || decimal.Parse(value) <= 0)
             {
                 throw new EmptyOrNullOrNegativeException("Empty/Null/Negative value");
             }
@@ -70,7 +74,6 @@ namespace BudgetCalculator
                 textBoxEntertainment.Text = Math.Round(decimalArray[7], 2).ToString();
                 textBoxEducation.Text = Math.Round(decimalArray[8], 2).ToString();
                 textBoxMiscellaneous.Text = Math.Round(decimalArray[9], 2).ToString();
-                labelTotalExpensesAmount.Text = Math.Round(total, 2).ToString();
                 ExpenseValue = total;
             }
             catch (Exception ex)
@@ -102,6 +105,7 @@ namespace BudgetCalculator
                 reader.Close();
                 textBoxIncome.Text = Math.Round(value, 2).ToString();
                 IncomeValue = value;
+                labelIncomePerMonth.Text = $"{Math.Round(value / 12, 2)}/month";
             }
             catch (Exception ex)
             {
@@ -153,6 +157,7 @@ namespace BudgetCalculator
                                                                      END)";
             using SqlConnection connection = new(connectionString);
             SqlCommand command = new(queryString, connection);
+            connection.Open();
             try
             {
                 command.Parameters.Add("@Housing", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxHousing.Text);
@@ -165,14 +170,6 @@ namespace BudgetCalculator
                 command.Parameters.Add("@Entertainment", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxEntertainment.Text);
                 command.Parameters.Add("@Education", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxEducation.Text);
                 command.Parameters.Add("@Miscellaneous", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxMiscellaneous.Text);
-            }
-            catch (EmptyOrNullOrNegativeException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            connection.Open();
-            try
-            {
                 command.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -187,17 +184,10 @@ namespace BudgetCalculator
             string queryString = @"UPDATE Money SET Amount = @Amount WHERE Id = 1";
             using SqlConnection connection = new(connectionString);
             SqlCommand command = new(queryString, connection);
-            try
-            {
-                command.Parameters.Add("@Amount", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxIncome.Text);
-            }
-            catch (EmptyOrNullOrNegativeException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
             connection.Open();
             try
             {
+                command.Parameters.Add("@Amount", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxIncome.Text);
                 command.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -212,17 +202,10 @@ namespace BudgetCalculator
             string queryString = @"UPDATE Money SET Amount = @Amount WHERE Id = 2";
             using SqlConnection connection = new(connectionString);
             SqlCommand command = new(queryString, connection);
-            try
-            {
-                command.Parameters.Add("@Amount", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxGoals.Text);
-            }
-            catch (EmptyOrNullOrNegativeException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
             connection.Open();
             try
             {
+                command.Parameters.Add("@Amount", SqlDbType.Decimal).Value = IfEmptyOrNegative(textBoxGoals.Text);
                 command.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -231,9 +214,30 @@ namespace BudgetCalculator
             }
             connection.Close();
         }
+        private void CalculateExpenses()
+        {
+            try
+            {
+                labelTotalExpensesAmount.Text = Math.Round(ExpenseValue, 2) + $" ({(int)Math.Round((ExpenseValue / IncomeValue) * 100)}%)";
+                labelTotalExpensesPerMonth.Text = $"{Math.Round(ExpenseValue / 12, 2)}/month";
+            }
+            catch(DivideByZeroException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private void CalculateSavings()
         {
-            labelSavingsAmount.Text = Math.Round(IncomeValue - ExpenseValue, 2).ToString();
+            try
+            {
+                decimal savings = IncomeValue - ExpenseValue;
+                labelSavingsAmount.Text = Math.Round(savings, 2) + $" ({(int)Math.Round((savings / IncomeValue) * 100)}%)";
+                labelSavingsPerMonth.Text = Math.Round(savings / 12, 2) + "/month";
+            }
+            catch(DivideByZeroException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private void CalculateGoal()
         {
@@ -282,11 +286,14 @@ namespace BudgetCalculator
             LoadIncome();
             CalculateSavings();
             CalculateGoal();
+            CalculateExpenses();
+            CalculateBudget();
         }
         private void ButtonSetExpense_Click(object sender, EventArgs e)
         {
             UpdateExpenses();
             LoadExpenses();
+            CalculateExpenses();
             CalculateSavings();
             CalculateBudget();
             CalculateGoal();
@@ -295,14 +302,6 @@ namespace BudgetCalculator
         {
             UpdateGoals();
             LoadGoals();
-            CalculateGoal();
-        }
-        private void ButtonCalculateBudget_Click(object sender, EventArgs e)
-        {
-            CalculateBudget();
-        }
-        private void ButtonCalculateSavings_Click(object sender, EventArgs e)
-        {
             CalculateGoal();
         }
     }
