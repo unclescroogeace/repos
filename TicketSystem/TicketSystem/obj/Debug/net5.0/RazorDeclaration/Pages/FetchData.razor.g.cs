@@ -83,8 +83,29 @@ using TicketSystem.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\FetchData.razor"
+#line 11 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\_Imports.razor"
+using Syncfusion.Blazor;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 12 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\_Imports.razor"
+using Syncfusion.Blazor.DropDowns;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\FetchData.razor"
 using TicketSystem.Data;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 2 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\FetchData.razor"
+           [Authorize]
 
 #line default
 #line hidden
@@ -98,7 +119,7 @@ using TicketSystem.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 39 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\FetchData.razor"
+#line 50 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\FetchData.razor"
        
     private WeatherForecast[] forecasts;
 

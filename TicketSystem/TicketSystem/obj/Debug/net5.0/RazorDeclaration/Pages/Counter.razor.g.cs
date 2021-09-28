@@ -82,6 +82,27 @@ using TicketSystem.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 11 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\_Imports.razor"
+using Syncfusion.Blazor;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 12 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\_Imports.razor"
+using Syncfusion.Blazor.DropDowns;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 2 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\Counter.razor"
+           [Authorize]
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/counter")]
     public partial class Counter : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -91,7 +112,7 @@ using TicketSystem.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 9 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\Counter.razor"
+#line 10 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\Counter.razor"
        
     private int currentCount = 0;
 
