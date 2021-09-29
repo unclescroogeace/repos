@@ -1,0 +1,76 @@
+﻿@page "/tickets"
+@attribute [Authorize]
+@using TicketSystem.Data 
+@inject ITicketService ticketService
+@inject NavigationManager NavigationManager
+<h1>Tickets</h1>
+<button class="btn btn-primary" @onclick="NavigateToCreateTicket">Create New</button>
+@if (TicketList is null)
+            {
+                <p><em>Loading.... !</em></p>
+            }
+<AuthorizeView Roles="Junior">
+  
+</AuthorizeView>
+<AuthorizeView Roles="MidLevel">
+    able to see midlevel
+</AuthorizeView>
+<AuthorizeView Roles="Senior">
+    able to see senior
+</AuthorizeView>
+<AuthorizeView Roles="OfficeSupport">
+    able to see officesupport
+</AuthorizeView>
+<AuthorizeView Roles="TechSupport">
+    able to see techsupport
+</AuthorizeView>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Content</th>
+            <th>ImageUrl</th>
+            <th>Visibility</th>
+            <th>RefersTo</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @foreach(var ticket in TicketList)
+            {
+                <tr>
+                    <td>@ticket.TicketId</td>
+                    <td>@ticket.Title</td>
+                    <td>@ticket.Content</td>
+                    <td>@ticket.ImageUrl</td>
+                    <td>@ticket.Visibility</td>
+                    <td>@ticket.RefersTo</td>
+                    <td>
+                        @*<a class="nav-link" href="EditEmployee/@emp.Id">*@
+                        <a class="nav-link" href="#">
+                            <span class="oi oi-pencil" aria-hidden="true">Edit</span>
+                        </a>
+                        <a class="nav-link" href="#">
+                            <span class="oi oi-trash" aria-hidden="true">Delete</span>
+                        </a>
+                    </td>
+                </tr>
+            }
+    </tbody>
+</table>
+
+@code{
+    List<Ticket> TicketList = new();
+    protected override async Task OnInitializedAsync()
+    {
+        TicketList = await Task.Run(() => ticketService.GetAllTicketsAsync());
+    }
+
+    private void NavigateToCreateTicket()
+    {
+        NavigationManager.NavigateTo("/createticket");
+    }
+}

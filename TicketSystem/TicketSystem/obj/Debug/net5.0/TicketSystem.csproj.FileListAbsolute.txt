@@ -189,6 +189,9 @@ C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\ne
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\bin\Debug\net5.0\Syncfusion.Blazor.dll
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\bin\Debug\net5.0\Syncfusion.ExcelExport.Net.dll
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\bin\Debug\net5.0\Syncfusion.PdfExport.Net.dll
-C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\Razor\Pages\Tickets.cshtml.g.cs
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\RazorDeclaration\Pages\Tickets.razor.g.cs
+C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\Razor\Pages\Tickets.razor.g.cs
+C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\RazorDeclaration\Pages\CreateTicket.razor.g.cs
+C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\Razor\Pages\CreateTicket.razor.g.cs

@@ -48,36 +48,36 @@ namespace TicketSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "dc0fd55b-9cbe-47a4-a7ff-b620b584f314",
-                            ConcurrencyStamp = "c0fcbe35-1916-45f5-92ec-e5d5f15ba20c",
+                            Id = "883cd9f0-cfe7-4bc5-a6f4-be134a9e5933",
+                            ConcurrencyStamp = "3bbdebdf-d2cc-421d-a029-83f464c37485",
                             Name = "Junior",
                             NormalizedName = "JUNIOR"
                         },
                         new
                         {
-                            Id = "6fabbd9a-b2f7-420b-8c7a-2bd3c6aa7f49",
-                            ConcurrencyStamp = "406576b1-11fc-4cb4-b1dc-484b11d04c03",
+                            Id = "9d19dd83-6215-4b6d-9a9d-d60855e6a580",
+                            ConcurrencyStamp = "995e51be-2691-4dbc-8e22-753037477baf",
                             Name = "MidLevel",
                             NormalizedName = "MIDLEVEL"
                         },
                         new
                         {
-                            Id = "684aee1e-1c8f-4f95-9f2e-d20a1e1f2969",
-                            ConcurrencyStamp = "2c6719a8-1f98-4ee7-94da-c77a9027cfd5",
+                            Id = "659c191c-021e-4811-9863-026e476e9795",
+                            ConcurrencyStamp = "7923cf6a-7945-43b3-a970-5fe0e5864e4f",
                             Name = "Senior",
                             NormalizedName = "SENIOR"
                         },
                         new
                         {
-                            Id = "bc3a7805-c350-4767-a3c2-d83452ee9b6c",
-                            ConcurrencyStamp = "138247b7-87ec-4a19-99ae-d957ea72c1d0",
+                            Id = "89653d0a-748b-4c82-ab0b-b86bf322ca21",
+                            ConcurrencyStamp = "02549bff-9ad8-4517-8e00-c814ec590bb9",
                             Name = "OfficeSupport",
                             NormalizedName = "OFFICESUPPORT"
                         },
                         new
                         {
-                            Id = "c84c9008-2846-4cdb-9bb1-ca1f8806f53f",
-                            ConcurrencyStamp = "b382cbd3-99b3-432a-bead-601028136511",
+                            Id = "924e65d9-8abb-4a12-b474-ecc80c998ff4",
+                            ConcurrencyStamp = "e2cbdade-334e-4fb0-9839-df863a6d1676",
                             Name = "TechSupport",
                             NormalizedName = "TECHSUPPORT"
                         });
@@ -256,6 +256,36 @@ namespace TicketSystem.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("TicketSystem.Data.Ticket", b =>
+                {
+                    b.Property<int>("TicketId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RefersTo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Visibility")
+                        .HasColumnType("int");
+
+                    b.HasKey("TicketId");
+
+                    b.ToTable("Tickets");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

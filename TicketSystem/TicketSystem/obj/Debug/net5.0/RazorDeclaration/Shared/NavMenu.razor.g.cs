@@ -104,7 +104,7 @@ using Syncfusion.Blazor.DropDowns;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 28 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Shared\NavMenu.razor"
+#line 33 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 
