@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using TicketSystem.Data;
@@ -23,22 +24,17 @@ namespace TicketSystem.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<AspNetUser> _signInManager;
         private readonly UserManager<AspNetUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
         //private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<AspNetUser> userManager,
             SignInManager<AspNetUser> signInManager,
-            RoleManager<IdentityRole> roleManager,
             ILogger<RegisterModel> logger)
-            //IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _roleManager = roleManager;
             _logger = logger;
-           // _emailSender = emailSender;
         }
 
         [BindProperty]
@@ -50,10 +46,6 @@ namespace TicketSystem.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            //[Required]
-            //[EmailAddress]
-            //[Display(Name = "Email")]
-            //public string Email { get; set; }
             [Required]
             [Display(Name = "Username")]
             public string Username { get; set; }
@@ -76,10 +68,12 @@ namespace TicketSystem.Areas.Identity.Pages.Account
             [Required]
             [Display(Name = "Lastname")]
             public string Lastname { get; set; }
+
             [Required]
             [Display(Name = "Role")]
             public string Role { get; set; }
         }
+
 
         public async Task OnGetAsync(string returnUrl = null)
         {
@@ -87,9 +81,37 @@ namespace TicketSystem.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
+        public static List<SelectListItem> GetRoles()
+        {
+            List<SelectListItem> roles = new();
+            roles.Add(new SelectListItem
+            {
+                Text = "Junior",
+                Value = "Junior"
+            }); roles.Add(new SelectListItem
+            {
+                Text = "Mid-Level",
+                Value = "MidLevel"
+            }); roles.Add(new SelectListItem
+            {
+                Text = "Senior",
+                Value = "Senior"
+            }); roles.Add(new SelectListItem
+            {
+                Text = "Office Support",
+                Value = "OfficeSupport"
+            }); roles.Add(new SelectListItem
+            {
+                Text = "Tech Support",
+                Value = "TechSupport"
+            });
+
+            return roles;
+        }
+
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
+            returnUrl ??= Url.Content("/tickets");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
@@ -98,25 +120,6 @@ namespace TicketSystem.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    //var callbackUrl = Url.Page(
-                    //    "/Account/ConfirmEmail",
-                    //    pageHandler: null,
-                    //    values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                    //    protocol: Request.Scheme);
-
-
-                    //if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    //{
-                    //    return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    //}
-                    //else
-                    //{
-                    //    await _signInManager.SignInAsync(user, isPersistent: false);
-                    //    return LocalRedirect(returnUrl);
-                    //}
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     await _userManager.AddToRoleAsync(user, Input.Role);

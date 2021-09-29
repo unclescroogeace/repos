@@ -1,0 +1,16 @@
+﻿@page "/tickets"
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+@{
+    ViewData["Title"] = "Tickets";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<AuthorizeView>
+    <Authorized>
+        Able to see
+    </Authorized>
+    <NotAuthorized>
+        Not able to see
+    </NotAuthorized>
+</AuthorizeView>
