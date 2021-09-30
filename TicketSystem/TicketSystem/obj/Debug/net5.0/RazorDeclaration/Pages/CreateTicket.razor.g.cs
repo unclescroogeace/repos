@@ -104,6 +104,20 @@ using TicketSystem.Data;
 #line hidden
 #nullable disable
 #nullable restore
+#line 4 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\CreateTicket.razor"
+using Microsoft.AspNetCore.Http;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\CreateTicket.razor"
+using TicketSystem.Utility;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 2 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\CreateTicket.razor"
            [Authorize]
 
@@ -119,11 +133,13 @@ using TicketSystem.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 30 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\CreateTicket.razor"
+#line 49 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\CreateTicket.razor"
        
     Ticket ticket = new();
     protected async void Create()
     {
+        ticket.UserId = httpContextAccessor.HttpContext.User.GetUserId();
+        ticket.ImageUrl = "urlhere";
         await ticketService.CreateTicket(ticket);
         NavigationManager.NavigateTo("tickets");
     }
@@ -135,6 +151,7 @@ using TicketSystem.Data;
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IHttpContextAccessor httpContextAccessor { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private ITicketService ticketService { get; set; }
     }

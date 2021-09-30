@@ -48,36 +48,36 @@ namespace TicketSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "883cd9f0-cfe7-4bc5-a6f4-be134a9e5933",
-                            ConcurrencyStamp = "3bbdebdf-d2cc-421d-a029-83f464c37485",
+                            Id = "80a1b807-f304-47d2-9370-286a0419a162",
+                            ConcurrencyStamp = "8b831a04-0ddf-4a94-96a1-43c511003a45",
                             Name = "Junior",
                             NormalizedName = "JUNIOR"
                         },
                         new
                         {
-                            Id = "9d19dd83-6215-4b6d-9a9d-d60855e6a580",
-                            ConcurrencyStamp = "995e51be-2691-4dbc-8e22-753037477baf",
+                            Id = "8f8e63f0-00cc-4681-bba5-06a6ba7c0590",
+                            ConcurrencyStamp = "576d2824-5d14-4dbe-b609-45c2de8fdb07",
                             Name = "MidLevel",
                             NormalizedName = "MIDLEVEL"
                         },
                         new
                         {
-                            Id = "659c191c-021e-4811-9863-026e476e9795",
-                            ConcurrencyStamp = "7923cf6a-7945-43b3-a970-5fe0e5864e4f",
+                            Id = "7026b5f4-1886-448d-b6fc-0fffc11aa370",
+                            ConcurrencyStamp = "263efc2c-b4ce-4fc2-9d17-fd3e3fd504cf",
                             Name = "Senior",
                             NormalizedName = "SENIOR"
                         },
                         new
                         {
-                            Id = "89653d0a-748b-4c82-ab0b-b86bf322ca21",
-                            ConcurrencyStamp = "02549bff-9ad8-4517-8e00-c814ec590bb9",
+                            Id = "8d264323-db1d-4bf1-b29e-4c8dfaf29825",
+                            ConcurrencyStamp = "6eb867cb-adc7-436a-9360-2991b975649c",
                             Name = "OfficeSupport",
                             NormalizedName = "OFFICESUPPORT"
                         },
                         new
                         {
-                            Id = "924e65d9-8abb-4a12-b474-ecc80c998ff4",
-                            ConcurrencyStamp = "e2cbdade-334e-4fb0-9839-df863a6d1676",
+                            Id = "71dd0b87-454a-412f-bc38-26c791549655",
+                            ConcurrencyStamp = "420d224c-73b2-4f23-a372-318a23b211cb",
                             Name = "TechSupport",
                             NormalizedName = "TECHSUPPORT"
                         });
@@ -234,6 +234,9 @@ namespace TicketSystem.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");

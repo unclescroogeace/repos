@@ -115,7 +115,7 @@ namespace TicketSystem.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new AspNetUser { UserName = Input.Username, Firstname = Input.Firstname, Lastname = Input.Lastname};
+                var user = new AspNetUser { UserName = Input.Username, Firstname = Input.Firstname, Lastname = Input.Lastname, Role = Input.Role};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

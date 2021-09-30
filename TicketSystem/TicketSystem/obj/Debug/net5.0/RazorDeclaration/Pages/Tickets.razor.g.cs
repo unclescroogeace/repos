@@ -104,6 +104,20 @@ using TicketSystem.Data;
 #line hidden
 #nullable disable
 #nullable restore
+#line 4 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\Tickets.razor"
+using Microsoft.AspNetCore.Http;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\Tickets.razor"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 2 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\Tickets.razor"
            [Authorize]
 
@@ -119,12 +133,19 @@ using TicketSystem.Data;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 65 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\Tickets.razor"
+#line 62 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\Tickets.razor"
       
     List<Ticket> TicketList = new();
+    AspNetUser loggedInUser = new();
+
+
+    private Task<AspNetUser> GetCurrentUserAsync() => userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
+
     protected override async Task OnInitializedAsync()
     {
         TicketList = await Task.Run(() => ticketService.GetAllTicketsAsync());
+        loggedInUser = await Task.Run(() => GetCurrentUserAsync());
+
     }
 
     private void NavigateToCreateTicket()
@@ -132,9 +153,17 @@ using TicketSystem.Data;
         NavigationManager.NavigateTo("/createticket");
     }
 
+    private void filterTickets()
+    {
+
+    }
+
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IUserService userService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private UserManager<AspNetUser> userManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IHttpContextAccessor httpContextAccessor { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private ITicketService ticketService { get; set; }
     }

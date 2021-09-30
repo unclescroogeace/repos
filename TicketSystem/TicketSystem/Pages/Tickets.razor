@@ -1,29 +1,19 @@
 ﻿@page "/tickets"
 @attribute [Authorize]
-@using TicketSystem.Data 
+@using TicketSystem.Data
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
 @inject ITicketService ticketService
 @inject NavigationManager NavigationManager
+@inject IHttpContextAccessor httpContextAccessor
+@inject UserManager<AspNetUser> userManager
+@inject IUserService userService
 <h1>Tickets</h1>
 <button class="btn btn-primary" @onclick="NavigateToCreateTicket">Create New</button>
 @if (TicketList is null)
-            {
-                <p><em>Loading.... !</em></p>
-            }
-<AuthorizeView Roles="Junior">
-  
-</AuthorizeView>
-<AuthorizeView Roles="MidLevel">
-    able to see midlevel
-</AuthorizeView>
-<AuthorizeView Roles="Senior">
-    able to see senior
-</AuthorizeView>
-<AuthorizeView Roles="OfficeSupport">
-    able to see officesupport
-</AuthorizeView>
-<AuthorizeView Roles="TechSupport">
-    able to see techsupport
-</AuthorizeView>
+{
+    <p><em>Loading.... !</em></p>
+}
 
 <table>
     <thead>
@@ -38,8 +28,9 @@
         </tr>
     </thead>
     <tbody>
-        
-        @foreach(var ticket in TicketList)
+        @foreach (var ticket in TicketList)
+        {
+            if (ticket.Visibility == 1 || ticket.UserId == loggedInUser.Id || ticket.RefersTo == loggedInUser.Role)
             {
                 <tr>
                     <td>@ticket.TicketId</td>
@@ -59,18 +50,36 @@
                     </td>
                 </tr>
             }
+            
+        }
     </tbody>
 </table>
 
+
+
+
+
 @code{
     List<Ticket> TicketList = new();
+    AspNetUser loggedInUser = new();
+
+
+    private Task<AspNetUser> GetCurrentUserAsync() => userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
+
     protected override async Task OnInitializedAsync()
     {
         TicketList = await Task.Run(() => ticketService.GetAllTicketsAsync());
+        loggedInUser = await Task.Run(() => GetCurrentUserAsync());
+
     }
 
     private void NavigateToCreateTicket()
     {
         NavigationManager.NavigateTo("/createticket");
+    }
+
+    private void filterTickets()
+    {
+
     }
 }

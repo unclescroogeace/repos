@@ -1,8 +1,11 @@
 ﻿@page "/createticket"
 @attribute [Authorize]
 @using TicketSystem.Data
+@using Microsoft.AspNetCore.Http
+@using TicketSystem.Utility 
 @inject ITicketService ticketService
 @inject NavigationManager NavigationManager
+@inject IHttpContextAccessor httpContextAccessor
 <h3>CreateTicket</h3>
 
 <form>
@@ -14,7 +17,7 @@
             </div>
             <div class="form-group">
                 <label for="Content" class="custom-control-label">Content</label>
-                <textarea class="form-control" id="textAreaContent" rows="4"></textarea>
+                <textarea class="form-control" id="textAreaContent" rows="4" @bind="ticket.Content"></textarea>
             </div>
             <div class="form-group">
                 <label for="RefersTo" class="custom-control-label"></label>
@@ -24,6 +27,22 @@
                     <option value="TechSupport">TechSupport</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label for="Visibility" class="custom-control-label"></label>
+                <select @bind="@ticket.Visibility" class="form-control">
+                    <option value="">-- Visibility --</option>
+                    <option value="0">Only for me</option>
+                    <option value="1">For Everyone</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="button" class="btn btn-primary" @onclick="@Create" value="Save" />
+                <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+            </div>
         </div>
     </div>
 </form>
@@ -31,6 +50,8 @@
     Ticket ticket = new();
     protected async void Create()
     {
+        ticket.UserId = httpContextAccessor.HttpContext.User.GetUserId();
+        ticket.ImageUrl = "urlhere";
         await ticketService.CreateTicket(ticket);
         NavigationManager.NavigateTo("tickets");
     }
