@@ -21,6 +21,10 @@ namespace TicketSystem.Data
         {
             return await _dbContext.Tickets.FirstOrDefaultAsync(t => t.TicketId.Equals(Id));
         }
+        public Ticket GetTicket(int Id)
+        {
+            return _dbContext.Tickets.FirstOrDefault(t => t.TicketId.Equals(Id));
+        }
         public async Task<bool> CreateTicket(Ticket ticket)
         {
             await _dbContext.Tickets.AddAsync(ticket);

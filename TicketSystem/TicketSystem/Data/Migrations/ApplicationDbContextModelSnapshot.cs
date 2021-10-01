@@ -48,36 +48,36 @@ namespace TicketSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "80a1b807-f304-47d2-9370-286a0419a162",
-                            ConcurrencyStamp = "8b831a04-0ddf-4a94-96a1-43c511003a45",
+                            Id = "cf4bcf5b-641a-4e96-a4e0-2cb97c90fc9a",
+                            ConcurrencyStamp = "7845655d-ae19-4ef0-90b3-68bda0bad457",
                             Name = "Junior",
                             NormalizedName = "JUNIOR"
                         },
                         new
                         {
-                            Id = "8f8e63f0-00cc-4681-bba5-06a6ba7c0590",
-                            ConcurrencyStamp = "576d2824-5d14-4dbe-b609-45c2de8fdb07",
+                            Id = "35fe1039-aadd-4185-84c4-cefa20699f09",
+                            ConcurrencyStamp = "6205a0b9-1b1a-4ad3-94bf-f8a2c2ad71c5",
                             Name = "MidLevel",
                             NormalizedName = "MIDLEVEL"
                         },
                         new
                         {
-                            Id = "7026b5f4-1886-448d-b6fc-0fffc11aa370",
-                            ConcurrencyStamp = "263efc2c-b4ce-4fc2-9d17-fd3e3fd504cf",
+                            Id = "d455238b-169d-4149-8583-70a1bf966418",
+                            ConcurrencyStamp = "7bd3ae95-9eb4-4b16-ba19-2d68979c44da",
                             Name = "Senior",
                             NormalizedName = "SENIOR"
                         },
                         new
                         {
-                            Id = "8d264323-db1d-4bf1-b29e-4c8dfaf29825",
-                            ConcurrencyStamp = "6eb867cb-adc7-436a-9360-2991b975649c",
+                            Id = "8bf51abc-632a-4ee9-a7ea-18cabde69e7c",
+                            ConcurrencyStamp = "5fc34952-7a0f-43d6-8612-7d79519a6451",
                             Name = "OfficeSupport",
                             NormalizedName = "OFFICESUPPORT"
                         },
                         new
                         {
-                            Id = "71dd0b87-454a-412f-bc38-26c791549655",
-                            ConcurrencyStamp = "420d224c-73b2-4f23-a372-318a23b211cb",
+                            Id = "ddafdcec-3caa-47c5-97b3-e1054cb972b1",
+                            ConcurrencyStamp = "39a05b73-270c-4667-9f5e-7bc08c89efc9",
                             Name = "TechSupport",
                             NormalizedName = "TECHSUPPORT"
                         });
@@ -261,6 +261,29 @@ namespace TicketSystem.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("TicketSystem.Data.Message", b =>
+                {
+                    b.Property<int>("MessageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TicketId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageId");
+
+                    b.HasIndex("TicketId");
+
+                    b.ToTable("Message");
+                });
+
             modelBuilder.Entity("TicketSystem.Data.Ticket", b =>
                 {
                     b.Property<int>("TicketId")
@@ -269,19 +292,24 @@ namespace TicketSystem.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Content")
+                        .HasMaxLength(4096)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(376)
+                        .HasColumnType("nvarchar(376)");
 
                     b.Property<string>("RefersTo")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<int>("Visibility")
                         .HasColumnType("int");
@@ -340,6 +368,20 @@ namespace TicketSystem.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("TicketSystem.Data.Message", b =>
+                {
+                    b.HasOne("TicketSystem.Data.Ticket", "Ticket")
+                        .WithMany("Messages")
+                        .HasForeignKey("TicketId");
+
+                    b.Navigation("Ticket");
+                });
+
+            modelBuilder.Entity("TicketSystem.Data.Ticket", b =>
+                {
+                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }

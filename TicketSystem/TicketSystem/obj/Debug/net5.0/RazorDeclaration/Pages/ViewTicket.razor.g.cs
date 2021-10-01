@@ -96,6 +96,35 @@ using Syncfusion.Blazor.DropDowns;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\ViewTicket.razor"
+using TicketSystem.Data;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\ViewTicket.razor"
+using Microsoft.AspNetCore.Http;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 5 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\ViewTicket.razor"
+using Microsoft.AspNetCore.Identity;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 2 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\ViewTicket.razor"
+           [Authorize]
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/ViewTicket/{Id}")]
     public partial class ViewTicket : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -103,6 +132,40 @@ using Syncfusion.Blazor.DropDowns;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 29 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\ViewTicket.razor"
+       
+    [Parameter]
+    public string Id { get; set; }
+    Ticket ticket = new();
+    AspNetUser loggedInUser = new();
+    AspNetUser author = new();
+
+
+    private Task<AspNetUser> GetCurrentUserAsync() => userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
+
+    protected override async Task OnInitializedAsync()
+    {
+        //ticket = await Task.Run(() => ticketService.GetTicketAsync(Convert.ToInt32(Id)));
+        ticket = ticketService.GetTicket(Convert.ToInt32(Id));
+        //author = await Task.Run(() => userService.GetUserAsync(ticket.UserId));
+        author = userService.GetUser(ticket.UserId);
+        loggedInUser = await Task.Run(() => GetCurrentUserAsync());
+    }
+
+    private void NavigateToCreateTicket()
+    {
+        NavigationManager.NavigateTo("/createticket");
+    }
+
+#line default
+#line hidden
+#nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IUserService userService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private UserManager<AspNetUser> userManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IHttpContextAccessor httpContextAccessor { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private ITicketService ticketService { get; set; }
     }
 }
 #pragma warning restore 1591

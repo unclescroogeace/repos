@@ -20,8 +20,6 @@
         <tr>
             <th>Id</th>
             <th>Title</th>
-            <th>Content</th>
-            <th>ImageUrl</th>
             <th>Visibility</th>
             <th>RefersTo</th>
             <th>Action</th>
@@ -34,9 +32,7 @@
             {
                 <tr>
                     <td>@ticket.TicketId</td>
-                    <td>@ticket.Title</td>
-                    <td>@ticket.Content</td>
-                    <td>@ticket.ImageUrl</td>
+                    <td><a href="/ViewTicket/@ticket.TicketId">@ticket.Title</a></td>
                     <td>@ticket.Visibility</td>
                     <td>@ticket.RefersTo</td>
                     <td>
@@ -50,14 +46,9 @@
                     </td>
                 </tr>
             }
-            
         }
     </tbody>
 </table>
-
-
-
-
 
 @code{
     List<Ticket> TicketList = new();
@@ -76,10 +67,5 @@
     private void NavigateToCreateTicket()
     {
         NavigationManager.NavigateTo("/createticket");
-    }
-
-    private void filterTickets()
-    {
-
     }
 }

@@ -11,11 +11,17 @@ namespace TicketSystem.Data
     {
         [Key]
         public int TicketId { get; set; }
+        [StringLength(256)]
         public string Title { get; set; }
+        [StringLength(4096)]
         public string Content { get; set; }
+        [StringLength(376)]
         public string ImageUrl { get; set; }
         public int Visibility { get; set; }
+        [StringLength(128)]
         public string RefersTo { get; set; }
+        [StringLength(128)]
         public string UserId { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

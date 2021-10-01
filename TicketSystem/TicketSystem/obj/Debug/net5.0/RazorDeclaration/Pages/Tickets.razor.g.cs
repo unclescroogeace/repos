@@ -133,7 +133,7 @@ using Microsoft.AspNetCore.Identity;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 62 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\Tickets.razor"
+#line 53 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\Tickets.razor"
       
     List<Ticket> TicketList = new();
     AspNetUser loggedInUser = new();
@@ -151,11 +151,6 @@ using Microsoft.AspNetCore.Identity;
     private void NavigateToCreateTicket()
     {
         NavigationManager.NavigateTo("/createticket");
-    }
-
-    private void filterTickets()
-    {
-
     }
 
 #line default

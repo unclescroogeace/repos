@@ -1,5 +1,67 @@
-﻿<h3>ViewTicket</h3>
+﻿@page "/ViewTicket/{Id}"
+@attribute [Authorize]
+@using TicketSystem.Data
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Identity
+@inject ITicketService ticketService
+@inject NavigationManager NavigationManager
+@inject IHttpContextAccessor httpContextAccessor
+@inject UserManager<AspNetUser> userManager
+@inject IUserService userService
+@inject IMessageService messageService
+<h3>Ticket - @ticket.Title</h3>
+
+<div>
+    <div>
+        @ticket.Title
+    </div>
+    <div>
+        Author: @author.UserName (@author.Firstname @author.Lastname)
+    </div>
+    <div>
+        <textarea readonly rows="20" cols="120">@ticket.Content</textarea>
+    </div>
+
+    <section class="discussion">
+        @foreach (Message message in messages)
+        {
+            if (message.UserId == author.Id || loggedInUser.Role == "OfficeSupport" || loggedInUser.Role == "TechSupport")
+            {
+                <div class="bubble sender">@message.Content</div>
+            }
+            else
+            {
+                <div class="bubble recipient">@message.Content</div>
+            }
+        }
+    </section>
+    <textarea class="blockedresizing"></textarea>
+</div>
 
 @code {
+    [Parameter]
+    public string Id { get; set; }
+    Ticket ticket = new();
+    AspNetUser loggedInUser = new();
+    AspNetUser author = new();
+    List<Message> messages = new();
 
+
+    private Task<AspNetUser> GetCurrentUserAsync() => userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
+
+    protected override async Task OnInitializedAsync()
+    {
+        //ticket = await Task.Run(() => ticketService.GetTicketAsync(Convert.ToInt32(Id)));
+        ticket = ticketService.GetTicket(Convert.ToInt32(Id));
+        //author = await Task.Run(() => userService.GetUserAsync(ticket.UserId));
+        author = userService.GetUser(ticket.UserId);
+        loggedInUser = await Task.Run(() => GetCurrentUserAsync());
+        messages = messageService.GetAllMessages().Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
+
+    }
+
+    private void NavigateToCreateTicket()
+    {
+        NavigationManager.NavigateTo("/createticket");
+    }
 }

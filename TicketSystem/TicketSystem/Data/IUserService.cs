@@ -8,5 +8,6 @@ namespace TicketSystem.Data
     public interface IUserService
     {
         Task<AspNetUser> GetUserAsync(string Id);
+        AspNetUser GetUser(string Id);
     }
 }

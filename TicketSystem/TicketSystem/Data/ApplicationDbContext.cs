@@ -24,5 +24,6 @@ namespace TicketSystem.Data
             builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "TechSupport", NormalizedName = "TECHSUPPORT", Id = Guid.NewGuid().ToString(), ConcurrencyStamp = Guid.NewGuid().ToString() });
         }
         public virtual DbSet<Ticket> Tickets { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
     }
 }

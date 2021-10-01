@@ -48,6 +48,7 @@ namespace TicketSystem
             services.AddSyncfusionBlazor();
             services.AddTransient<ITicketService, TicketService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IMessageService, MessageService>();
             //services.AddHttpContextAccessor();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

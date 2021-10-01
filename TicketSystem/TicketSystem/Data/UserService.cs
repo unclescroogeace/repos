@@ -11,7 +11,6 @@ namespace TicketSystem.Data
     public class UserService : IUserService
     {
         private readonly ApplicationDbContext _dbContext;
-        private UserManager<AspNetUser> userManager;
         public UserService(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -20,9 +19,9 @@ namespace TicketSystem.Data
         {
             return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id.Equals(Id));
         }
-        private async Task<AspNetUser> GetCurrentUserAsync(ClaimsPrincipal claimsPrincipal)
+        public AspNetUser GetUser(string Id)
         {
-            return await userManager.GetUserAsync(claimsPrincipal);
+            return _dbContext.Users.FirstOrDefault(u => u.Id.Equals(Id));
         }
     }
 }
