@@ -9,34 +9,88 @@
 @inject UserManager<AspNetUser> userManager
 @inject IUserService userService
 @inject IMessageService messageService
-<h3>Ticket - @ticket.Title</h3>
+@inject IJSRuntime js
+<h3>@ticket.Title</h3>
 
-<div>
-    <div>
-        @ticket.Title
-    </div>
-    <div>
-        Author: @author.UserName (@author.Firstname @author.Lastname)
-    </div>
-    <div>
-        <textarea readonly rows="20" cols="120">@ticket.Content</textarea>
-    </div>
+<AuthorizeView Roles="OfficeSupport, TechSupport">
+    <Authorized>
+        <div>
+            <div>
+                Author: @author.UserName (@author.Firstname @author.Lastname)
+            </div>
+            <div>
+                <textarea readonly rows="20" cols="120">@ticket.Content</textarea>
+            </div>
+            <section class="discussion">
+                @foreach (Message message in messages)
+                {
+                    if ((loggedInUser.Role == "OfficeSupport" && ticket.RefersTo == "OfficeSupport")
+                        || (loggedInUser.Role == "TechSupport" && ticket.RefersTo == "TechSupport"))
+                    {
+                        if (message.UserId != author.Id)
+                        {
+                            <div class="bubble sender">@message.Content</div>
+                        }
+                        else
+                        {
+                            <div class="bubble recipient">@message.Content</div>
+                        }
+                    }
+                    else if (loggedInUser.Id == author.Id)
+                    {
+                        if (message.UserId == loggedInUser.Id)
+                        {
+                            <div class="bubble sender">@message.Content</div>
+                        }
+                        else
+                        {
+                            <div class="bubble recipient">@message.Content</div>
+                        }
+                    }
+                }
+            </section>
+            @if (loggedInUser.Role == ticket.RefersTo)
+            {
+                <textarea class="blockedresizing" @bind="message.Content" rows="4" cols="120"></textarea>
+                <button @onclick="SendMessage" value="Send">Send</button>
+            }
+        </div>
+    </Authorized>
+</AuthorizeView>
+<AuthorizeView Roles="Junior, Senior, MidLevel">
+    <Authorized>
+        <div>
+            <div>
+                @ticket.Title
+            </div>
+            <div>
+                Author: @author.UserName (@author.Firstname @author.Lastname)
+            </div>
+            <div>
+                <textarea readonly rows="20" cols="120">@ticket.Content</textarea>
+            </div>
 
-    <section class="discussion">
-        @foreach (Message message in messages)
-        {
-            if (message.UserId == author.Id || loggedInUser.Role == "OfficeSupport" || loggedInUser.Role == "TechSupport")
+            <section class="discussion">
+                @foreach (Message message in messages)
+                {
+                    if (message.UserId == author.Id)
+                    {
+                        <div class="bubble sender">@message.Content</div>
+                    }
+                    else
+                    {
+                        <div class="bubble recipient">@message.Content</div>
+                    }
+                }
+            </section>
+            @if (loggedInUser.Id == author.Id)
             {
-                <div class="bubble sender">@message.Content</div>
+                <textarea class="blockedresizing" @bind="message.Content" rows="4" cols="120"></textarea>
+                <button @onclick="SendMessage" value="Send">Send</button>
             }
-            else
-            {
-                <div class="bubble recipient">@message.Content</div>
-            }
-        }
-    </section>
-    <textarea class="blockedresizing"></textarea>
-</div>
+        </div>
+    </Authorized>
+</AuthorizeView>
 
 @code {
     [Parameter]
@@ -45,7 +99,7 @@
     AspNetUser loggedInUser = new();
     AspNetUser author = new();
     List<Message> messages = new();
-
+    Message message = new();
 
     private Task<AspNetUser> GetCurrentUserAsync() => userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
 
@@ -59,9 +113,19 @@
         messages = messageService.GetAllMessages().Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
 
     }
-
-    private void NavigateToCreateTicket()
+    private void NavigateToTickets()
     {
-        NavigationManager.NavigateTo("/createticket");
+        NavigationManager.NavigateTo("/Tickets/");
+    }
+    protected void SendMessage()
+    {
+        message.Ticket = ticket;
+        message.UserId = loggedInUser.Id;
+        if (messageService.CreateMessage(message))
+        {
+            messages = messageService.GetAllMessages().Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
+            message = new();
+            StateHasChanged();
+        }
     }
 }

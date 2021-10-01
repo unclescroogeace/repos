@@ -124,7 +124,7 @@ using TicketSystem.Utility;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/createticket")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/CreateTicket")]
     public partial class CreateTicket : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998

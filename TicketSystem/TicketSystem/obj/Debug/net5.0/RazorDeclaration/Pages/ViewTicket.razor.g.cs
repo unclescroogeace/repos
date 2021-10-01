@@ -133,14 +133,15 @@ using Microsoft.AspNetCore.Identity;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 29 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\ViewTicket.razor"
+#line 95 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\ViewTicket.razor"
        
     [Parameter]
     public string Id { get; set; }
     Ticket ticket = new();
     AspNetUser loggedInUser = new();
     AspNetUser author = new();
-
+    List<Message> messages = new();
+    Message message = new();
 
     private Task<AspNetUser> GetCurrentUserAsync() => userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
 
@@ -151,16 +152,30 @@ using Microsoft.AspNetCore.Identity;
         //author = await Task.Run(() => userService.GetUserAsync(ticket.UserId));
         author = userService.GetUser(ticket.UserId);
         loggedInUser = await Task.Run(() => GetCurrentUserAsync());
-    }
+        messages = messageService.GetAllMessages().Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
 
-    private void NavigateToCreateTicket()
+    }
+    private void NavigateToTickets()
     {
-        NavigationManager.NavigateTo("/createticket");
+        NavigationManager.NavigateTo("/Tickets/");
+    }
+    protected void SendMessage()
+    {
+        message.Ticket = ticket;
+        message.UserId = loggedInUser.Id;
+        if (messageService.CreateMessage(message))
+        {
+            messages = messageService.GetAllMessages().Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
+            message = new();
+            StateHasChanged();
+        }
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime js { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IMessageService messageService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IUserService userService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private UserManager<AspNetUser> userManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IHttpContextAccessor httpContextAccessor { get; set; }

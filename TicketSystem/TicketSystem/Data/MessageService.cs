@@ -20,5 +20,17 @@ namespace TicketSystem.Data
         {
             return _dbContext.Messages.ToList();
         }
+        public async Task<bool> CreateMessageAsync(Message message)
+        {
+            await _dbContext.Messages.AddAsync(message);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+        public bool CreateMessage(Message message)
+        {
+            _dbContext.Messages.Add(message);
+            _dbContext.SaveChanges();
+            return true;
+        }
     }
 }

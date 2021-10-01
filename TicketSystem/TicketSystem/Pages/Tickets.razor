@@ -1,4 +1,4 @@
-﻿@page "/tickets"
+﻿@page "/Tickets"
 @attribute [Authorize]
 @using TicketSystem.Data
 @using Microsoft.AspNetCore.Http
@@ -9,7 +9,11 @@
 @inject UserManager<AspNetUser> userManager
 @inject IUserService userService
 <h1>Tickets</h1>
-<button class="btn btn-primary" @onclick="NavigateToCreateTicket">Create New</button>
+<AuthorizeView Roles="Junior, Senior, MidLevel">
+    <Authorized>
+        <button class="btn btn-primary" @onclick="NavigateToCreateTicket">Create New</button>
+    </Authorized>
+</AuthorizeView>
 @if (TicketList is null)
 {
     <p><em>Loading.... !</em></p>
@@ -68,4 +72,5 @@
     {
         NavigationManager.NavigateTo("/createticket");
     }
+
 }

@@ -16,13 +16,13 @@ max-width: 50%;
     align-self: flex-start;
     background-color: cornflowerblue;
     color: #fff;
-    border-radius: 0.1em 0.1em 0.1em 0.1em;
+    border-radius: 0.3em 0.3em 0.3em 0.3em;
 }
 
 .discussion > .bubble.recipient {
     align-self: flex-end;
     background-color: #efefef;
-    border-radius: 0.1em 0.1em 0.1em 0.1em;
+    border-radius: 0.3em 0.3em 0.3em 0.3em;
 }
 
 .blockedresizing {

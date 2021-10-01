@@ -124,7 +124,7 @@ using Microsoft.AspNetCore.Identity;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/tickets")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/Tickets")]
     public partial class Tickets : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -133,7 +133,7 @@ using Microsoft.AspNetCore.Identity;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 53 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\Tickets.razor"
+#line 57 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\Tickets.razor"
       
     List<Ticket> TicketList = new();
     AspNetUser loggedInUser = new();
@@ -152,6 +152,7 @@ using Microsoft.AspNetCore.Identity;
     {
         NavigationManager.NavigateTo("/createticket");
     }
+
 
 #line default
 #line hidden

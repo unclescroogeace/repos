@@ -9,5 +9,7 @@ namespace TicketSystem.Data
     {
         List<Message> GetAllMessages();
         Message GetMessage(int Id);
+        Task<bool> CreateMessageAsync(Message message);
+        bool CreateMessage(Message message);
     }
 }
