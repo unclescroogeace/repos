@@ -9,10 +9,12 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Syncfusion.Blazor;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TicketSystem.Areas.Identity;
@@ -51,6 +53,7 @@ namespace TicketSystem
             services.AddTransient<IMessageService, MessageService>();
             //services.AddHttpContextAccessor();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IImageUploadService, ImageUploadService>();
 
         }
 

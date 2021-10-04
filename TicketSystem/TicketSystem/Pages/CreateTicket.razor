@@ -2,10 +2,15 @@
 @attribute [Authorize]
 @using TicketSystem.Data
 @using Microsoft.AspNetCore.Http
-@using TicketSystem.Utility 
+@using TicketSystem.Utility
+@using BlazorInputFile
+@using Microsoft.AspNetCore.Hosting;
 @inject ITicketService ticketService
 @inject NavigationManager NavigationManager
 @inject IHttpContextAccessor httpContextAccessor
+@inject IImageUploadService imageUploadService
+@inject IWebHostEnvironment webHostEnvironment
+
 <h3>CreateTicket</h3>
 
 <form>
@@ -35,6 +40,9 @@
                     <option value="1">For Everyone</option>
                 </select>
             </div>
+            <div class="form-group">
+                <InputFile OnChange="HandleFileSelected"></InputFile>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -48,15 +56,27 @@
 </form>
 @code {
     Ticket ticket = new();
+    IFileListEntry file;
+    string randomFileName;
     protected async void Create()
     {
         ticket.UserId = httpContextAccessor.HttpContext.User.GetUserId();
-        ticket.ImageUrl = "urlhere";
+        ticket.ImageUrl = Directory.GetCurrentDirectory() + @"\Upload\" + randomFileName;
         await ticketService.CreateTicket(ticket);
         NavigationManager.NavigateTo("tickets");
     }
     void Cancel()
     {
         NavigationManager.NavigateTo("tickets");
+    }
+    async Task HandleFileSelected(IFileListEntry[] files)
+    {
+        file = files.FirstOrDefault();
+        if (file != null)
+        {
+            var extension = file.Name.Split('.');
+            randomFileName = Utility.RandomGenerator.GenerateRandomFileName(extension[1]);
+            await imageUploadService.UploadAsync(file, randomFileName);
+        }
     }
 }

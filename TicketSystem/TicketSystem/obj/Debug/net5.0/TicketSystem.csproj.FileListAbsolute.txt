@@ -197,3 +197,4 @@ C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\ne
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\Razor\Pages\CreateTicket.razor.g.cs
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\RazorDeclaration\Pages\ViewTicket.razor.g.cs
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\Razor\Pages\ViewTicket.razor.g.cs
+C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\bin\Debug\net5.0\BlazorInputFile.dll

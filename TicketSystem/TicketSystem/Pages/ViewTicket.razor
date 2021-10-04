@@ -19,7 +19,12 @@
                 Author: @author.UserName (@author.Firstname @author.Lastname)
             </div>
             <div>
-                <textarea readonly rows="20" cols="120">@ticket.Content</textarea>
+                <div>
+                    <textarea readonly rows="20" cols="120">@ticket.Content</textarea>
+                </div>
+                <div>
+                    <img src="/Images/@ticket.ImageUrl" alt="Attached image" width="300" />
+                </div>
             </div>
             <section class="discussion">
                 @foreach (Message message in messages)
@@ -67,19 +72,26 @@
                 Author: @author.UserName (@author.Firstname @author.Lastname)
             </div>
             <div>
-                <textarea readonly rows="20" cols="120">@ticket.Content</textarea>
+                <div>
+                    <textarea readonly rows="20" cols="120">@ticket.Content</textarea>
+                </div>
+                <div>
+                    <img src="/Images/@ticket.ImageUrl" alt="Alternative text" width="100" />
+                </div>
             </div>
-
             <section class="discussion">
-                @foreach (Message message in messages)
+                @if (messages != null)
                 {
-                    if (message.UserId == author.Id)
+                    @foreach (Message message in messages)
                     {
-                        <div class="bubble sender">@message.Content</div>
-                    }
-                    else
-                    {
-                        <div class="bubble recipient">@message.Content</div>
+                        if (message.UserId == author.Id)
+                        {
+                            <div class="bubble sender">@message.Content</div>
+                        }
+                        else
+                        {
+                            <div class="bubble recipient">@message.Content</div>
+                        }
                     }
                 }
             </section>
@@ -110,7 +122,8 @@
         //author = await Task.Run(() => userService.GetUserAsync(ticket.UserId));
         author = userService.GetUser(ticket.UserId);
         loggedInUser = await Task.Run(() => GetCurrentUserAsync());
-        messages = messageService.GetAllMessages().Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
+        messages = messageService.GetAllMessages();
+        messages = messages.Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
 
     }
     private void NavigateToTickets()

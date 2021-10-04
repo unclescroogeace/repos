@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "5dTt1wBNIgCU3LYQFXGqbX4XqtsHbz+dBFdGMjiKPVNUwwWWRKUv/4U9x6fl1rnACcEurYU3aXxGfz6haB6c6Q==",
+  "dgSpecHash": "2sz6W5PzEpcB/tnzyOIQXtpM808FkT8WPUM1p3jOf+s1V/d267wPm3HdMKHHR1vjHy4A6eqOMHcndkNelJc6LA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Krasimir Kostadinov\\source\\repos\\TicketSystem\\TicketSystem\\TicketSystem.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Krasimir Kostadinov\\.nuget\\packages\\blazorinputfile\\0.2.0\\blazorinputfile.0.2.0.nupkg.sha512",
     "C:\\Users\\Krasimir Kostadinov\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Krasimir Kostadinov\\.nuget\\packages\\microsoft.aspnetcore.authorization\\5.0.0\\microsoft.aspnetcore.authorization.5.0.0.nupkg.sha512",
     "C:\\Users\\Krasimir Kostadinov\\.nuget\\packages\\microsoft.aspnetcore.components\\5.0.0\\microsoft.aspnetcore.components.5.0.0.nupkg.sha512",
