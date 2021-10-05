@@ -11,7 +11,7 @@
 <h1>Tickets</h1>
 <AuthorizeView Roles="Junior, Senior, MidLevel">
     <Authorized>
-        <button class="btn btn-primary" @onclick="NavigateToCreateTicket">Create New</button>
+        <button class="btn btn-outline-primary" id="createButton" @onclick="NavigateToCreateTicket">Create New</button><br /><br />
     </Authorized>
 </AuthorizeView>
 @if (TicketList is null)
@@ -19,14 +19,11 @@
     <p><em>Loading.... !</em></p>
 }
 
-<table>
-    <thead>
+<table class="table">
+    <thead class="thead-light">
         <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Visibility</th>
-            <th>RefersTo</th>
-            <th>Action</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
         </tr>
     </thead>
     <tbody>
@@ -34,20 +31,10 @@
         {
             if (ticket.Visibility == 2 || ticket.UserId == loggedInUser.Id || ticket.RefersTo == loggedInUser.Role)
             {
+                authorInfo = userService.GetUser(ticket.UserId);
                 <tr>
-                    <td>@ticket.TicketId</td>
                     <td><a href="/ViewTicket/@ticket.TicketId">@ticket.Title</a></td>
-                    <td>@ticket.Visibility</td>
-                    <td>@ticket.RefersTo</td>
-                    <td>
-                        @*<a class="nav-link" href="EditEmployee/@emp.Id">*@
-                        <a class="nav-link" href="#">
-                            <span class="oi oi-pencil" aria-hidden="true">Edit</span>
-                        </a>
-                        <a class="nav-link" href="#">
-                            <span class="oi oi-trash" aria-hidden="true">Delete</span>
-                        </a>
-                    </td>
+                    <td>@authorInfo.Firstname @authorInfo.Lastname</td>
                 </tr>
             }
         }
@@ -57,6 +44,7 @@
 @code{
     List<Ticket> TicketList = new();
     AspNetUser loggedInUser = new();
+    AspNetUser authorInfo = new();
 
 
     private Task<AspNetUser> GetCurrentUserAsync() => userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
@@ -65,12 +53,10 @@
     {
         TicketList = await Task.Run(() => ticketService.GetAllTicketsAsync());
         loggedInUser = await Task.Run(() => GetCurrentUserAsync());
-
     }
 
     private void NavigateToCreateTicket()
     {
-        NavigationManager.NavigateTo("/createticket");
+        NavigationManager.NavigateTo("/CreateTicket");
     }
-
 }

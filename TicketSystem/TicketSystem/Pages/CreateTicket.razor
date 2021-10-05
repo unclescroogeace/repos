@@ -11,21 +11,21 @@
 @inject IImageUploadService imageUploadService
 @inject IWebHostEnvironment webHostEnvironment
 
-<h3>CreateTicket</h3>
+<h3>Create New Ticket</h3>
 
 <form>
     <div class="row">
         <div class="col-md-8">
             <div class="form-group">
-                <label for="Title" class="custom-control-label">Title</label>
+                <label for="Title">Title</label>
                 <input form="Title" class="form-control" @bind="ticket.Title" />
             </div>
             <div class="form-group">
-                <label for="Content" class="custom-control-label">Content</label>
+                <label for="Content">Content</label>
                 <textarea class="form-control" id="textAreaContent" rows="4" @bind="ticket.Content"></textarea>
             </div>
             <div class="form-group">
-                <label for="RefersTo" class="custom-control-label"></label>
+                <label for="RefersTo"></label>
                 <select @bind="@ticket.RefersTo" class="form-control">
                     <option value="0">-- Refers to --</option>
                     <option value="OfficeSupport">Office Support</option>
@@ -33,23 +33,26 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="Visibility" class="custom-control-label"></label>
+                <label for="Visible for"></label>
                 <select @bind="@ticket.Visibility" class="form-control">
-                    <option value="0">-- Visibility --</option>
-                    <option value="1">Only for me</option>
-                    <option value="2">For Everyone</option>
+                    <option value="0">-- Visible for --</option>
+                    <option value="1">Only me</option>
+                    <option value="2">Everyone</option>
                 </select>
             </div>
             <div class="form-group">
-                <InputFile OnChange="HandleFileSelected"></InputFile>
+                <InputFile class="btn btn-outline-primary" OnChange="HandleFileSelected"></InputFile>
+            </div>
+            <div class="imagePadding">
+                @msImage
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <input type="button" class="btn btn-primary" @onclick="@Create" value="Save" />
-                <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+                <input type="button" class="btn btn-outline-primary" @onclick="@Create" value="Save" />
+                <input type="button" class="btn btn-outline-primary" @onclick="@Cancel" value="Cancel" />
             </div>
         </div>
     </div>
@@ -58,6 +61,8 @@
     Ticket ticket = new();
     IFileListEntry file;
     string randomFileName = string.Empty;
+    MarkupString msImage;
+
     protected async void Create()
     {
         ticket.UserId = httpContextAccessor.HttpContext.User.GetUserId();
@@ -76,6 +81,7 @@
         {
             randomFileName = Utility.RandomGenerator.GenerateRandomFileName(file.Name.Substring(file.Name.LastIndexOf(".")));
             await imageUploadService.UploadAsync(file, randomFileName);
+            msImage = (MarkupString)("<img src=" + "/Images/" + randomFileName + " alt=\"Uploaded image\" width=\"300\" />");
         }
     }
 }

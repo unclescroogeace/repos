@@ -9,7 +9,8 @@ namespace TicketSystem.Utility
     {
         public static string GenerateRandomFileName(string extension)
         {
-            return  Guid.NewGuid().ToString() + "." + extension;
+            //return  Guid.NewGuid().ToString() + "." + extension;
+            return  Guid.NewGuid().ToString() + extension;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,7 +19,9 @@ namespace TicketSystem.Data
         }
         public List<Message> GetAllMessages()
         {
-            return _dbContext.Messages.ToList();
+            return _dbContext.Messages
+                .Include(x => x.Ticket)
+                .ToList();
         }
         public async Task<bool> CreateMessageAsync(Message message)
         {

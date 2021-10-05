@@ -147,11 +147,13 @@ using Microsoft.AspNetCore.Hosting;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 57 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\CreateTicket.razor"
+#line 60 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\CreateTicket.razor"
        
     Ticket ticket = new();
     IFileListEntry file;
     string randomFileName = string.Empty;
+    MarkupString msImage;
+
     protected async void Create()
     {
         ticket.UserId = httpContextAccessor.HttpContext.User.GetUserId();
@@ -168,9 +170,9 @@ using Microsoft.AspNetCore.Hosting;
         file = files.FirstOrDefault();
         if (file != null)
         {
-            var extension = file.Name.Split('.');
-            randomFileName = Utility.RandomGenerator.GenerateRandomFileName(extension[1]);
+            randomFileName = Utility.RandomGenerator.GenerateRandomFileName(file.Name.Substring(file.Name.LastIndexOf(".")));
             await imageUploadService.UploadAsync(file, randomFileName);
+            msImage = (MarkupString)("<img src=" + "/Images/" + randomFileName + " alt=\"Uploaded image\" width=\"300\" />");
         }
     }
 

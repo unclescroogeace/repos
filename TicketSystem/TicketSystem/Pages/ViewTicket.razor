@@ -3,6 +3,7 @@
 @using TicketSystem.Data
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Identity
+@using Utility;
 @inject ITicketService ticketService
 @inject NavigationManager NavigationManager
 @inject IHttpContextAccessor httpContextAccessor
@@ -15,100 +16,101 @@
 
 <AuthorizeView Roles="OfficeSupport, TechSupport">
     <Authorized>
-        <div>
+        @if (ticket.RefersTo != loggedInUser.Role && ticket.Visibility == 1)
+        {
+            NavigationManager.NavigateTo("Tickets");
+        }
+        <div class="maincontainer">
             <div>
-                Author: @author.UserName (@author.Firstname @author.Lastname)
+                <b>Author:</b> @author.Firstname @author.Lastname (@author.UserName)
             </div>
             <div>
                 <div>
-                    <textarea readonly rows="20" cols="120">@ticket.Content</textarea>
+                    <textarea readonly rows="20" cols="120" class="form-control">@ticket.Content</textarea>
                 </div>
-                <div>
-                    <img src="/Images/@ticket.ImageUrl" alt="Attached image" width="300" />
+                <div class="ticketImage">
+                    @if (ticket.ImageUrl != string.Empty)
+                    {
+                        <img src="/Images/@ticket.ImageUrl" alt="Attached image" width="300" />
+                    }
                 </div>
             </div>
+            <hr class="my-2" />
             <section class="discussion">
                 @foreach (Message message in messages)
                 {
                     if ((loggedInUser.Role == "OfficeSupport" && ticket.RefersTo == "OfficeSupport")
-                        || (loggedInUser.Role == "TechSupport" && ticket.RefersTo == "TechSupport"))
+                        || (loggedInUser.Role == "TechSupport" && ticket.RefersTo == "TechSupport")
+                        || ticket.Visibility == 2)
                     {
                         if (message.UserId != author.Id)
                         {
                             if (message.Type == 0)
                             {
-                                <div class="bubble sender">@message.Content</div>
+                <div class="bubble sender">
+                    @if (prevUser != message.UserId)
+                    {<div class="letterCircle">@userService.GetUser(message.UserId).Firstname[0]</div>}@message.Content
+                </div>
                             }
                             else
                             {
-                                <div class="imageResizeSender"><img src="/Images/@message.ImageUrl" /></div>
+            <div class="imageResizeSender">
+                @if (prevUser != message.UserId)
+                {<div class="letterCircle">@userService.GetUser(message.UserId).Firstname[0]</div>}<img src="/Images/@message.ImageUrl" class="messageImage"/>
+                                        </div>
                             }
                         }
                         else
                         {
                             if (message.Type == 0)
                             {
-                                <div class="bubble recipient">@message.Content</div>
+            <div class="bubble recipient">
+                @if (prevUser != message.UserId)
+                {<div class="letterCircle">@userService.GetUser(message.UserId).Firstname[0]</div>}@message.Content
+            </div>
                             }
                             else
                             {
-                                <div class="imageResizeRecipient"><img src="/Images/@message.ImageUrl" /></div>
+            <div class="imageResizeRecipient">
+                @if (prevUser != message.UserId)
+                {<div class="letterCircle">@userService.GetUser(message.UserId).Firstname[0]</div>}<img src="/Images/@message.ImageUrl" class="messageImage"/>
+                                        </div>
                             }
                         }
                     }
-                    else if (loggedInUser.Id == author.Id)
-                    {
-                        if (message.UserId == loggedInUser.Id)
-                        {
-                            if (message.Type == 0)
-                            {
-                                <div class="bubble sender">@message.Content</div>
-                            }
-                            else
-                            {
-                                <div class="imageResizeSender"><img src="/Images/@message.ImageUrl" /></div>
-                            }
-                        }
-                        else
-                        {
-                            if (message.Type == 0)
-                            {
-                                <div class="bubble recipient">@message.Content</div>
-                            }
-                            else
-                            {
-                                <div class="imageResizeRecipient"><img src="/Images/@message.ImageUrl" /></div>
-                            }
-                        }
-                    }
+                    prevUser = message.UserId;
                 }
             </section>
-            @if (loggedInUser.Role == ticket.RefersTo)
+            @if (loggedInUser.Role == ticket.RefersTo || ticket.Visibility == 2)
             {
-                <textarea class="blockedresizing" @bind="message.Content" rows="4" cols="120"></textarea>
-                <button @onclick="SendMessage" value="Send">Send</button>
-                <InputFile OnChange="SendMessageImage"></InputFile>
+                <div class="messageBoxes">
+                    <textarea class="blockedresizing form-control" @bind="message.Content" rows="4" cols="120"></textarea>
+                    <button class="btn btn-outline-primary" @onclick="SendMessage" value="Send">Send</button>
+                    <InputFile class="btn btn-outline-primary" OnChange="SendMessageImage"></InputFile>
+                </div>
             }
         </div>
     </Authorized>
 </AuthorizeView>
 <AuthorizeView Roles="Junior, Senior, MidLevel">
     <Authorized>
-        <div>
+        <div class="maincontainer">
             <div>
-                @ticket.Title
-            </div>
-            <div>
-                Author: @author.UserName (@author.Firstname @author.Lastname)
+                <b>Author:</b> @author.UserName (@author.Firstname @author.Lastname)
             </div>
             <div>
                 <div>
-                    <textarea readonly rows="20" cols="120">@ticket.Content</textarea>
+                    <textarea readonly rows="20" cols="120" class="form-control">@ticket.Content</textarea>
                 </div>
-                <div>
-                    <img src="/Images/@ticket.ImageUrl" alt="Alternative text" width="100" />
+                <div class="ticketImage">
+                    @if (ticket.ImageUrl != string.Empty)
+                    {
+                        <p>Attached image</p>
+                        <img src="/Images/@ticket.ImageUrl" alt="Attached image" width="300"  />
+                    }
                 </div>
             </div>
+            <hr class="my-2" />
             <section class="discussion">
                 @if (messages != null)
                 {
@@ -118,32 +120,39 @@
                         {
                             if (message.Type == 0)
                             {
-                                <div class="bubble sender">@message.Content</div>
+                                <div class="bubble sender">@if (prevUser != message.UserId)
+                                {<div class="letterCircle">@userService.GetUser(message.UserId).Firstname[0]</div>}@message.Content</div>
                             }
                             else
                             {
-                                <div class="imageResizeSender"><img src="/Images/@message.ImageUrl"/></div>
+                                <div class="imageResizeSender">@if (prevUser != message.UserId) 
+                                {<div class="letterCircle">@userService.GetUser(message.UserId).Firstname[0]</div>} <img src="/Images/@message.ImageUrl" class="messageImage"/></div>
                             }
                         }
                         else
                         {
                             if (message.Type == 0)
                             {
-                                <div class="bubble recipient">@message.Content</div>
+                                <div class="bubble recipient">@if (prevUser != message.UserId)
+                                {<div class="letterCircle">@userService.GetUser(message.UserId).Firstname[0]</div>}@message.Content</div>
                             }
                             else
                             {
-                                <div class="imageResizeRecipient"><img src="/Images/@message.ImageUrl"/></div>
+                                <div class="imageResizeRecipient">@if (prevUser != message.UserId)
+                                {<div class="letterCircle">@userService.GetUser(message.UserId).Firstname[0]</div>}<img src="/Images/@message.ImageUrl" class="messageImage"/></div>
                             }
                         }
+                        prevUser = message.UserId;
                     }
                 }
             </section>
-            @if (loggedInUser.Id == author.Id)
+            @if (loggedInUser.Id == author.Id || ticket.Visibility == 2)
             {
-                <textarea class="blockedresizing" @bind="message.Content" rows="4" cols="120"></textarea>
-                <button @onclick="SendMessage" value="Send">Send</button>
-                <InputFile OnChange="SendMessageImage"></InputFile>
+                <div class="messageBoxes">
+                    <textarea class="blockedresizing form-control" @bind="message.Content" rows="4" cols="120"></textarea>
+                    <button class="btn btn-outline-primary" @onclick="SendMessage" value="Send">Send</button>
+                    <InputFile class="btn btn-outline-primary" OnChange="SendMessageImage"></InputFile>
+                </div>
             }
         </div>
     </Authorized>
@@ -158,19 +167,17 @@
     List<Message> messages = new();
     Message message = new();
     IFileListEntry file;
+    string prevUser;
 
     private Task<AspNetUser> GetCurrentUserAsync() => userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
 
     protected override async Task OnInitializedAsync()
     {
-        //ticket = await Task.Run(() => ticketService.GetTicketAsync(Convert.ToInt32(Id)));
         ticket = ticketService.GetTicket(Convert.ToInt32(Id));
-        //author = await Task.Run(() => userService.GetUserAsync(ticket.UserId));
         author = userService.GetUser(ticket.UserId);
         loggedInUser = await Task.Run(() => GetCurrentUserAsync());
         messages = messageService.GetAllMessages();
         messages = messages.Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
-
     }
     private void NavigateToTickets()
     {
@@ -194,8 +201,7 @@
         file = files.FirstOrDefault();
         if (file != null)
         {
-            var extension = file.Name.Split('.');
-            string randomFileName = Utility.RandomGenerator.GenerateRandomFileName(extension[1]);
+            string randomFileName = RandomGenerator.GenerateRandomFileName(file.Name.Substring(file.Name.LastIndexOf(".")));
             message.Ticket = ticket;
             message.UserId = loggedInUser.Id;
             message.Type = 1;

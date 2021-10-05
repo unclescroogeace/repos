@@ -140,10 +140,11 @@ using Microsoft.AspNetCore.Identity;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 57 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\Tickets.razor"
+#line 44 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\Tickets.razor"
       
     List<Ticket> TicketList = new();
     AspNetUser loggedInUser = new();
+    AspNetUser authorInfo = new();
 
 
     private Task<AspNetUser> GetCurrentUserAsync() => userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
@@ -152,14 +153,12 @@ using Microsoft.AspNetCore.Identity;
     {
         TicketList = await Task.Run(() => ticketService.GetAllTicketsAsync());
         loggedInUser = await Task.Run(() => GetCurrentUserAsync());
-
     }
 
     private void NavigateToCreateTicket()
     {
-        NavigationManager.NavigateTo("/createticket");
+        NavigationManager.NavigateTo("/CreateTicket");
     }
-
 
 #line default
 #line hidden

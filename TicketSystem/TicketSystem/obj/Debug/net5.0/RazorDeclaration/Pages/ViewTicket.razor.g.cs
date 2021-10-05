@@ -125,6 +125,13 @@ using Microsoft.AspNetCore.Identity;
 #line hidden
 #nullable disable
 #nullable restore
+#line 6 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\ViewTicket.razor"
+using Utility;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 2 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\ViewTicket.razor"
            [Authorize]
 
@@ -140,7 +147,7 @@ using Microsoft.AspNetCore.Identity;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 152 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\ViewTicket.razor"
+#line 161 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\ViewTicket.razor"
        
     [Parameter]
     public string Id { get; set; }
@@ -150,19 +157,17 @@ using Microsoft.AspNetCore.Identity;
     List<Message> messages = new();
     Message message = new();
     IFileListEntry file;
+    string prevUser;
 
     private Task<AspNetUser> GetCurrentUserAsync() => userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
 
     protected override async Task OnInitializedAsync()
     {
-        //ticket = await Task.Run(() => ticketService.GetTicketAsync(Convert.ToInt32(Id)));
         ticket = ticketService.GetTicket(Convert.ToInt32(Id));
-        //author = await Task.Run(() => userService.GetUserAsync(ticket.UserId));
         author = userService.GetUser(ticket.UserId);
         loggedInUser = await Task.Run(() => GetCurrentUserAsync());
         messages = messageService.GetAllMessages();
         messages = messages.Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
-
     }
     private void NavigateToTickets()
     {
@@ -186,8 +191,7 @@ using Microsoft.AspNetCore.Identity;
         file = files.FirstOrDefault();
         if (file != null)
         {
-            var extension = file.Name.Split('.');
-            string randomFileName = Utility.RandomGenerator.GenerateRandomFileName(extension[1]);
+            string randomFileName = RandomGenerator.GenerateRandomFileName(file.Name.Substring(file.Name.LastIndexOf(".")));
             message.Ticket = ticket;
             message.UserId = loggedInUser.Id;
             message.Type = 1;
