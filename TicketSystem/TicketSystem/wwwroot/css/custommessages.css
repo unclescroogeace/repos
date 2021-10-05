@@ -6,10 +6,10 @@
 }
 
 .discussion > .bubble {
-border-radius: 1em;
-padding: 0.25em 0.75em;
-margin: 0.0625em;
-max-width: 50%;
+    border-radius: 1em;
+    padding: 0.25em 0.75em;
+    margin: 0.0625em;
+    max-width: 50%;
 }
 
 .discussion > .bubble.sender {
@@ -28,4 +28,21 @@ max-width: 50%;
 .blockedresizing {
     overflow: auto;
     resize:none;
+}
+
+img {
+    max-width: 350px;
+    height: auto;
+}
+
+.discussion > .imageResizeSender {
+    align-self: flex-start;
+    padding: 0.25em 0.75em;
+    margin: 0.0625em;
+}
+
+.discussion > .imageResizeRecipient {
+    align-self: flex-end;
+    padding: 0.25em 0.75em;
+    margin: 0.0625em;
 }

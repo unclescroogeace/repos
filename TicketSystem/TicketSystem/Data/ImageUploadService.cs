@@ -17,10 +17,11 @@ namespace TicketSystem.Data
         }
         public async Task UploadAsync(IFileListEntry fileEntry, string randomFileName)
         {
-            var path = Path.Combine(_environment.ContentRootPath, "Upload", randomFileName);
+            //var path = Path.Combine(_environment.ContentRootPath, "\\wwwroot\\Images\\",  randomFileName);
+            string path2 = _environment.ContentRootPath + "\\wwwroot\\Images\\" + randomFileName;
             MemoryStream ms = new();
             await fileEntry.Data.CopyToAsync(ms);
-            using FileStream file = new(path, FileMode.Create, FileAccess.Write);
+            using FileStream file = new(path2, FileMode.Create, FileAccess.Write);
             ms.WriteTo(file);
         }
     }

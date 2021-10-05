@@ -140,7 +140,7 @@ using Microsoft.AspNetCore.Identity;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 107 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\ViewTicket.razor"
+#line 152 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\ViewTicket.razor"
        
     [Parameter]
     public string Id { get; set; }
@@ -149,6 +149,7 @@ using Microsoft.AspNetCore.Identity;
     AspNetUser author = new();
     List<Message> messages = new();
     Message message = new();
+    IFileListEntry file;
 
     private Task<AspNetUser> GetCurrentUserAsync() => userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
 
@@ -171,6 +172,8 @@ using Microsoft.AspNetCore.Identity;
     {
         message.Ticket = ticket;
         message.UserId = loggedInUser.Id;
+        message.Type = 0;
+        message.ImageUrl = null;
         if (messageService.CreateMessage(message))
         {
             messages = messageService.GetAllMessages().Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
@@ -178,10 +181,31 @@ using Microsoft.AspNetCore.Identity;
             StateHasChanged();
         }
     }
+    async Task SendMessageImage(IFileListEntry[] files)
+    {
+        file = files.FirstOrDefault();
+        if (file != null)
+        {
+            var extension = file.Name.Split('.');
+            string randomFileName = Utility.RandomGenerator.GenerateRandomFileName(extension[1]);
+            message.Ticket = ticket;
+            message.UserId = loggedInUser.Id;
+            message.Type = 1;
+            message.ImageUrl = randomFileName;
+            await imageUploadService.UploadAsync(file, randomFileName);
+            if (messageService.CreateMessage(message))
+            {
+                messages = messageService.GetAllMessages().Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
+                message = new();
+                StateHasChanged();
+            }
+        }
+    }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IImageUploadService imageUploadService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime js { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IMessageService messageService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IUserService userService { get; set; }

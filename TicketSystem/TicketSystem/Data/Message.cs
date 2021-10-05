@@ -12,6 +12,8 @@ namespace TicketSystem.Data
         public int MessageId { get; set; }
         public string Content { get; set; }
         public string UserId { get; set; }
+        public int Type { get; set; }
+        public string ImageUrl { get; set; } 
         public virtual Ticket Ticket { get; set; }
     }
 }

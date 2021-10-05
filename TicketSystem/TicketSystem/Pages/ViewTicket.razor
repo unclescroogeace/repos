@@ -10,6 +10,7 @@
 @inject IUserService userService
 @inject IMessageService messageService
 @inject IJSRuntime js
+@inject IImageUploadService imageUploadService
 <h3>@ticket.Title</h3>
 
 <AuthorizeView Roles="OfficeSupport, TechSupport">
@@ -34,22 +35,50 @@
                     {
                         if (message.UserId != author.Id)
                         {
-                            <div class="bubble sender">@message.Content</div>
+                            if (message.Type == 0)
+                            {
+                                <div class="bubble sender">@message.Content</div>
+                            }
+                            else
+                            {
+                                <div class="imageResizeSender"><img src="/Images/@message.ImageUrl" /></div>
+                            }
                         }
                         else
                         {
-                            <div class="bubble recipient">@message.Content</div>
+                            if (message.Type == 0)
+                            {
+                                <div class="bubble recipient">@message.Content</div>
+                            }
+                            else
+                            {
+                                <div class="imageResizeRecipient"><img src="/Images/@message.ImageUrl" /></div>
+                            }
                         }
                     }
                     else if (loggedInUser.Id == author.Id)
                     {
                         if (message.UserId == loggedInUser.Id)
                         {
-                            <div class="bubble sender">@message.Content</div>
+                            if (message.Type == 0)
+                            {
+                                <div class="bubble sender">@message.Content</div>
+                            }
+                            else
+                            {
+                                <div class="imageResizeSender"><img src="/Images/@message.ImageUrl" /></div>
+                            }
                         }
                         else
                         {
-                            <div class="bubble recipient">@message.Content</div>
+                            if (message.Type == 0)
+                            {
+                                <div class="bubble recipient">@message.Content</div>
+                            }
+                            else
+                            {
+                                <div class="imageResizeRecipient"><img src="/Images/@message.ImageUrl" /></div>
+                            }
                         }
                     }
                 }
@@ -58,6 +87,7 @@
             {
                 <textarea class="blockedresizing" @bind="message.Content" rows="4" cols="120"></textarea>
                 <button @onclick="SendMessage" value="Send">Send</button>
+                <InputFile OnChange="SendMessageImage"></InputFile>
             }
         </div>
     </Authorized>
@@ -86,11 +116,25 @@
                     {
                         if (message.UserId == author.Id)
                         {
-                            <div class="bubble sender">@message.Content</div>
+                            if (message.Type == 0)
+                            {
+                                <div class="bubble sender">@message.Content</div>
+                            }
+                            else
+                            {
+                                <div class="imageResizeSender"><img src="/Images/@message.ImageUrl"/></div>
+                            }
                         }
                         else
                         {
-                            <div class="bubble recipient">@message.Content</div>
+                            if (message.Type == 0)
+                            {
+                                <div class="bubble recipient">@message.Content</div>
+                            }
+                            else
+                            {
+                                <div class="imageResizeRecipient"><img src="/Images/@message.ImageUrl"/></div>
+                            }
                         }
                     }
                 }
@@ -99,6 +143,7 @@
             {
                 <textarea class="blockedresizing" @bind="message.Content" rows="4" cols="120"></textarea>
                 <button @onclick="SendMessage" value="Send">Send</button>
+                <InputFile OnChange="SendMessageImage"></InputFile>
             }
         </div>
     </Authorized>
@@ -112,6 +157,7 @@
     AspNetUser author = new();
     List<Message> messages = new();
     Message message = new();
+    IFileListEntry file;
 
     private Task<AspNetUser> GetCurrentUserAsync() => userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
 
@@ -134,11 +180,33 @@
     {
         message.Ticket = ticket;
         message.UserId = loggedInUser.Id;
+        message.Type = 0;
+        message.ImageUrl = null;
         if (messageService.CreateMessage(message))
         {
             messages = messageService.GetAllMessages().Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
             message = new();
             StateHasChanged();
+        }
+    }
+    async Task SendMessageImage(IFileListEntry[] files)
+    {
+        file = files.FirstOrDefault();
+        if (file != null)
+        {
+            var extension = file.Name.Split('.');
+            string randomFileName = Utility.RandomGenerator.GenerateRandomFileName(extension[1]);
+            message.Ticket = ticket;
+            message.UserId = loggedInUser.Id;
+            message.Type = 1;
+            message.ImageUrl = randomFileName;
+            await imageUploadService.UploadAsync(file, randomFileName);
+            if (messageService.CreateMessage(message))
+            {
+                messages = messageService.GetAllMessages().Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
+                message = new();
+                StateHasChanged();
+            }
         }
     }
 }

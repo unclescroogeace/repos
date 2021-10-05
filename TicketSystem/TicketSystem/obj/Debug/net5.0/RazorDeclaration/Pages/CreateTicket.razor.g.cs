@@ -155,7 +155,7 @@ using Microsoft.AspNetCore.Hosting;
     protected async void Create()
     {
         ticket.UserId = httpContextAccessor.HttpContext.User.GetUserId();
-        ticket.ImageUrl = Directory.GetCurrentDirectory() + @"\Upload\" + randomFileName;
+        ticket.ImageUrl = randomFileName;
         await ticketService.CreateTicket(ticket);
         NavigationManager.NavigateTo("tickets");
     }
