@@ -46,7 +46,6 @@ namespace TicketSystem
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<AspNetUser>>();
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddSingleton<WeatherForecastService>();
             services.AddSyncfusionBlazor();
             services.AddTransient<ITicketService, TicketService>();
             services.AddTransient<IUserService, UserService>();

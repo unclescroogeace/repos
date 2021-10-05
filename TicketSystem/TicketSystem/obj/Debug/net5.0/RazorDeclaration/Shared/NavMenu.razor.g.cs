@@ -111,7 +111,7 @@ using BlazorInputFile;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 33 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Shared\NavMenu.razor"
+#line 23 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 
