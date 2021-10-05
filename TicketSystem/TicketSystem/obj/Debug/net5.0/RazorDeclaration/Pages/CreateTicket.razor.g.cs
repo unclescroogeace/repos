@@ -151,7 +151,7 @@ using Microsoft.AspNetCore.Hosting;
        
     Ticket ticket = new();
     IFileListEntry file;
-    string randomFileName;
+    string randomFileName = string.Empty;
     protected async void Create()
     {
         ticket.UserId = httpContextAccessor.HttpContext.User.GetUserId();

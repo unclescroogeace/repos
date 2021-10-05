@@ -60,8 +60,6 @@ C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\ne
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\TicketSystem.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\TicketSystem.RazorComponent.input.cache
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\RazorDeclaration\App.razor.g.cs
-C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\RazorDeclaration\Pages\Counter.razor.g.cs
-C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\RazorDeclaration\Pages\FetchData.razor.g.cs
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\RazorDeclaration\Pages\Index.razor.g.cs
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\RazorDeclaration\Shared\LoginDisplay.razor.g.cs
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\RazorDeclaration\Shared\SurveyPrompt.razor.g.cs
@@ -74,8 +72,6 @@ C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\ne
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\TicketSystem.TagHelpers.output.cache
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\TicketSystem.RazorCoreGenerate.cache
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\Razor\App.razor.g.cs
-C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\Razor\Pages\Counter.razor.g.cs
-C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\Razor\Pages\FetchData.razor.g.cs
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\Razor\Pages\Index.razor.g.cs
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\Razor\Shared\LoginDisplay.razor.g.cs
 C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\obj\Debug\net5.0\Razor\Shared\SurveyPrompt.razor.g.cs

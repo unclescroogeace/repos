@@ -27,7 +27,7 @@
             <div class="form-group">
                 <label for="RefersTo" class="custom-control-label"></label>
                 <select @bind="@ticket.RefersTo" class="form-control">
-                    <option value="">-- Refers to --</option>
+                    <option value="0">-- Refers to --</option>
                     <option value="OfficeSupport">Office Support</option>
                     <option value="TechSupport">TechSupport</option>
                 </select>
@@ -35,9 +35,9 @@
             <div class="form-group">
                 <label for="Visibility" class="custom-control-label"></label>
                 <select @bind="@ticket.Visibility" class="form-control">
-                    <option value="">-- Visibility --</option>
-                    <option value="0">Only for me</option>
-                    <option value="1">For Everyone</option>
+                    <option value="0">-- Visibility --</option>
+                    <option value="1">Only for me</option>
+                    <option value="2">For Everyone</option>
                 </select>
             </div>
             <div class="form-group">
@@ -57,7 +57,7 @@
 @code {
     Ticket ticket = new();
     IFileListEntry file;
-    string randomFileName;
+    string randomFileName = string.Empty;
     protected async void Create()
     {
         ticket.UserId = httpContextAccessor.HttpContext.User.GetUserId();
@@ -74,8 +74,7 @@
         file = files.FirstOrDefault();
         if (file != null)
         {
-            var extension = file.Name.Split('.');
-            randomFileName = Utility.RandomGenerator.GenerateRandomFileName(extension[1]);
+            randomFileName = Utility.RandomGenerator.GenerateRandomFileName(file.Name.Substring(file.Name.LastIndexOf(".")));
             await imageUploadService.UploadAsync(file, randomFileName);
         }
     }
