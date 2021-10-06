@@ -16,9 +16,9 @@
 
 <AuthorizeView Roles="OfficeSupport, TechSupport">
     <Authorized>
-        @if (ticket.RefersTo != loggedInUser.Role && ticket.Visibility != 2)
+        @if (ticket.RefersTo != loggedInUser.Role && ticket.Visibility != 1)
         {
-            //fix during debugging
+            //fix for during debugging
             try
             {
                 NavigateToTickets();
@@ -31,7 +31,7 @@
             </div>
             <div>
                 <div>
-                    <textarea readonly rows="20" cols="120" class="form-control">@ticket.Content</textarea>
+                    <textarea readonly rows="10" cols="60" class="ticketContentArea form-control">@ticket.Content</textarea>
                 </div>
                 <div class="ticketImage">
                     @if (ticket.ImageUrl != string.Empty)
@@ -47,7 +47,7 @@
                 {
                     if ((loggedInUser.Role == "OfficeSupport" && ticket.RefersTo == "OfficeSupport")
                         || (loggedInUser.Role == "TechSupport" && ticket.RefersTo == "TechSupport")
-                        || ticket.Visibility == 2)
+                        || ticket.Visibility == 1)
                     {
                         if (message.UserId != author.Id)
                         {
@@ -62,7 +62,7 @@
                             {
                                 <div class="imageResizeSender">
                                     @if (prevUser != message.UserId)
-                                    {<div class="letterCircleSender">@userService.GetUser(message.UserId).Firstname[0]</div>}<img src="/Images/@message.ImageUrl" class="messageImage"/>
+                                    {<div class="letterCircleSender">@userService.GetUser(message.UserId).Firstname[0]</div>}<img src="/Images/@message.ImageUrl" class="messageImage" />
                                 </div>
                             }
                         }
@@ -76,10 +76,10 @@
                                 </div>
                             }
                             else
-                                                    {
+                            {
                                 <div class="imageResizeRecipient">
                                     @if (prevUser != message.UserId)
-                                    {<div class="letterCircleRecipient">@userService.GetUser(message.UserId).Firstname[0]</div>}<img src="/Images/@message.ImageUrl" class="messageImage"/>
+                                    {<div class="letterCircleRecipient">@userService.GetUser(message.UserId).Firstname[0]</div>}<img src="/Images/@message.ImageUrl" class="messageImage" />
                                 </div>
                             }
                         }
@@ -87,7 +87,7 @@
                     prevUser = message.UserId;
                 }
             </section>
-            <div class="messageBoxes">
+            <div class="sendMessageArea">
                 <textarea class="blockedresizing form-control" @bind="message.Content" rows="4" cols="120"></textarea>
                 <button class="buttonSendMessage btn btn-outline-primary" @onclick="SendMessage" value="Send">Send Message</button>
                 <div class="buttonUploadImage btn btn-outline-primary"><InputFile OnChange="SendMessageImage"></InputFile><a>Upload Image</a></div>
@@ -97,9 +97,9 @@
 </AuthorizeView>
 <AuthorizeView Roles="Junior, Senior, MidLevel">
     <Authorized>
-        @if (ticket.Visibility != 2 && author.Id != loggedInUser.Id)
+        @if (ticket.Visibility != 1 && author.Id != loggedInUser.Id)
         {
-            //fix during debugging
+            //fix for during debugging
             try
             {
                 NavigateToTickets();
@@ -112,13 +112,13 @@
             </div>
             <div>
                 <div>
-                    <textarea readonly rows="20" cols="120" class="form-control">@ticket.Content</textarea>
+                    <textarea readonly rows="10" cols="60" class="form-control">@ticket.Content</textarea>
                 </div>
                 <div class="ticketImage">
                     @if (ticket.ImageUrl != string.Empty)
                     {
                         <p>Attached image</p>
-                        <img src="/Images/@ticket.ImageUrl" alt="Attached image" width="300"  />
+                        <img src="/Images/@ticket.ImageUrl" alt="Attached image" width="300" />
                     }
                 </div>
             </div>
@@ -140,8 +140,8 @@
                             else
                             {
                                 <div class="imageResizeSender">
-                                    @if (prevUser != message.UserId) 
-                                    {<div class="letterCircleSender">@userService.GetUser(message.UserId).Firstname[0]</div>} <img src="/Images/@message.ImageUrl" class="messageImage"/>
+                                    @if (prevUser != message.UserId)
+                                    {<div class="letterCircleSender">@userService.GetUser(message.UserId).Firstname[0]</div>} <img src="/Images/@message.ImageUrl" class="messageImage" />
                                 </div>
                             }
                         }
@@ -158,7 +158,7 @@
                             {
                                 <div class="imageResizeRecipient">
                                     @if (prevUser != message.UserId)
-                                    {<div class="letterCircleRecipient">@userService.GetUser(message.UserId).Firstname[0]</div>}<img src="/Images/@message.ImageUrl" class="messageImage"/>
+                                    {<div class="letterCircleRecipient">@userService.GetUser(message.UserId).Firstname[0]</div>}<img src="/Images/@message.ImageUrl" class="messageImage" />
                                 </div>
                             }
                         }
@@ -166,11 +166,11 @@
                     }
                 }
             </section>
-                <div class="messageBoxes">
-                    <textarea class="blockedresizing form-control" @bind="message.Content" rows="4" cols="120"></textarea>
-                    <button class="buttonSendMessage btn btn-outline-primary" @onclick="SendMessage" value="Send">Send Message</button>
-                    <div class="buttonUploadImage btn btn-outline-primary"><InputFile OnChange="SendMessageImage"></InputFile>Upload Image</div>
-                </div>
+            <div class="sendMessageArea">
+                <textarea class="blockedresizing form-control" @bind="message.Content" rows="4" cols="120"></textarea>
+                <button class="buttonSendMessage btn btn-outline-primary" @onclick="SendMessage" value="Send">Send Message</button>
+                <div class="buttonUploadImage btn btn-outline-primary"><InputFile OnChange="SendMessageImage"></InputFile>Upload Image</div>
+            </div>
         </div>
     </Authorized>
 </AuthorizeView>
@@ -200,7 +200,7 @@
     }
     protected void SendMessage()
     {
-        if (message.Content == string.Empty)
+        if (string.IsNullOrEmpty(message.Content))
         {
             return;
         }
@@ -212,6 +212,7 @@
         {
             messages = messageService.GetAllMessages().Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
             message = new();
+            prevUser = string.Empty;
             StateHasChanged();
         }
     }
@@ -230,6 +231,7 @@
             {
                 messages = messageService.GetAllMessages().Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
                 message = new();
+                prevUser = string.Empty;
                 StateHasChanged();
             }
         }

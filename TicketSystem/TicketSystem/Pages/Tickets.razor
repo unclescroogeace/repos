@@ -29,7 +29,7 @@
     <tbody>
         @foreach (var ticket in TicketList)
         {
-            if (ticket.Visibility == 2 || ticket.UserId == loggedInUser.Id || ticket.RefersTo == loggedInUser.Role)
+            if (ticket.Visibility == 1 || ticket.UserId == loggedInUser.Id || ticket.RefersTo == loggedInUser.Role)
             {
                 authorInfo = userService.GetUser(ticket.UserId);
                 <tr>

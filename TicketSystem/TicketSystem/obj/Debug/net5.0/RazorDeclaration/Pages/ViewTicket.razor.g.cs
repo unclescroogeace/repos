@@ -173,7 +173,7 @@ using Utility;
     }
     protected void SendMessage()
     {
-        if (message.Content == string.Empty)
+        if (string.IsNullOrEmpty(message.Content))
         {
             return;
         }
@@ -185,6 +185,7 @@ using Utility;
         {
             messages = messageService.GetAllMessages().Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
             message = new();
+            prevUser = string.Empty;
             StateHasChanged();
         }
     }
@@ -203,6 +204,7 @@ using Utility;
             {
                 messages = messageService.GetAllMessages().Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
                 message = new();
+                prevUser = string.Empty;
                 StateHasChanged();
             }
         }

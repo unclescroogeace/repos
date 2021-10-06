@@ -4,7 +4,8 @@
 @using Microsoft.AspNetCore.Http
 @using TicketSystem.Utility
 @using BlazorInputFile
-@using Microsoft.AspNetCore.Hosting;
+@using Microsoft.AspNetCore.Hosting
+@using Microsoft.AspNetCore.Components.Forms
 @inject ITicketService ticketService
 @inject NavigationManager NavigationManager
 @inject IHttpContextAccessor httpContextAccessor
@@ -13,67 +14,76 @@
 
 <h3>Create New Ticket</h3>
 
-<form>
-    <div class="row">
-        <div class="col-md-8">
-            <div class="form-group">
-                <label for="Title">Title</label>
-                <input form="Title" class="form-control" @bind="ticket.Title" />
+<div class="createTicketContainer">
+    <EditForm Model="@ticket" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <div class="form-group row">
+            <label for="Title" class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                <InputText id="title" class="form-control" placeholder="Title" @bind-Value="ticket.Title" />
+                <ValidationMessage For="@(() => ticket.Title)" />
             </div>
-            <div class="form-group">
-                <label for="Content">Content</label>
-                <textarea class="form-control" id="textAreaContent" rows="4" @bind="ticket.Content"></textarea>
+        </div>
+        <div class="form-group row">
+            <label for="Content" class="col-sm-2 col-form-label">Content</label>
+            <div class="col-sm-10">
+                <InputTextArea id="content" class="form-control" placeholder="Content" @bind-Value="ticket.Content" />
+                <ValidationMessage For="@(() => ticket.Content)" />
             </div>
-            <div class="form-group">
-                <label for="RefersTo"></label>
-                <select @bind="@ticket.RefersTo" class="form-control">
-                    <option value="0">-- Refers to --</option>
-                    <option value="OfficeSupport">Office Support</option>
+        </div>
+        <div class="form-group row">
+            <label for="Visibility" class="col-sm-2 col-form-label">Visible to</label>
+            <div class="col-sm-10">
+                <InputSelect @bind-Value="@ticket.Visibility" class="form-control">
+                    <option value="0">Only me</option>
+                    <option value="1">Everyone</option>
+                </InputSelect>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="RefersTo" class="col-sm-2 col-form-label">Refers To</label>
+            <div class="col-sm-10">
+                <InputSelect id="RefersTo" @bind-Value="@ticket.RefersTo" class="form-control">
+                    <option value="OfficeSupport" selected="selected">OfficeSupport</option>
                     <option value="TechSupport">TechSupport</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="Visible for"></label>
-                <select @bind="@ticket.Visibility" class="form-control">
-                    <option value="0">-- Visible for --</option>
-                    <option value="1">Only me</option>
-                    <option value="2">Everyone</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <div class="buttonUploadImageCreateTicket btn btn-outline-primary"><InputFile OnChange="HandleFileSelected"></InputFile><a>Upload Image</a></div>
-            </div>
-            <div class="imagePadding">
-                @msImage
+                </InputSelect>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <input type="button" class="btn btn-outline-primary" @onclick="@Create" value="Save" />
-                <input type="button" class="btn btn-outline-primary" @onclick="@Cancel" value="Cancel" />
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <div class="@hideUploadButton uploadImageButtonCreateTicket btn btn-outline-primary">
+                    <BlazorInputFile.InputFile OnChange="HandleFileSelected" />Upload Image
+                </div>
+                <div class="@uploadImagePreviewStyle">
+                    @msImage
+                </div>
+                <button type="button" class="@hideClearButton createTicketClearImageButton btn btn-outline-primary" @onclick="ClearImage">Clear Image</button>
             </div>
         </div>
-    </div>
-</form>
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <input type="submit" class="btn btn-outline-primary" value="Save" />
+                <input type="button" class="btn btn-outline-primary" @onclick="Cancel" value="Cancel" />
+            </div>
+        </div>
+    </EditForm>
+</div>
+
 @code {
     Ticket ticket = new();
     IFileListEntry file;
-    string randomFileName = string.Empty;
     MarkupString msImage;
+    string randomFileName = string.Empty;
+    string uploadImagePreviewStyle = string.Empty;
+    string hideUploadButton = string.Empty;
+    string hideClearButton = "hideTheButton";
 
-    protected async void Create()
+    //Temporary fix
+    protected override void OnInitialized()
     {
-        ticket.UserId = httpContextAccessor.HttpContext.User.GetUserId();
-        ticket.ImageUrl = randomFileName;
-        await ticketService.CreateTicket(ticket);
-        NavigationManager.NavigateTo("tickets");
+        ticket.RefersTo = "OfficeSupport";
     }
-    void Cancel()
-    {
-        NavigationManager.NavigateTo("tickets");
-    }
+
     async Task HandleFileSelected(IFileListEntry[] files)
     {
         file = files.FirstOrDefault();
@@ -81,7 +91,33 @@
         {
             randomFileName = Utility.RandomGenerator.GenerateRandomFileName(file.Name.Substring(file.Name.LastIndexOf(".")));
             await imageUploadService.UploadAsync(file, randomFileName);
-            msImage = (MarkupString)("<img src=" + "/Images/" + randomFileName + " alt=\"Uploaded image\" width=\"300\" />");
+            uploadImagePreviewStyle = "createTicketUploadImage";
+            msImage = (MarkupString)("<p>Attached Image</p><img src=" + "/Images/" + randomFileName + " alt=\"Uploaded image\" width=\"300\" />");
+            hideClearButton = string.Empty;
+            hideUploadButton = "hideTheButton";
         }
+    }
+
+    async void HandleValidSubmit()
+    {
+        ticket.UserId = httpContextAccessor.HttpContext.User.GetUserId();
+        ticket.ImageUrl = randomFileName;
+        await ticketService.CreateTicket(ticket);
+        NavigationManager.NavigateTo("Tickets");
+    }
+
+    void ClearImage()
+    {
+        msImage = (MarkupString)string.Empty;
+        uploadImagePreviewStyle = string.Empty;
+        randomFileName = string.Empty;
+        hideUploadButton = string.Empty;
+        hideClearButton = "hideTheButton";
+        StateHasChanged();
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("Tickets");
     }
 }

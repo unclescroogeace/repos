@@ -11,6 +11,7 @@ namespace TicketSystem.Data
     {
         [Key]
         public int TicketId { get; set; }
+        [Required(ErrorMessage = "Title is required")]
         [StringLength(256)]
         public string Title { get; set; }
         [StringLength(4096)]

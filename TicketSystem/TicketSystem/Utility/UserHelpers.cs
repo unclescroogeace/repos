@@ -15,11 +15,5 @@ namespace TicketSystem.Utility
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             return claim.Value;
         }
-        public static string GetUserRole(this IPrincipal principal)
-        {
-            var claimsIdentity = (ClaimsIdentity)principal.Identity;
-            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role);
-            return claim.Value;
-        }
     }
 }

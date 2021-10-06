@@ -132,6 +132,13 @@ using Microsoft.AspNetCore.Hosting;
 #line hidden
 #nullable disable
 #nullable restore
+#line 8 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\CreateTicket.razor"
+using Microsoft.AspNetCore.Components.Forms;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 2 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\CreateTicket.razor"
            [Authorize]
 
@@ -147,24 +154,22 @@ using Microsoft.AspNetCore.Hosting;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 60 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\CreateTicket.razor"
+#line 72 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\CreateTicket.razor"
        
     Ticket ticket = new();
     IFileListEntry file;
-    string randomFileName = string.Empty;
     MarkupString msImage;
+    string randomFileName = string.Empty;
+    string uploadImagePreviewStyle = string.Empty;
+    string hideUploadButton = string.Empty;
+    string hideClearButton = "hideTheButton";
 
-    protected async void Create()
+    //Temporary fix
+    protected override void OnInitialized()
     {
-        ticket.UserId = httpContextAccessor.HttpContext.User.GetUserId();
-        ticket.ImageUrl = randomFileName;
-        await ticketService.CreateTicket(ticket);
-        NavigationManager.NavigateTo("tickets");
+        ticket.RefersTo = "OfficeSupport";
     }
-    void Cancel()
-    {
-        NavigationManager.NavigateTo("tickets");
-    }
+
     async Task HandleFileSelected(IFileListEntry[] files)
     {
         file = files.FirstOrDefault();
@@ -172,8 +177,34 @@ using Microsoft.AspNetCore.Hosting;
         {
             randomFileName = Utility.RandomGenerator.GenerateRandomFileName(file.Name.Substring(file.Name.LastIndexOf(".")));
             await imageUploadService.UploadAsync(file, randomFileName);
-            msImage = (MarkupString)("<img src=" + "/Images/" + randomFileName + " alt=\"Uploaded image\" width=\"300\" />");
+            uploadImagePreviewStyle = "createTicketUploadImage";
+            msImage = (MarkupString)("<p>Attached Image</p><img src=" + "/Images/" + randomFileName + " alt=\"Uploaded image\" width=\"300\" />");
+            hideClearButton = string.Empty;
+            hideUploadButton = "hideTheButton";
         }
+    }
+
+    async void HandleValidSubmit()
+    {
+        ticket.UserId = httpContextAccessor.HttpContext.User.GetUserId();
+        ticket.ImageUrl = randomFileName;
+        await ticketService.CreateTicket(ticket);
+        NavigationManager.NavigateTo("Tickets");
+    }
+
+    void ClearImage()
+    {
+        msImage = (MarkupString)string.Empty;
+        uploadImagePreviewStyle = string.Empty;
+        randomFileName = string.Empty;
+        hideUploadButton = string.Empty;
+        hideClearButton = "hideTheButton";
+        StateHasChanged();
+    }
+
+    void Cancel()
+    {
+        NavigationManager.NavigateTo("Tickets");
     }
 
 #line default
