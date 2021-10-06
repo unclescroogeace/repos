@@ -1,5 +1,5 @@
 ﻿.discussion {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
     display: flex;
     flex-flow: column wrap;
@@ -19,20 +19,14 @@
     background-color: cornflowerblue;
     color: #fff;
     border-radius: 0.3em 0.3em 0.3em 0.3em;
-    white-space: pre;
+    word-break: break-word;
 }
 
 .discussion > .bubble.recipient {
     align-self: flex-end;
     background-color: #efefef;
     border-radius: 0.3em 0.3em 0.3em 0.3em;
-    white-space: pre;
-}
-
-.blockedresizing {
-    overflow: auto;
-    resize: none;
-    margin-bottom: 20px;
+    word-break: break-word;
 }
 
 img {
@@ -64,10 +58,6 @@ td > a:hover {
     font-weight: bold;
 }
 
-.messageBoxes {
-    margin: 20px;
-}
-
 .imagePadding {
     padding-bottom: 20px;
 }
@@ -77,10 +67,12 @@ td > a:hover {
 }
 
 .messageImage {
+    border-radius: 1em;
     padding: 10px 10px 10px 10px;
 }
 
-.letterCircle {
+.letterCircleSender {
+    align-self: flex-start;
     border-radius: 50%;
     width: 24px;
     height: 24px;
@@ -92,3 +84,89 @@ td > a:hover {
     font: 16px Arial, sans-serif;
 }
 
+.letterCircleRecipient {
+    align-self: flex-end;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    padding: 2px;
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+    font: 16px Arial, sans-serif;
+}
+
+.messageBoxes {
+    text-align: center;
+    display: block;
+}
+
+.blockedresizing {
+    overflow: auto;
+    resize: none;
+    margin-bottom: 20px;
+    max-width: 800px;
+    display: inline;
+}
+
+.buttonSendMessage {
+    position: absolute;
+    width: 7%;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.buttonUploadImage {
+    position: absolute;
+    width: 7%;
+    margin-top: 60px;
+    margin-left: 10px;
+    align-items: center;
+    justify-content: center;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.buttonUploadImage:hover {
+    background-color: #007bff;
+    cursor: pointer;
+}
+.buttonUploadImage input[type=file] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.buttonUploadImage > a:hover
+{
+    cursor: pointer;
+}
+
+.buttonUploadImageCreateTicket {
+    position:relative;
+    margin-top: 15px;
+    align-items: center;
+    justify-content: center;
+    color: #007bff;
+    cursor: pointer;
+}
+
+.buttonUploadImageCreateTicket:hover {
+    background-color: #007bff;
+    cursor: pointer;
+}
+
+.buttonUploadImageCreateTicket input[type=file] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.buttonUploadImageCreateTicket > a:hover {
+    cursor: pointer;
+}

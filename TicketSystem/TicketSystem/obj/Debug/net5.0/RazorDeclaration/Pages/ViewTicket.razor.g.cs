@@ -147,7 +147,7 @@ using Utility;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 161 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\ViewTicket.razor"
+#line 178 "C:\Users\Krasimir Kostadinov\source\repos\TicketSystem\TicketSystem\Pages\ViewTicket.razor"
        
     [Parameter]
     public string Id { get; set; }
@@ -159,13 +159,11 @@ using Utility;
     IFileListEntry file;
     string prevUser;
 
-    private Task<AspNetUser> GetCurrentUserAsync() => userManager.GetUserAsync(httpContextAccessor.HttpContext.User);
-
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         ticket = ticketService.GetTicket(Convert.ToInt32(Id));
         author = userService.GetUser(ticket.UserId);
-        loggedInUser = await Task.Run(() => GetCurrentUserAsync());
+        loggedInUser = userService.GetUser(userManager.GetUserId(httpContextAccessor.HttpContext.User));
         messages = messageService.GetAllMessages();
         messages = messages.Where(m => m.Ticket.TicketId == ticket.TicketId).ToList();
     }
@@ -175,6 +173,10 @@ using Utility;
     }
     protected void SendMessage()
     {
+        if (message.Content == string.Empty)
+        {
+            return;
+        }
         message.Ticket = ticket;
         message.UserId = loggedInUser.Id;
         message.Type = 0;
