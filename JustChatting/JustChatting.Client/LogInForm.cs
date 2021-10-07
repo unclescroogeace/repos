@@ -10,16 +10,17 @@ using System.Windows.Forms;
 
 namespace JustChatting.Client
 {
-    public partial class LogInFOrm : Form
+    public partial class LogInForm : Form
     {
-        public LogInFOrm()
+        public LogInForm()
         {
             InitializeComponent();
         }
 
         private void LabelSignUp_Click(object sender, EventArgs e)
         {
-
+            SignUpForm signUpForm = new();
+            signUpForm.ShowDialog();
         }
     }
 }

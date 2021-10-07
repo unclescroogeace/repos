@@ -1,7 +1,7 @@
 ﻿
 namespace JustChatting.Client
 {
-    partial class LogInFOrm
+    partial class LogInForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,7 +29,7 @@ namespace JustChatting.Client
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogInFOrm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LogInForm));
             this.TextBoxUsername = new Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopTextBox();
             this.LabelLogInScreen = new Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopLabel();
             this.LabelUsername = new Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopLabel();
@@ -50,7 +50,7 @@ namespace JustChatting.Client
             this.TextBoxUsername.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(142)))), ((int)(((byte)(245)))));
             this.TextBoxUsername.ForeColor = System.Drawing.Color.Black;
             this.TextBoxUsername.IsEnabled = true;
-            this.TextBoxUsername.Location = new System.Drawing.Point(58, 237);
+            this.TextBoxUsername.Location = new System.Drawing.Point(57, 237);
             this.TextBoxUsername.MaxLength = 32767;
             this.TextBoxUsername.Multiline = false;
             this.TextBoxUsername.Name = "TextBoxUsername";
@@ -82,7 +82,7 @@ namespace JustChatting.Client
             this.LabelUsername.AutoSize = true;
             this.LabelUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.LabelUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.LabelUsername.Location = new System.Drawing.Point(58, 215);
+            this.LabelUsername.Location = new System.Drawing.Point(57, 215);
             this.LabelUsername.Name = "LabelUsername";
             this.LabelUsername.Size = new System.Drawing.Size(73, 17);
             this.LabelUsername.TabIndex = 2;
@@ -94,7 +94,7 @@ namespace JustChatting.Client
             this.labelPassword.AutoSize = true;
             this.labelPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
-            this.labelPassword.Location = new System.Drawing.Point(58, 282);
+            this.labelPassword.Location = new System.Drawing.Point(57, 282);
             this.labelPassword.Name = "labelPassword";
             this.labelPassword.Size = new System.Drawing.Size(69, 17);
             this.labelPassword.TabIndex = 3;
@@ -108,7 +108,7 @@ namespace JustChatting.Client
             this.TextBoxPassword.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(142)))), ((int)(((byte)(245)))));
             this.TextBoxPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
             this.TextBoxPassword.IsEnabled = true;
-            this.TextBoxPassword.Location = new System.Drawing.Point(58, 305);
+            this.TextBoxPassword.Location = new System.Drawing.Point(57, 305);
             this.TextBoxPassword.MaxLength = 32767;
             this.TextBoxPassword.Multiline = false;
             this.TextBoxPassword.Name = "TextBoxPassword";
@@ -146,7 +146,7 @@ namespace JustChatting.Client
             this.ButtonLogIn.Name = "ButtonLogIn";
             this.ButtonLogIn.RippleEffectColor = System.Drawing.Color.Black;
             this.ButtonLogIn.RippleOpacity = 25;
-            this.ButtonLogIn.Size = new System.Drawing.Size(89, 30);
+            this.ButtonLogIn.Size = new System.Drawing.Size(90, 30);
             this.ButtonLogIn.Smoothing = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             this.ButtonLogIn.TabIndex = 6;
             this.ButtonLogIn.Text = "Log In";
@@ -168,6 +168,7 @@ namespace JustChatting.Client
             // 
             this.LabelSignUp.AllowTransparency = true;
             this.LabelSignUp.AutoSize = true;
+            this.LabelSignUp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.LabelSignUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.LabelSignUp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(142)))), ((int)(((byte)(245)))));
             this.LabelSignUp.Location = new System.Drawing.Point(250, 433);
@@ -177,12 +178,12 @@ namespace JustChatting.Client
             this.LabelSignUp.Text = "Sign up";
             this.LabelSignUp.Click += new System.EventHandler(this.LabelSignUp_Click);
             // 
-            // LogIn
+            // LogInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(412, 487);
+            this.ClientSize = new System.Drawing.Size(414, 491);
             this.Controls.Add(this.LabelSignUp);
             this.Controls.Add(this.LabelDontHaveRegistration);
             this.Controls.Add(this.ButtonLogIn);
@@ -192,7 +193,9 @@ namespace JustChatting.Client
             this.Controls.Add(this.LabelUsername);
             this.Controls.Add(this.LabelLogInScreen);
             this.Controls.Add(this.TextBoxUsername);
-            this.Name = "LogIn";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "LogInForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Just Chatting";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

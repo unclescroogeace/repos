@@ -16,5 +16,10 @@ namespace JustChatting.Client
         {
             InitializeComponent();
         }
+
+        private void ButtonSignUp_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
