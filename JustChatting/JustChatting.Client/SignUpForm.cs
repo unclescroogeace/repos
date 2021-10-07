@@ -10,12 +10,11 @@ using System.Windows.Forms;
 
 namespace JustChatting.Client
 {
-    public partial class Form1 : Form
+    public partial class SignUpForm : Form
     {
-        public Form1()
+        public SignUpForm()
         {
             InitializeComponent();
         }
-
     }
 }
