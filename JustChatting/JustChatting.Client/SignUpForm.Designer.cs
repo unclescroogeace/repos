@@ -145,6 +145,7 @@ namespace JustChatting.Client
             this.ButtonSignUp.BackColor = System.Drawing.Color.Transparent;
             this.ButtonSignUp.BGColor = "#508ef5";
             this.ButtonSignUp.Corners = 1F;
+            this.ButtonSignUp.Cursor = System.Windows.Forms.Cursors.Default;
             this.ButtonSignUp.DisabledBGColor = System.Drawing.Color.FromArgb(((int)(((byte)(176)))), ((int)(((byte)(178)))), ((int)(((byte)(181)))));
             this.ButtonSignUp.DoubleRipple = false;
             this.ButtonSignUp.EnabledBGColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(142)))), ((int)(((byte)(245)))));

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JustChatting.Data
 {
-    class UserService : IUserService
+    public class UserService : IUserService
     {
         private readonly JustChattingDbContext _dbContext;
         public UserService(JustChattingDbContext dbContext)
