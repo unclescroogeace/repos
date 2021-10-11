@@ -106,7 +106,7 @@ namespace JustChatting.Client
             this.TextBoxPassword.DisabledUnFocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(236)))), ((int)(((byte)(238)))));
             this.TextBoxPassword.EnabledUnFocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(219)))), ((int)(((byte)(219)))), ((int)(((byte)(219)))));
             this.TextBoxPassword.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(142)))), ((int)(((byte)(245)))));
-            this.TextBoxPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.TextBoxPassword.ForeColor = System.Drawing.Color.Black;
             this.TextBoxPassword.IsEnabled = true;
             this.TextBoxPassword.Location = new System.Drawing.Point(57, 305);
             this.TextBoxPassword.MaxLength = 32767;
@@ -151,6 +151,7 @@ namespace JustChatting.Client
             this.ButtonLogIn.TabIndex = 6;
             this.ButtonLogIn.Text = "Log In";
             this.ButtonLogIn.TextRendering = System.Drawing.Text.TextRenderingHint.AntiAlias;
+            this.ButtonLogIn.Click += new System.EventHandler(this.ButtonLogIn_Click);
             // 
             // LabelDontHaveRegistration
             // 

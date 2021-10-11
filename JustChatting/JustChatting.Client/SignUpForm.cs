@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using JustChatting.Data;
+using JustChatting.Client.Networking;
 
 namespace JustChatting.Client
 {
@@ -22,6 +23,7 @@ namespace JustChatting.Client
 
         private void ButtonSignUp_Click(object sender, EventArgs e)
         {
+            LabelSomethingWentWrong.Text = string.Empty;
             int failedValidations = 0;
             if (string.IsNullOrEmpty(TextBoxUsername.Text))
             {
@@ -55,12 +57,20 @@ namespace JustChatting.Client
 
             if (failedValidations == 0)
             {
-                User user = new();
-                user.Username = TextBoxUsername.Text;
-                user.Password = TextBoxPassword.Text;
-                user.Created = DateTime.Now;
-            }
+                //User user = new();
+                //user.Username = TextBoxUsername.Text;
+                //user.Password = TextBoxPassword.Text;
+                //user.Created = DateTime.Now;
 
+                //if (ClientTcp.Register("127.0.0.1", 13300 , user))
+                //{
+                //    this.Close();
+                //}
+                //else
+                //{
+                //    LabelSomethingWentWrong.Text = "Something went wrong!";
+                //}
+            }
         }
     }
 }

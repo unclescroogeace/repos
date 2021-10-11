@@ -11,5 +11,6 @@ namespace JustChatting.Data
         Task<List<User>> GetAllUsersAsync();
         Task<User> GetUserAsync(int Id);
         Task<bool> CreateUserAsync(User user);
+        bool CreateUser(User user);
     }
 }

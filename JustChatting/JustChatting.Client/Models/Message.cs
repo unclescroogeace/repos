@@ -7,7 +7,7 @@ using JustChatting.Data;
 
 namespace JustChatting.Client.Models
 {
-    public class MessageClient : Message
+    public class Message : Data.Message
     {
         public byte[] Image { get; set; }
     }

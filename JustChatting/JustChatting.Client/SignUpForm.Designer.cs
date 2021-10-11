@@ -37,6 +37,7 @@ namespace JustChatting.Client
             this.LabelRepeatPassword = new Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopLabel();
             this.TextBoxRepeatPassword = new Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopTextBox();
             this.ButtonSignUp = new Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopButton();
+            this.LabelSomethingWentWrong = new Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopLabel();
             this.SuspendLayout();
             // 
             // LabelUsername
@@ -161,12 +162,24 @@ namespace JustChatting.Client
             this.ButtonSignUp.TextRendering = System.Drawing.Text.TextRenderingHint.AntiAlias;
             this.ButtonSignUp.Click += new System.EventHandler(this.ButtonSignUp_Click);
             // 
+            // LabelSomethingWentWrong
+            // 
+            this.LabelSomethingWentWrong.AllowTransparency = true;
+            this.LabelSomethingWentWrong.AutoSize = true;
+            this.LabelSomethingWentWrong.Font = new System.Drawing.Font("Roboto Medium", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelSomethingWentWrong.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.LabelSomethingWentWrong.Location = new System.Drawing.Point(257, 203);
+            this.LabelSomethingWentWrong.Name = "LabelSomethingWentWrong";
+            this.LabelSomethingWentWrong.Size = new System.Drawing.Size(0, 19);
+            this.LabelSomethingWentWrong.TabIndex = 7;
+            // 
             // SignUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(414, 246);
+            this.Controls.Add(this.LabelSomethingWentWrong);
             this.Controls.Add(this.ButtonSignUp);
             this.Controls.Add(this.TextBoxRepeatPassword);
             this.Controls.Add(this.LabelRepeatPassword);
@@ -192,5 +205,6 @@ namespace JustChatting.Client
         private Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopLabel LabelRepeatPassword;
         private Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopTextBox TextBoxRepeatPassword;
         private Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopButton ButtonSignUp;
+        private Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopLabel LabelSomethingWentWrong;
     }
 }

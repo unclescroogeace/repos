@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace JustChatting.Data
 {
+    [Serializable]
     public class User
     {
         [Key]

@@ -7,26 +7,70 @@ using System.Threading.Tasks;
 
 namespace JustChatting.Data
 {
-    public class UserService : IUserService
+    public class UserService
     {
+        //private readonly JustChattingDbContext _dbContext;
+        //public UserService(JustChattingDbContext dbContext)
+        //{
+        //    _dbContext = dbContext;
+        //}
+        //public async Task<List<User>> GetAllUsersAsync()
+        //{
+        //    return await _dbContext.Users.ToListAsync();
+        //}
+        //public async Task<User> GetUserAsync(int Id)
+        //{
+        //    return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id.Equals(Id));
+        //}
+        //public async Task<bool> CreateUserAsync(User user)
+        //{
+        //    await _dbContext.Users.AddAsync(user);
+        //    await _dbContext.SaveChangesAsync();
+        //    return true;
+        //}
+
+        //public bool CreateUser(User user)
+        //{
+        //    _dbContext.Users.Add(user);
+        //    if (_dbContext.SaveChanges() > 0)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
+
         private readonly JustChattingDbContext _dbContext;
-        public UserService(JustChattingDbContext dbContext)
+        public UserService()
         {
-            _dbContext = dbContext;
+            _dbContext = new JustChattingDbContext();
         }
-        public async Task<List<User>> GetAllUsersAsync()
+
+        public bool CreateUser(User user)
         {
-            return await _dbContext.Users.ToListAsync();
+            _dbContext.Users.Add(user);
+            if (_dbContext.SaveChanges() > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        public async Task<User> GetUserAsync(int Id)
+
+        public bool AuthenticateUser(string Username, string Password)
         {
-            return await _dbContext.Users.FirstOrDefaultAsync(u => u.Id.Equals(Id));
-        }
-        public async Task<bool> CreateUserAsync(User user)
-        {
-            await _dbContext.Users.AddAsync(user);
-            await _dbContext.SaveChangesAsync();
-            return true;
+            if(_dbContext.Users.FirstOrDefault(u => u.Username == Username && u.Password == Password) != null)
+            {
+                return true;
+            }
+            else
+            { 
+                return false;
+            }
         }
     }
 }
