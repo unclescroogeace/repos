@@ -142,8 +142,6 @@ namespace JustChatting.Server.Networking
                         content = "0";
                     }
 
-
-
                     // Echo the data back to the client.  
 
                     Send(handler, content);

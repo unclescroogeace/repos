@@ -151,7 +151,7 @@ namespace JustChatting.Client.Networking
                 else
                 {
                     // All the data has arrived; put it in response.  
-                    if (state.sb.Length > 1)
+                    if (state.sb.Length >= 1)
                     {
                         response = state.sb.ToString();
                     }
