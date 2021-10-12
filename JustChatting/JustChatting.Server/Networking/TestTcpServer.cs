@@ -128,18 +128,39 @@ namespace JustChatting.Server.Networking
                     int index = content.IndexOf("<EOF>");
                     string temp = content.Substring(0, index);
 
-                    LogIn login = StringToObject(temp);
                     
-                    Console.WriteLine("Read {0} bytes from socket. \n Data : {1}",
-                        content.Length, login.Username);
+                    Console.WriteLine("Read {0} bytes from socket.",
+                        content.Length);
 
-                    if (userService.AuthenticateUser(login.Username, login.Password))
+                    int indexEndType = temp.IndexOf(">") + 1;
+                    string type = temp.Substring(0, indexEndType);
+                    string contentWithoutType = temp.Substring(indexEndType, temp.Length - indexEndType);
+
+                    if (type == "<LogIn>")
                     {
-                        content = "1";
+                        LogIn login = LogInDeserialize(contentWithoutType);
+
+                        if (userService.AuthenticateUser(login.Username, login.Password))
+                        {
+                            content = "1";
+                        }
+                        else
+                        {
+                            content = "0";
+                        }
                     }
-                    else
+                    else if (type == "<User>")
                     {
-                        content = "0";
+                        User user = UserDeserialize(contentWithoutType);
+
+                        if (userService.CreateUser(user))
+                        {
+                            content = "1";
+                        }
+                        else
+                        {
+                            content = "0";
+                        }
                     }
 
                     // Echo the data back to the client.  
@@ -186,13 +207,26 @@ namespace JustChatting.Server.Networking
             }
         }
 
-        private static LogIn StringToObject(string obj)
+        private static LogIn LogInDeserialize(string obj)
         {
             try
             {
                 XmlSerializer xmlSerializer = new(typeof(LogIn));
                 using StringReader textReader = new(obj);
                 return (LogIn)xmlSerializer.Deserialize(textReader);
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        private static User UserDeserialize(string obj)
+        {
+            try
+            {
+                XmlSerializer xmlSerializer = new(typeof(User));
+                using StringReader textReader = new(obj);
+                return (User)xmlSerializer.Deserialize(textReader);
             }
             catch
             {

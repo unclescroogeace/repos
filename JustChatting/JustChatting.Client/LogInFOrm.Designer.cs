@@ -39,6 +39,7 @@ namespace JustChatting.Client
             this.ButtonLogIn = new Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopButton();
             this.LabelDontHaveRegistration = new Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopLabel();
             this.LabelSignUp = new Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopLabel();
+            this.LabelWrongNameOrPassword = new Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopLabel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -179,12 +180,25 @@ namespace JustChatting.Client
             this.LabelSignUp.Text = "Sign up";
             this.LabelSignUp.Click += new System.EventHandler(this.LabelSignUp_Click);
             // 
+            // LabelWrongNameOrPassword
+            // 
+            this.LabelWrongNameOrPassword.AllowTransparency = true;
+            this.LabelWrongNameOrPassword.AutoSize = true;
+            this.LabelWrongNameOrPassword.Font = new System.Drawing.Font("Roboto Medium", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelWrongNameOrPassword.ForeColor = System.Drawing.Color.Red;
+            this.LabelWrongNameOrPassword.Location = new System.Drawing.Point(108, 399);
+            this.LabelWrongNameOrPassword.Name = "LabelWrongNameOrPassword";
+            this.LabelWrongNameOrPassword.Size = new System.Drawing.Size(0, 19);
+            this.LabelWrongNameOrPassword.TabIndex = 9;
+            this.LabelWrongNameOrPassword.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // LogInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(414, 491);
+            this.Controls.Add(this.LabelWrongNameOrPassword);
             this.Controls.Add(this.LabelSignUp);
             this.Controls.Add(this.LabelDontHaveRegistration);
             this.Controls.Add(this.ButtonLogIn);
@@ -215,6 +229,7 @@ namespace JustChatting.Client
         private Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopButton ButtonLogIn;
         private Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopLabel LabelDontHaveRegistration;
         private Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopLabel LabelSignUp;
+        private Zeroit.Framework.LollipopControls.Controls.ZeroitLollipopLabel LabelWrongNameOrPassword;
     }
 }
 

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using JustChatting.Client.Models;
 using System.Text.Json;
+using JustChatting.Data;
 
 namespace JustChatting.Client.Networking
 {
@@ -42,7 +43,7 @@ namespace JustChatting.Client.Networking
         // The response from the remote device.  
         public static string response = string.Empty;
 
-        public static void StartClient(LogIn login)
+        public static void StartClient(LogIn login = null, User user = null)
         {
             // Connect to a remote device.  
             try
@@ -63,8 +64,15 @@ namespace JustChatting.Client.Networking
                     new AsyncCallback(ConnectCallback), client);
                 connectDone.WaitOne();
 
+                if (login != null)
+                {
+                    Send(client, login);
+                }
+                else if (user != null)
+                {
+                    Send(client, user);
+                }
                 // Send test data to the remote device.  
-                Send(client, login);
                 sendDone.WaitOne();
 
                 // Receive the response from the remote device.  
@@ -169,7 +177,18 @@ namespace JustChatting.Client.Networking
         {
             response = string.Empty;
             
-            byte[] byteData = Encoding.ASCII.GetBytes(ObjectToString(login) + "<EOF>");
+            byte[] byteData = Encoding.ASCII.GetBytes("<LogIn>" + LogInSerialize(login) + "<EOF>");
+
+            // Begin sending the data to the remote device.  
+            client.BeginSend(byteData, 0, byteData.Length, 0,
+                new AsyncCallback(SendCallback), client);
+        }
+
+        public static void Send(Socket client, User user)
+        {
+            response = string.Empty;
+
+            byte[] byteData = Encoding.ASCII.GetBytes("<User>" + UserSerialize(user) + "<EOF>");
 
             // Begin sending the data to the remote device.  
             client.BeginSend(byteData, 0, byteData.Length, 0,
@@ -196,7 +215,7 @@ namespace JustChatting.Client.Networking
             }
         }
 
-        private static string ObjectToString(LogIn login)
+        private static string LogInSerialize(LogIn login)
         {
             try
             {
@@ -206,6 +225,22 @@ namespace JustChatting.Client.Networking
                 return stringwriter.ToString();
             }
             catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
+        private static string UserSerialize(User user)
+        {
+            try
+            {
+                using var stringwriter = new System.IO.StringWriter();
+                var serializer = new XmlSerializer(typeof(User));
+                serializer.Serialize(stringwriter, user);
+                return stringwriter.ToString();
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
                 throw;

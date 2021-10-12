@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using JustChatting.Client.Models;
 using JustChatting.Client.Networking;
+using JustChatting.Data;
 
 namespace JustChatting.Client
 {
@@ -29,14 +30,19 @@ namespace JustChatting.Client
 
         private void ButtonLogIn_Click(object sender, EventArgs e)
         {
+            LabelWrongNameOrPassword.Text = "";
             AsynchronousClient.StartClient(new LogIn(TextBoxUsername.Text, TextBoxPassword.Text));
             if (AsynchronousClient.response == "1")
             {
-                LabelDontHaveRegistration.Text = "You have";
+                UserService userService = new();
+                User user = userService.GetUser(TextBoxUsername.Text);
+                MainForm main = new(user);
+                Hide();
+                main.Show();
             }
             else
             {
-                LabelDontHaveRegistration.Text = "But you don't";
+                LabelWrongNameOrPassword.Text = "Wrong name or password!";
             }
         }
     }

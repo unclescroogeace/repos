@@ -57,10 +57,21 @@ namespace JustChatting.Client
 
             if (failedValidations == 0)
             {
-                //User user = new();
-                //user.Username = TextBoxUsername.Text;
-                //user.Password = TextBoxPassword.Text;
-                //user.Created = DateTime.Now;
+                User user = new();
+                user.Username = TextBoxUsername.Text;
+                user.Password = TextBoxPassword.Text;
+                user.Created = DateTime.Now;
+
+                AsynchronousClient.StartClient(user: user);
+
+                if (AsynchronousClient.response == "1")
+                {
+                    Close();
+                }
+                else
+                {
+                    LabelSomethingWentWrong.Text = "Something went wrong!";
+                }
 
                 //if (ClientTcp.Register("127.0.0.1", 13300 , user))
                 //{

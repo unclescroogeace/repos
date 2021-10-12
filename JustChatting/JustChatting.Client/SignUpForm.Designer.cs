@@ -166,11 +166,11 @@ namespace JustChatting.Client
             // 
             this.LabelSomethingWentWrong.AllowTransparency = true;
             this.LabelSomethingWentWrong.AutoSize = true;
-            this.LabelSomethingWentWrong.Font = new System.Drawing.Font("Roboto Medium", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.LabelSomethingWentWrong.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(153)))), ((int)(((byte)(153)))), ((int)(((byte)(153)))));
+            this.LabelSomethingWentWrong.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.LabelSomethingWentWrong.ForeColor = System.Drawing.Color.Red;
             this.LabelSomethingWentWrong.Location = new System.Drawing.Point(257, 203);
             this.LabelSomethingWentWrong.Name = "LabelSomethingWentWrong";
-            this.LabelSomethingWentWrong.Size = new System.Drawing.Size(0, 19);
+            this.LabelSomethingWentWrong.Size = new System.Drawing.Size(0, 17);
             this.LabelSomethingWentWrong.TabIndex = 7;
             // 
             // SignUpForm

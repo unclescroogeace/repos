@@ -72,5 +72,10 @@ namespace JustChatting.Data
                 return false;
             }
         }
+
+        public User GetUser(string Username)
+        {
+            return _dbContext.Users.FirstOrDefault(u => u.Username == Username);
+        }
     }
 }
